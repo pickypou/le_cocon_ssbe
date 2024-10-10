@@ -37,10 +37,29 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_core: ^3.6.0
   firebase_data_connect: ^0.1.2
+  cloud_firestore: ^5.4.4
+  equatable: ^2.0.5
+  firebase_storage: ^12.3.2
+  flutter_bloc: ^8.1.6
+  flutter_hooks: ^0.20.5
+  flutter_image_compress: ^2.3.0
+  flutter_markdown: ^0.7.3+1
+  freelance: ^1.0.2
+  google_fonts: ^6.2.1
+  google_maps_flutter: ^2.9.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_utils:
+    git:
+      url: https://github.com/pickypou/flutter_utils.git
+      ref: main
+
+      flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,7 +83,11 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/markdown/
+    - assets/pdf/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
@@ -87,6 +110,15 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: Amable
+      fonts:
+        - asset:
+            'assets/fonts/Amable.ttf'
+    - family: Autography
+      fonts:
+        - asset:
+            'assets/fonts/Autography.otf'
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
