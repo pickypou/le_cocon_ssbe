@@ -30,7 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
+/firebase-config.js
 # Symbolication related
 app.*.symbols
 

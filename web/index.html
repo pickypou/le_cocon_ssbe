@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+
+  <title>Le Cocon S-S-B-E : Centre de Sport Santé Bien-être</title>
+
+  <meta name="description" content="Découvrez le Cocon S-S-B-E, votre centre de sport santé bien-être à proximité. Un espace convivial alliant physique et psychique pour votre transformation personnelle.">
+
+  <meta name="keywords" content="sport santé, bien-être, transformation personnelle, santé physique, santé mentale, équilibre vie professionnelle, gestion du stress">
+
+  <meta name="author" content="Loren et Gerard">
+
+  <meta name="language" content="fr">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="le_cocon_ssbe">
+  <meta name="apple-mobile-web-app-title" content="Le Cocon S-S-B-E">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>le_cocon_ssbe</title>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.lecoconsbbe.com/">
+  <meta property="og:title" content="Le Cocon S-S-B-E : Votre espace de sport santé et bien-être">
+  <meta property="og:description" content="Un centre convivial alliant sport, santé et bien-être pour vous aider à vous sentir bien dans votre corps et votre esprit.">
+  <meta property="og:image" content="https://www.lecoconsbbe.com/image-apercu.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lecoconssbe.fr/">
+  <meta property="twitter:title" content="Le Cocon S-S-B-E : Votre espace de sport santé et bien-être">
+  <meta property="twitter:description" content="Un centre convivial alliant sport, santé et bien-être pour vous aider à vous sentir bien dans votre corps et votre esprit.">
+  <meta property="twitter:image" content="https://www.lecoconsbbe.com/image-apercu.jpg">
+
   <link rel="manifest" href="manifest.json">
+  <script>
+    window.firebaseConfig = {
+    apiKey: "{{FIREBASE_API_KEY}}",
+    authDomain: "{{FIREBASE_AUTH_DOMAIN}}",
+    projectId: "{{FIREBASE_PROJECT_ID}}",
+    storageBucket: "{{FIREBASE_STORAGE_SENDER_ID}}",
+    messagingSenderId: "{{FIREBASE_MESSAGING_SENDER_ID}}",
+    apiKey: "{{FIREBASE_API_KEY}}"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
