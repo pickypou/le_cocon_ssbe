@@ -1,5 +1,1 @@
-{
-  "dataconnect": {
-    "source": "dataconnect"
-  }
-}
+{"dataconnect":{"source":"dataconnect"},"flutter":{"platforms":{"android":{"default":{"projectId":"le-cocon-ssbe-6a4d0","appId":"1:282482672251:android:1738159416084ea68058de","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"le-cocon-ssbe-6a4d0","configurations":{"android":"1:282482672251:android:1738159416084ea68058de","ios":"1:282482672251:ios:2c0ec7d8e29a270b8058de","macos":"1:282482672251:ios:2c0ec7d8e29a270b8058de","web":"1:282482672251:web:2c68d577580e00a08058de"}}}}}}
