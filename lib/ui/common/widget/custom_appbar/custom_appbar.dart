@@ -9,11 +9,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final void Function(String)? onNavigate;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.actions,
     this.onNavigate,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -63,7 +63,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return GestureDetector(
       onTap: () => _scrollToSection(context, sectionId),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Center(
           child: Text(
             label,
@@ -82,13 +82,13 @@ class CustomDrawer extends StatelessWidget {
   final GlobalKey contact;
 
   const CustomDrawer({
-    Key? key,
+    super.key,
     required this.espaceBienEtre,
     required this.espaceSport,
     required this .commenters,
     required this.evenement,
     required this.contact,
-  }) : super(key: key);
+  });
 
   void _scrollToSection(GlobalKey sectionKey) {
     if (sectionKey.currentContext != null) {

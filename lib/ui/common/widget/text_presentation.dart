@@ -28,16 +28,16 @@ class TextPresentation extends StatelessWidget {
                 width: size.width / 3.4, // Ajustez la largeur selon vos besoins
               ),
               const SizedBox(width: 10),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
                     phrase: 'Pourquoi le, Cocon ?',
                     // Supprimer le \n pour réduire l'espace
                   ),
-                  const SizedBox(
+                  SizedBox(
                       height: 5), // Ajustez cet espacement si nécessaire
-                  const CustomText(
+                  CustomText(
                     phrase: 'Sport, Santé, Bien, Etre',
                   ),
                 ],

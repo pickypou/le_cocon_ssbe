@@ -22,7 +22,7 @@ class EspaceBienEtreMobile extends StatelessWidget {
                 fit: BoxFit.contain,
                 width: size.width / 3,
               ),
-              CustomText(phrase: 'Espace, Bien, Etre')
+              const CustomText(phrase: 'Espace, Bien, Etre')
             ],
           ),
           const SizedBox(
@@ -93,7 +93,7 @@ class EspaceBienEtreMobile extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          LinkText(
+          const LinkText(
               text: 'Pour plus de renseignement www.aucoeurdelesensciel.com',
               url: 'https://www.aucoeurdelesensciel.com')
         ],

@@ -14,9 +14,7 @@ class ImageCompressService {
       final String filePath = file.absolute.path;
 
       // Générer un chemin de sortie
-      final String outPath = filePath.substring(0, filePath.lastIndexOf('/')) +
-          '/compressed_' +
-          filePath.split('/').last;
+      final String outPath = '${filePath.substring(0, filePath.lastIndexOf('/'))}/compressed_${filePath.split('/').last}';
 
       // Compresser l'image
       var compressedImage = await FlutterImageCompress.compressAndGetFile(

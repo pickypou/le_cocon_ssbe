@@ -21,7 +21,7 @@ class EspaceSportMobile extends StatelessWidget {
             fit: BoxFit.contain,
             width: size.width / 2,
           ),
-          Center(
+          const Center(
             child: CustomText(phrase: 'Espace, Sport, Santé'),
           ),
           const SizedBox(height: 25),
@@ -94,7 +94,7 @@ class EspaceSportMobile extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          LinkText(
+          const LinkText(
               text: 'Pour plus de renseignement www.gerard.fr',
               url: 'https://www.gerad.fr')
         ],

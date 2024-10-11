@@ -6,7 +6,7 @@ class LinkText extends StatelessWidget {
   final String text;
   final String url;
 
-  LinkText({required this.text, required this.url});
+  const LinkText({super.key, required this.text, required this.url});
 
   Future<void> _launchURL() async {
     final Uri uri = Uri.parse(url);

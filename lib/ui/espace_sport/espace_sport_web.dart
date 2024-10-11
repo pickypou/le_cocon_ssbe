@@ -156,7 +156,7 @@ class EspaceSportWeb extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          ActivitySport()
+          const ActivitySport()
         ]));
   }
 }

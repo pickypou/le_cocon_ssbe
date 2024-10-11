@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
 class Presentation extends StatelessWidget {
+  const Presentation({super.key});
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -22,7 +24,7 @@ class Presentation extends StatelessWidget {
                     'assets/images/sport.png',
                     width: size.width / 4,
                   ),
-                  SizedBox(height: 10), // Espace entre l'image et la suivante
+                  const SizedBox(height: 10), // Espace entre l'image et la suivante
                   Transform.rotate(
                     angle: 0.1,
                     child: Image.asset(
@@ -53,7 +55,7 @@ class Presentation extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 35),
+          const SizedBox(height: 35),
           Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: Column(
@@ -67,7 +69,7 @@ class Presentation extends StatelessWidget {
                             fontSize: size.width / 75) // Texte en gras
                         ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -84,8 +86,4 @@ class Presentation extends StatelessWidget {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: Presentation(),
-  ));
-}
+

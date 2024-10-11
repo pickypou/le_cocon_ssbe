@@ -94,7 +94,7 @@ class _FormContactState extends State<FormContact> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _sendEmail,
-                      child: const Text('Envoyer'),
+                      child: const  Text('Envoyer'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:  theme.colorScheme.secondary, // Couleur de fond gris
                         foregroundColor: theme.colorScheme.surface, // Couleur du texte
@@ -102,7 +102,7 @@ class _FormContactState extends State<FormContact> {
                           side: BorderSide(color: theme.colorScheme.secondary, width: 2), // Bordure rouge
                           borderRadius: BorderRadius.circular(15), // Coins arrondis
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Espacement interne
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Espacement interne
                         elevation: 0, // Pas d'ombre
                       ),
                     ),

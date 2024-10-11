@@ -19,13 +19,13 @@ class MarkdownViewer extends StatelessWidget {
       future: loadMarkdown(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return Center(child: Text('Erreur: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('Pas de contenu disponible'));
+          return const Center(child: Text('Pas de contenu disponible'));
         }
 
         return Padding(

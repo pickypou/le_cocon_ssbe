@@ -7,7 +7,7 @@ class ActivitySport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

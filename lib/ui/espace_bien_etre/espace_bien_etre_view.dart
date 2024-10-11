@@ -10,12 +10,12 @@ class EspaceBienEtreView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     if (size.width < 750) {
-      return SizedBox(
+      return const SizedBox(
         child: Padding(
-            padding: const EdgeInsets.all(25), child: EspaceBienEtreMobile()),
+            padding: EdgeInsets.all(25), child: EspaceBienEtreMobile()),
       );
     } else {
-      return SizedBox(
+      return const SizedBox(
         child: EspaceBienEtreWeb(),
       );
     }

@@ -11,12 +11,12 @@ class EspaceSportView extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
 
     if (size.width < 750) {
-      return SizedBox(
+      return const SizedBox(
         child: Padding(
-            padding: const EdgeInsets.all(25), child: EspaceSportMobile()),
+            padding: EdgeInsets.all(25), child: EspaceSportMobile()),
       );
     } else {
-      return SizedBox(
+      return const SizedBox(
         child: EspaceSportWeb(),
       );
     }

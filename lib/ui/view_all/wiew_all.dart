@@ -19,7 +19,7 @@ class ViewAll extends StatelessWidget {
   final GlobalKey evenement = GlobalKey();
   final GlobalKey contact = GlobalKey();
 
-  ViewAll({Key? key}) : super(key: key);
+  ViewAll({super.key});
 
   void _scrollToSection(String sectionId) {
     GlobalKey? key;
@@ -58,7 +58,7 @@ class ViewAll extends StatelessWidget {
       appBar: CustomAppBar(
         title: '',
         onNavigate: _scrollToSection,
-        actions: [],
+        actions: const [],
       ),
       drawer: size.width < 749
           ? CustomDrawer(

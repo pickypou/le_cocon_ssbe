@@ -33,7 +33,7 @@ class ContactView extends StatelessWidget {
                   builder: (context, innerConstraints) {
                     if (innerConstraints.maxWidth > 600) {
                       // Version desktop
-                      return Row(
+                      return const Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
@@ -42,19 +42,19 @@ class ContactView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 ContactBientEtre(),
-                                const SizedBox(height: 10),
+                                SizedBox(height: 10),
                                 ContactSportSante(),
                               ],
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          SizedBox(width: 20),
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 FormContact(),
-                                const SizedBox(height: 10),
+                                SizedBox(height: 10),
                                 ContactLeCocon(),
                               ],
                             ),
@@ -63,16 +63,16 @@ class ContactView extends StatelessWidget {
                       );
                     } else {
                       // Version mobile
-                      return Column(
+                      return const Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           ContactBientEtre(),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           ContactSportSante(),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
                           FormContact(),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           ContactLeCocon(),
                         ],
                       );

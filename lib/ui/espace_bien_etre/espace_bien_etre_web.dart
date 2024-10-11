@@ -25,10 +25,10 @@ class EspaceBienEtreWeb extends StatelessWidget {
                 width: size.width / 6,
               ),
 
-              CustomText(phrase: 'Espace, Bien, Etre')
+              const CustomText(phrase: 'Espace, Bien, Etre')
             ],
           ),
-          SizedBox(height: 25,),
+          const SizedBox(height: 25,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -55,7 +55,7 @@ class EspaceBienEtreWeb extends StatelessWidget {
         style: textStyleText(context).copyWith(fontSize: size.width/ 75),),
           const SizedBox(height: 25,),
 
-          ActivityBienEtre()
+          const ActivityBienEtre()
         ],
       ),
     );

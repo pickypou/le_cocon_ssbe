@@ -17,7 +17,7 @@ class Footer extends StatelessWidget {
         },
       );
 
-      print("Tentative de récupération du PDF...");
+      debugPrint("Tentative de récupération du PDF...");
 
       // Récupérer l'URL du PDF depuis Firebase Storage
       final ref = FirebaseStorage.instance.ref().child('mention_legal.pdf');
@@ -27,16 +27,16 @@ class Footer extends StatelessWidget {
       Navigator.of(context).pop();
 
       // Lancer le PDF
-      print("Tentative d'ouverture du PDF...");
+      debugPrint("Tentative d'ouverture du PDF...");
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-        print("PDF lancé avec succès");
+        debugPrint("PDF lancé avec succès");
       } else {
         throw 'Impossible d\'ouvrir le PDF à l\'adresse $url';
       }
     } catch (e, stackTrace) {
-      print("Erreur inattendue : $e");
-      print("Stack trace : $stackTrace");
+      debugPrint("Erreur inattendue : $e");
+      debugPrint("Stack trace : $stackTrace");
       Navigator.of(context).pop(); // Fermer l'indicateur de chargement
       _showErrorDialog(context, 'Erreur inattendue: $e\n\nStack trace: $stackTrace');
     }
