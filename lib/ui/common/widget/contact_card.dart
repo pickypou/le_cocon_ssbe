@@ -14,7 +14,7 @@ class ContactCard extends StatelessWidget {
   final String? website; // URL optionnelle pour le site web
 
   const ContactCard({
-    Key? key,
+    super.key,
     required this.assetImage,
     required this.name,
     required this.phone,
@@ -23,7 +23,7 @@ class ContactCard extends StatelessWidget {
     this.location, // Peut être null pour désactiver la carte
     this.website,
     this.fontSize, // Peut être null pour désactiver le lien du site web
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class ContactCard extends StatelessWidget {
                       height: 60, // Hauteur du cercle
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Text(
                     name,
                     style: textStyleText(context)
@@ -64,18 +64,18 @@ class ContactCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildContactRow(context, Icons.phone, phone),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               _buildContactRow(context, Icons.email, email),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               _buildContactRow(context, Icons.location_on, address),
               if (website != null) ...[
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildWebsiteRow(context, website!),
               ],
               if (location != null) ...[
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 // Carte Google Maps
                 SizedBox(
                   height: 200, // Taille de la carte
@@ -86,13 +86,13 @@ class ContactCard extends StatelessWidget {
                     ),
                     markers: {
                       Marker(
-                        markerId: MarkerId('locationMarker'),
+                        markerId: const MarkerId('locationMarker'),
                         position: location!,
                       ),
                     },
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextButton(
                   onPressed: () =>
                       _launchMapsUrl(location!.latitude, location!.longitude),
@@ -120,7 +120,7 @@ class ContactCard extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: Theme.of(context).colorScheme.secondary),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           text,
           style: textStyleText(context).copyWith(fontSize: calculatedFontSize),
@@ -137,7 +137,7 @@ class ContactCard extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.web, color: Theme.of(context).colorScheme.secondary),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         GestureDetector(
           onTap: () => _launchURL(website),
           child: Text(
