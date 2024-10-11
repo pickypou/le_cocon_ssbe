@@ -11,7 +11,46 @@ android {
     defaultConfig {
         applicationId "fr.lecoconssbe.lecoconssbe"
         minSdk 21
-        targetSdk 34
+        targetSdk 34plugins {
+            id "com.android.application"
+            id 'com.google.gms.google-services'
+            id "kotlin-android"
+            id "dev.flutter.flutter-gradle-plugin"
+        }
+
+        android {
+            namespace = "fr.leCoConssbe.lecoconssbe"
+            compileSdk = flutter.compileSdkVersion
+            ndkVersion = flutter.ndkVersion
+
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_1_8
+            }
+
+            defaultConfig {
+                applicationId = "fr.LeCoConssbe.lecoconssbe"
+                minSdk = flutter.minSdkVersion
+                targetSdk = flutter.targetSdkVersion
+                versionCode = flutter.versionCode
+                versionName = flutter.versionName
+            }
+
+            buildTypes {
+                release {
+                    signingConfig = signingConfigs.debug
+                }
+            }
+        }
+
+        flutter {
+            source = "../.."
+        }
+
         versionCode 1
         versionName "1.0"
     }
