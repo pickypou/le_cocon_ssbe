@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/data/repository/avis_clients_repository/avis_clients_repository.dart';
 import 'package:le_cocon_ssbe/ui/avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_appbar/custom_appbar.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/footer.dart';
@@ -19,7 +18,6 @@ class ViewAll extends StatelessWidget {
   final GlobalKey commenters = GlobalKey();
   final GlobalKey evenement = GlobalKey();
   final GlobalKey contact = GlobalKey();
-
 
   ViewAll({Key? key}) : super(key: key);
 
@@ -62,13 +60,15 @@ class ViewAll extends StatelessWidget {
         onNavigate: _scrollToSection,
         actions: [],
       ),
-      drawer: size.width < 749 ?  CustomDrawer(
-        espaceBienEtre: espaceBienEtre,
-        espaceSport: espaceSport,
-        commenters: commenters,
-        evenement: evenement,
-        contact: contact,
-      ) : null,
+      drawer: size.width < 749
+          ? CustomDrawer(
+              espaceBienEtre: espaceBienEtre,
+              espaceSport: espaceSport,
+              commenters: commenters,
+              evenement: evenement,
+              contact: contact,
+            )
+          : null,
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
@@ -88,12 +88,14 @@ class ViewAll extends StatelessWidget {
               EspaceSportView(key: espaceSport),
               Image.asset('assets/images/divider_2.png'),
               AvisClientsView(key: commenters),
-              const SizedBox(height: 50,),
+              const SizedBox(
+                height: 50,
+              ),
               Image.asset('assets/images/divider_2.png'),
               Evenements(key: evenement),
               Image.asset('assets/images/divider_2.png'),
               ContactView(key: contact),
-              Footer()
+              const Footer()
             ],
           ),
         ),

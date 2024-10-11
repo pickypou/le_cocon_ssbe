@@ -6,12 +6,10 @@ import 'package:le_cocon_ssbe/ui/theme.dart';
 class RecupAvisClients extends StatelessWidget {
   final AvisClients avis;
 
-  const RecupAvisClients({Key? key, required this.avis}) : super(key: key);
+  const RecupAvisClients({super.key, required this.avis});
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return BulleAvisClients(
       date: avis.formattedPublishDate,
       categories: avis.categories,

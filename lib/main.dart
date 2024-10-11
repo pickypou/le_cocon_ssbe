@@ -1,16 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:le_cocon_ssbe/ui/view_all/wiew_all.dart';
 
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform, // Utilisez les options générées
+    options:
+        DefaultFirebaseOptions.currentPlatform, // Utilisez les options générées
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Le cocon s.s.b.e',
       theme: theme,
-      home:  ViewAll(),
+      home: ViewAll(),
     );
   }
 }

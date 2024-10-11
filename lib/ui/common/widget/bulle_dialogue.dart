@@ -3,7 +3,7 @@ import 'package:flutter_utils/flutter_utils.dart';
 import '../../theme.dart';
 
 class BulleDialogue extends StatelessWidget {
-  final  color;
+  final color;
   final String text;
   final double width;
   final double height;
@@ -17,7 +17,7 @@ class BulleDialogue extends StatelessWidget {
       this.height = 150,
       this.textXOffset = 0,
       this.textYOffset = -20,
-        required this.color});
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class BulleDialogue extends StatelessWidget {
             borderColor: color,
             fillColor: Colors.transparent,
             text: text,
-            textStyle: textStyleTextBulle(context).copyWith(fontSize: size.width/70),
+            textStyle:
+                textStyleTextBulle(context).copyWith(fontSize: size.width / 70),
             width: width,
             height: height,
             textXOffset: textXOffset,
