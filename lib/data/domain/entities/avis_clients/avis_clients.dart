@@ -15,7 +15,7 @@ class AvisClients {
 });
     //Formatte la date au format (DD/MM/YYYY)
   String get formattedPublishDate {
-    return DateFormat('dd/mm/yyyy').format(publishDate);
+    return DateFormat('dd/MM/yyyy').format(publishDate);
   }
   factory AvisClients.fromMap(Map<String, dynamic>? data, String id) {
     return AvisClients(

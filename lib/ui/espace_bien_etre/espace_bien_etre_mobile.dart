@@ -45,7 +45,7 @@ class EspaceBienEtreMobile extends StatelessWidget {
                   bottom: BorderSide(width: 90.0, color: Colors.white),
                 )),
             child: Image.asset(
-              'assets/images/loren_2.jpg',
+              'assets/images/loren_2.jpeg',
               fit: BoxFit.contain,
               width: size.width / 1.5,
             ),

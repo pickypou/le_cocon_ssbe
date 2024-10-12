@@ -2,66 +2,13 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'dev.flutter.flutter-gradle-plugin'
 }
 
 android {
     namespace 'fr.lecoconssbe.lecoconssbe'
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "fr.lecoconssbe.lecoconssbe"
-        minSdk 21
-        targetSdk 34plugins {
-            id "com.android.application"
-            id 'com.google.gms.google-services'
-            id "kotlin-android"
-            id "dev.flutter.flutter-gradle-plugin"
-        }
-
-        android {
-            namespace = "fr.leCoConssbe.lecoconssbe"
-            compileSdk = flutter.compileSdkVersion
-            ndkVersion = flutter.ndkVersion
-
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
-            }
-
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_1_8
-            }
-
-            defaultConfig {
-                applicationId = "fr.LeCoConssbe.lecoconssbe"
-                minSdk = flutter.minSdkVersion
-                targetSdk = flutter.targetSdkVersion
-                versionCode = flutter.versionCode
-                versionName = flutter.versionName
-            }
-
-            buildTypes {
-                release {
-                    signingConfig = signingConfigs.debug
-                }
-            }
-        }
-
-        flutter {
-            source = "../.."
-        }
-
-        versionCode 1
-        versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug // Using debug signing config for now
-        }
-    }
+    compileSdk flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -71,15 +18,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    defaultConfig {
+        applicationId "fr.lecoconssbe.lecoconssbe"
+        minSdk flutter.minSdkVersion
+        targetSdk flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug // Using debug signing config for now
+        }
+    }
 }
 
-dependencies {
-    implementation platform('com.google.firebase:firebase-bom:33.4.0')
-    implementation 'com.google.firebase:firebase-firestore'
-    implementation 'com.google.firebase:firebase-storage'
-
-    // Add other dependencies here
-    implementation 'androidx.core:core-ktx:1.10.1'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+flutter {
+    source '../..'
 }

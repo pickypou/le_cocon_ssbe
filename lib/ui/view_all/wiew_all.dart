@@ -6,6 +6,7 @@ import 'package:le_cocon_ssbe/ui/contact/contact_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/espace_sport_view.dart';
 import 'package:le_cocon_ssbe/ui/evenements/evenements.dart';
+import 'package:le_cocon_ssbe/ui/presentation/presentation.dart';
 
 import '../common/widget/header.dart';
 import '../common/widget/img_header.dart';
@@ -82,6 +83,7 @@ class ViewAll extends StatelessWidget {
               ImgHeader(),
               const SizedBox(height: 50),
               const TextPresentation(),
+              const Presentation(),
               Image.asset('assets/images/divider_2.png'),
               EspaceBienEtreView(key: espaceBienEtre),
               Image.asset('assets/images/divider_2.png'),
