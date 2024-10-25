@@ -4,7 +4,7 @@ import 'package:le_cocon_ssbe/ui/common/widget/footer.dart';
 import 'package:le_cocon_ssbe/ui/contact/contact_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/espace_sport_view.dart';
-import 'package:le_cocon_ssbe/ui/evenements/evenements.dart';
+import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenements.dart';
 import 'package:le_cocon_ssbe/ui/presentation/presentation.dart';
 
 import '../avis_des_clients/avis_clients_list/view/avis_clients_view.dart';

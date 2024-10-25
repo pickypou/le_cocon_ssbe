@@ -14,8 +14,11 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/repository/avis_client_repositoryImpl.dart' as _i993;
+import '../../data/repository/avis_clients_repository.dart' as _i990;
+import '../../data/repository/enements_repository.dart' as _i554;
 import '../../data/repository/evenementRepositoryImpl.dart' as _i284;
 import '../../domain/usecases/fetch_avis_clients_data_usecase.dart' as _i57;
+import '../../domain/usecases/fetch_evenement-data-usecase.dart' as _i545;
 import 'api/firestore_service.dart' as _i746;
 import 'di_module.dart' as _i211;
 
@@ -31,17 +34,19 @@ _i174.GetIt init(
     environmentFilter,
   );
   final firebaseModule = _$FirebaseModule();
-  gh.factory<_i57.FetchAvisClientDataUseCase>(
-      () => _i57.FetchAvisClientDataUseCase());
   gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
   gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseModule.storage);
   gh.lazySingleton<_i211.StorageService>(
       () => _i211.StorageService(gh<_i457.FirebaseStorage>()));
+  gh.factory<_i284.EvenementRepositoryImpl>(() =>
+      _i284.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
   gh.factory<_i993.AvisClientsRepositoryImpl>(() =>
       _i993.AvisClientsRepositoryImpl(
           firestore: gh<_i974.FirebaseFirestore>()));
-  gh.factory<_i284.EvenementRepositoryImpl>(() =>
-      _i284.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
+  gh.factory<_i545.FetchEvenementDataUseCase>(
+      () => _i545.FetchEvenementDataUseCase(gh<_i554.EvenementRepository>()));
+  gh.factory<_i57.FetchAvisClientDataUseCase>(
+      () => _i57.FetchAvisClientDataUseCase(gh<_i990.AvisClientsRepository>()));
   gh.lazySingleton<_i211.FirestoreService>(
       () => _i211.FirestoreService(gh<_i974.FirebaseFirestore>()));
   gh.factory<_i746.FirestoreService>(

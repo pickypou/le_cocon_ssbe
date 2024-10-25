@@ -1,20 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:le_cocon_ssbe/core/di/di.dart';
-import 'package:le_cocon_ssbe/data/repository/avis_client_repositoryImpl.dart';
+
 import '../../data/repository/avis_clients_repository.dart';
 import '../entities/avis_clients.dart';
 
 @injectable
 class FetchAvisClientDataUseCase {
-  final AvisClientsRepository avisClientsRepository = getIt<AvisClientsRepositoryImpl>();
+  final AvisClientsRepository avisClientsRepository;
 
+  FetchAvisClientDataUseCase(this.avisClientsRepository);
 
   Future<List<AvisClients>> getAvisClients() async {
     try {
       debugPrint("Fetching avis_client data from Firestore...");
       Stream<Iterable<AvisClients>> avisClientStream =
-      avisClientsRepository.getAvisClientsStream();
+          avisClientsRepository.getAvisClientsStream();
 
       //Utilisez 'await for' pour consommer le stream
       List<AvisClients> avisClientsList = [];
@@ -22,7 +22,7 @@ class FetchAvisClientDataUseCase {
         avisClientsList.addAll(avisClientsIterable);
       }
       return avisClientsList;
-    }catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
       rethrow;
     }
@@ -32,9 +32,9 @@ class FetchAvisClientDataUseCase {
     try {
       debugPrint("Fetching avis_client data from Firestore...");
       Map<String, dynamic>? avisClientsData =
-      await avisClientsRepository.getById(avisClientsId);
+          await avisClientsRepository.getById(avisClientsId);
       return AvisClients.fromMap(avisClientsData, avisClientsId);
-    }catch (e) {
+    } catch (e) {
       debugPrint(e.toString());
       rethrow;
     }
