@@ -3,6 +3,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
+import 'package:le_cocon_ssbe/data/repository/enements_repository.dart';
+import 'package:le_cocon_ssbe/data/repository/evenementRepositoryImpl.dart';
 
 import '../../core/di/api/firestore_service.dart';
 import 'avis_client_repositoryImpl.dart';
@@ -22,4 +24,6 @@ void setupDataModule() {
   getIt.registerLazySingleton<AvisClientsRepository>(
           () => AvisClientsRepositoryImpl()
   );
+
+  getIt.registerLazySingleton<EvenementRepository>(() => EvenementRepositoryImpl());
 }

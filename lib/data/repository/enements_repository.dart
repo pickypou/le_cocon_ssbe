@@ -9,5 +9,4 @@ abstract class EvenementRepository {
 
   Stream<Iterable<Evenements>> getEvenementStream();
   Future<Map<String, dynamic>?>getById(String evenementId);
-
 }
