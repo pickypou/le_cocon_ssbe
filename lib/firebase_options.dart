@@ -28,7 +28,7 @@ class DefaultFirebaseOptions {
     appId: '1:282482672251:web:2c68d577580e00a08058de',
     messagingSenderId: '282482672251',
     projectId: 'le-cocon-ssbe-6a4d0',
-    authDomain: 'le-cocon-ssbe-6a4d0.firebaseapp.com',
+    authDomain: 'lecoconssbe.fr',
     storageBucket: 'le-cocon-ssbe-6a4d0.appspot.com',
   );
 }

@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDcFwkYsp64HNZVgsY86TC7aE2_VM1SIqQ",
-  authDomain: "le-cocon-ssbe-6a4d0.firebaseapp.com",
+  authDomain: "lecoconssbe.fr",
   projectId: "le-cocon-ssbe-6a4d0",
   storageBucket: "le-cocon-ssbe-6a4d0.appspot.com",
   messagingSenderId: "282482672251",

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_appbar/custom_appbar.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/footer.dart';
 import 'package:le_cocon_ssbe/ui/contact/contact_view.dart';
@@ -8,6 +7,7 @@ import 'package:le_cocon_ssbe/ui/espace_sport/espace_sport_view.dart';
 import 'package:le_cocon_ssbe/ui/evenements/evenements.dart';
 import 'package:le_cocon_ssbe/ui/presentation/presentation.dart';
 
+import '../avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
 import '../common/widget/header.dart';
 import '../common/widget/img_header.dart';
 import '../common/widget/text_presentation.dart';
