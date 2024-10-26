@@ -1,27 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Evenements extends StatelessWidget {
-  const Evenements({super.key});
+class Evenements {
+  final String id;
+  final String title;
+  final DateTime publishDate;
 
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
-    return SizedBox(
-      child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Evénements',
-                  style: titleStyleMedium(context)
-                      .copyWith(fontSize: size.width / 10)),
-              Image.asset(
-                'assets/images/evenement.png',
-                fit: BoxFit.contain,
-              ),
-            ],
-          )),
+  Evenements({required this.id, required this.title, required this.publishDate});
+
+  factory Evenements.fromMap(Map<String, dynamic> data, String documentId) {
+    return Evenements(
+      id: documentId,
+      title: data['title'] ?? 'Sans titre',
+      publishDate: (data['publishDate'] as Timestamp).toDate(),
     );
   }
 }

@@ -38,11 +38,11 @@ _i174.GetIt initGetIt(
   gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseModule.storage);
   gh.lazySingleton<_i211.StorageService>(
       () => _i211.StorageService(gh<_i457.FirebaseStorage>()));
-  gh.factory<_i284.EvenementRepositoryImpl>(() =>
-      _i284.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
   gh.factory<_i993.AvisClientsRepositoryImpl>(() =>
       _i993.AvisClientsRepositoryImpl(
           firestore: gh<_i974.FirebaseFirestore>()));
+  gh.factory<_i284.EvenementRepositoryImpl>(() =>
+      _i284.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
   gh.factory<_i545.FetchEvenementDataUseCase>(
       () => _i545.FetchEvenementDataUseCase(gh<_i554.EvenementRepository>()));
   gh.factory<_i57.FetchAvisClientDataUseCase>(

@@ -18,6 +18,7 @@ void setupEntityModule() {
   getIt.registerFactory<Evenements>(() =>
       Evenements(
         id: '',
+        title: '',
         fileType: '',
         fileUrl: '',
         publishDate: DateTime.now(),
