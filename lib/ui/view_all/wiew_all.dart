@@ -5,12 +5,14 @@ import 'package:le_cocon_ssbe/ui/common/widget/footer.dart';
 import 'package:le_cocon_ssbe/ui/contact/contact_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/espace_sport_view.dart';
+import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenement_view.dart';
 import 'package:le_cocon_ssbe/ui/presentation/presentation.dart';
 import '../avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
 import '../common/widget/header.dart';
 import '../common/widget/img_header.dart';
 import '../common/widget/text_presentation.dart';
 import '../evenements/evenement_view/evenement_list_view.dart'; // Assurez-vous d'importer EvenementListView pour afficher la liste d'événements
+import '../evenements/evenement_view/evenement_page.dart';
 import '../theme.dart';
 import '../../domain/entities/evenements.dart';
 
@@ -93,35 +95,7 @@ class ViewAll extends StatelessWidget {
               AvisClientsView(key: commenters),
               const SizedBox(height: 50),
               Image.asset('assets/images/divider_2.png'),
-
-              // Utilisation de StreamBuilder pour récupérer et afficher les événements
-              StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('evenement')
-                    .orderBy('publishDate', descending: true)
-                    .limit(8)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.hasError) {
-                    return Center(child: Text('Erreur : ${snapshot.error}'));
-                  }
-                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return const Center(child: Text('Aucun événement disponible'));
-                  }
-
-                  List<Evenements> evenementsList = snapshot.data!.docs
-                      .map((doc) => Evenements.fromMap(
-                    doc.data() as Map<String, dynamic>,
-                    doc.id,
-                  ))
-                      .toList();
-
-                  return const EvenementListView( evenements: [],);
-                },
-              ),
+              EvenementView(key: evenement),
               Image.asset('assets/images/divider_2.png'),
               ContactView(key: contact),
               const Footer(),

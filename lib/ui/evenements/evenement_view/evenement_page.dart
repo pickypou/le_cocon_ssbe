@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
+import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenement_list_view.dart';
 
-import 'evenement_list_view.dart';
+import '../../../domain/entities/evenements.dart';
 
 class EvenementPage extends StatelessWidget {
   const EvenementPage({super.key});
@@ -13,7 +13,7 @@ class EvenementPage extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection('evenement')
           .orderBy('publishDate', descending: true)
-          .limit(8)
+          .limit(3)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -21,10 +21,12 @@ class EvenementPage extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
+          print("Erreur lors de la récupération des données : ${snapshot.error}");
           return Center(child: Text('Erreur : ${snapshot.error}'));
         }
 
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          print("Aucune donnée disponible dans la collection 'evenement'");
           return const Center(child: Text('Aucun événement disponible'));
         }
 
@@ -36,10 +38,11 @@ class EvenementPage extends StatelessWidget {
         ))
             .toList();
 
-        // Utilisation de AvisClientsListView pour afficher les avis
-        return const EvenementListView( evenements: [],);
+        print("Données récupérées : $evenement");
+
+        // Utilisation de EvenementListView pour afficher les événements
+        return EvenementListView(evenement: evenement); // Transmettre les données récupérées
       },
     );
   }
 }
-

@@ -24,9 +24,9 @@ class Evenements {
   factory Evenements.fromMap(Map<String, dynamic>? data, String id) {
     return Evenements(
         id: id,
-        title: data ?['title'] ?? '',
-        fileType: data? ['fileType'] ?? '',
-        fileUrl: data? ['fileUrl'] ?? '',
+      title: data?['title'] ?? 'Titre inconnu',
+      fileType: data?['fileType'] ?? 'Type inconnu',
+      fileUrl: data?['fileUrl'] ?? 'URL inconnue',
         publishDate:DateConverter.converToDateTime( data? ['publishDATE']),
 
     );
@@ -35,5 +35,10 @@ class Evenements {
   //Formatte la date au format (DD/MM/YYYY)
   String get formattedPublishDate {
     return DateFormat('dd/MM/yyyy').format(publishDate);
+  }
+
+  @override
+  String toString() {
+    return 'Evenements(id: $id, title: $title, fileType: $fileType, fileUrl: $fileUrl, publishDate: $formattedPublishDate)';
   }
 }

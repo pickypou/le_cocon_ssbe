@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
-import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenement_view.dart';
-import 'package:le_cocon_ssbe/ui/theme.dart';
+import '../../../domain/entities/evenements.dart';
+import '../../theme.dart';
 
 class EvenementListView extends StatelessWidget {
-  final List<Evenements> evenements;
+  final List<Evenements> evenement;
 
-  const EvenementListView({super.key, required this.evenements});
+  const EvenementListView({super.key, required this.evenement});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SizedBox(
-          width: constraints.maxWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Événements',
-                style: titleStyleLarge(context)
-              ),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 16, // horizontal space between items
-                runSpacing: 16, // vertical space between lines
-                children: evenements.map((evenement) {
-                  return SizedBox(
-                    width: 200, // Set a fixed width for each item
-                    child: EvenementView(evenement: evenement),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        );
-      },
+    return Container(
+      height: 300, // Définissez une hauteur appropriée
+      child: ListView.builder(
+        itemCount: evenement.length,
+        itemBuilder: (context, index) {
+          final evt = evenement[index];
+          return Card(
+            child: ListTile(
+              title: Text(evt.title),
+              subtitle: Text(evt.formattedPublishDate),
+              leading: Image.network(evt.fileUrl, width: 50, height: 50, fit: BoxFit.cover),
+            ),
+          );
+        },
+      ),
     );
   }
 }
