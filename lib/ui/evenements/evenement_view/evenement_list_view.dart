@@ -3,66 +3,101 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:open_file/open_file.dart';
 import 'dart:io';
 import '../../../domain/entities/evenements.dart';
-import '../../theme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:url_launcher/url_launcher.dart';
 
 class EvenementListView extends StatelessWidget {
   final List<Evenements> evenement;
 
-  const EvenementListView({super.key, required this.evenement});
+  const EvenementListView({Key? key, required this.evenement}) : super(key: key);
 
-  Future<void> _openDocument(BuildContext context, Evenements evt) async {
-    final url = evt.fileUrl;
-    print("Tentative d'ouverture du document: $url"); // Log pour déboguer
-
-    if (url.startsWith('http')) {
-      // URL distante
+  Future<void> _handleDocumentTap(BuildContext context, Evenements evt) async {
+    if (kIsWeb) {
+      await _launchURL(evt.fileUrl);
+    } else {
       try {
-        final uri = Uri.parse(url);
-        final response = await http.get(uri);
-        final bytes = response.bodyBytes;
-        final tempDir = await getTemporaryDirectory();
-        final tempDocumentPath = '${tempDir.path}/${evt.title}.${_getFileExtension(url)}';
-        File(tempDocumentPath).writeAsBytesSync(bytes);
-        print("Fichier téléchargé et sauvegardé: $tempDocumentPath"); // Log pour déboguer
-        _openFile(context, tempDocumentPath, evt.title);
+        final file = await _downloadFile(evt.fileUrl, evt.title);
+        if (file != null) {
+          if (_isImageFile(evt.fileUrl)) {
+            _showEnlargedImage(context, file, evt.title);
+          } else {
+            _openPdfFile(context, file, evt.title);
+          }
+        }
       } catch (e) {
-        print("Erreur lors du téléchargement: $e"); // Log pour déboguer
+        print("Erreur lors du téléchargement: $e");
         _showErrorDialog(context, "Impossible de télécharger le document: $e");
       }
-    } else {
-      // URL locale
-      print("Tentative d'ouverture du fichier local: $url"); // Log pour déboguer
-      _openFile(context, url, evt.title);
     }
   }
 
-  void _openFile(BuildContext context, String filePath, String title) {
-    print("Ouverture du fichier: $filePath"); // Log pour déboguer
-    if (_isImageFile(filePath)) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => DocumentViewerPage(
-            title: title,
-            filePath: filePath,
-            isImage: true,
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<File?> _downloadFile(String url, String fileName) async {
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final bytes = response.bodyBytes;
+        final tempDir = await getTemporaryDirectory();
+        final file = File('${tempDir.path}/${fileName.isNotEmpty ? fileName : "document"}.${_getFileExtension(url)}');
+        await file.writeAsBytes(bytes);
+        print("File downloaded successfully: ${file.path}");
+        return file;
+      }
+    } catch (e) {
+      print("Erreur lors du téléchargement: $e");
+    }
+    return null;
+  }
+
+  void _showEnlargedImage(BuildContext context, File file, String title) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: Text(title.isNotEmpty ? title : "Image")),
+          body: PhotoView(
+            imageProvider: FileImage(file),
+            minScale: PhotoViewComputedScale.contained,
+            maxScale: PhotoViewComputedScale.covered * 2,
           ),
         ),
-      );
-    } else {
-      OpenFile.open(filePath).then((result) {
-        print("Résultat de l'ouverture: ${result.type}, ${result.message}"); // Log pour déboguer
-        if (result.type != ResultType.done) {
-          _showErrorDialog(context, "Impossible d'ouvrir le fichier: ${result.message}");
-        }
-      });
-    }
+      ),
+    );
+  }
+
+  void _openPdfFile(BuildContext context, File file, String title) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: Text(title.isNotEmpty ? title : "PDF")),
+          body: PDFView(
+            filePath: file.path,
+            enableSwipe: true,
+            swipeHorizontal: true,
+            autoSpacing: false,
+            pageFling: false,
+            onError: (error) {
+              print(error.toString());
+            },
+            onPageError: (page, error) {
+              print('$page: ${error.toString()}');
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   void _showErrorDialog(BuildContext context, String message) {
-    print("Affichage de l'erreur: $message"); // Log pour déboguer
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -83,12 +118,35 @@ class EvenementListView extends StatelessWidget {
   }
 
   String _getFileExtension(String url) {
-    return url.split('.').last.toLowerCase();
+    return url.split('.').last.split('?').first.toLowerCase();
   }
 
   bool _isImageFile(String url) {
     final imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
     return imageExtensions.contains(_getFileExtension(url));
+  }
+
+  Widget _buildThumbnail(Evenements evt) {
+    print("Building thumbnail for: ${evt.title}, URL: ${evt.fileUrl}");
+    if (_isImageFile(evt.fileUrl)) {
+      return CachedNetworkImage(
+        imageUrl: evt.fileUrl,
+        fit: BoxFit.cover,
+        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) {
+          print("Error loading image: $error");
+          return Center(child: Icon(Icons.error));
+        },
+      );
+    } else {
+      return Center(
+        child: Icon(
+          Icons.picture_as_pdf,
+          size: 50,
+          color: Colors.grey,
+        ),
+      );
+    }
   }
 
   @override
@@ -112,7 +170,7 @@ class EvenementListView extends StatelessWidget {
                           child: SizedBox(
                             width: cardWidth,
                             child: GestureDetector(
-                              onTap: () => _openDocument(context, evt),
+                              onTap: () => _handleDocumentTap(context, evt),
                               child: Card(
                                 elevation: 4,
                                 child: Column(
@@ -120,19 +178,7 @@ class EvenementListView extends StatelessWidget {
                                   children: [
                                     Container(
                                       height: 150,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: _getImageProvider(evt.fileUrl),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Icon(
-                                          _isImageFile(evt.fileUrl) ? Icons.image : Icons.picture_as_pdf,
-                                          size: 50,
-                                          color: Colors.white.withOpacity(0.8),
-                                        ),
-                                      ),
+                                      child: _buildThumbnail(evt),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
@@ -140,7 +186,7 @@ class EvenementListView extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            evt.title,
+                                            evt.title.isNotEmpty ? evt.title : "Sans titre",
                                             style: TextStyle(fontWeight: FontWeight.bold),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -166,43 +212,6 @@ class EvenementListView extends StatelessWidget {
               ),
             );
           }
-      ),
-    );
-  }
-
-  ImageProvider _getImageProvider(String url) {
-    if (url.startsWith('http')) {
-      return NetworkImage(url);
-    } else {
-      return FileImage(File(url));
-    }
-  }
-}
-
-class DocumentViewerPage extends StatelessWidget {
-  final String title;
-  final String filePath;
-  final bool isImage;
-
-  const DocumentViewerPage({
-    Key? key,
-    required this.title,
-    required this.filePath,
-    required this.isImage,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: isImage
-          ? PhotoView(
-        imageProvider: FileImage(File(filePath)),
-        minScale: PhotoViewComputedScale.contained,
-        maxScale: PhotoViewComputedScale.covered * 2,
-      )
-          : Center(
-        child: Text("Ce fichier n'est pas une image et ne peut pas être affiché ici."),
       ),
     );
   }
