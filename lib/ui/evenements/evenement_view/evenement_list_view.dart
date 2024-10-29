@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/evenements.dart';
 import '../event_handler.dart';
+import '../pdf_miniature.dart';
 
 class EvenementListView extends StatelessWidget {
   final List<Evenements> evenement;
@@ -42,7 +43,11 @@ class EvenementListView extends StatelessWidget {
                             children: [
                               Container(
                                 height: 150,
-                                child: eventHandler.buildThumbnail(evt), // Utilisation de buildThumbnail
+                                child: evt.isPdfFile
+                                    ? PDFMiniature(pdfUrl: evt.fileUrl) // Utilisation de PDFMiniature pour les PDFs
+                                    : Image.network(evt.fileUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+                                  return Icon(Icons.image_not_supported, color: Colors.red);
+                                }),
                               ),
                               Padding(
                                 padding: EdgeInsets.all(8.0),

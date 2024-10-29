@@ -11,7 +11,7 @@ class FetchEvenementDataUseCase {
 
   Future<List<Evenements>> getEvenement() async {
     try {
-      debugPrint("Fetching avis_client data from Firestore...");
+      debugPrint("Fetching événement data from Firestore...");
       Stream<Iterable<Evenements>> evenementStream =
           evenementRepository.getEvenementStream();
 
@@ -29,7 +29,7 @@ class FetchEvenementDataUseCase {
 
   Future<Evenements?> getEvenementById(String evenementId) async {
     try {
-      debugPrint("Fetching avis_client data from Firestore...");
+      debugPrint("Fetching événement data from Firestore...");
       Map<String, dynamic>? evenementData =
           await evenementRepository.getById(evenementId);
       return Evenements.fromMap(evenementData, evenementId);

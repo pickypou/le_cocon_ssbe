@@ -1,15 +1,11 @@
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:pdfx/pdfx.dart';
-import '../../domain/entities/evenements.dart';
-import 'package:flutter/material.dart';
-
-import 'evenement_view/evenement_helpers.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventHandler {
   Future<void> handleDocumentTap(BuildContext context, String fileUrl, String title) async {
@@ -26,9 +22,11 @@ class EventHandler {
           } else {
             _showErrorDialog(context, "Type de fichier non pris en charge.");
           }
+        } else {
+          _showErrorDialog(context, "Impossible de télécharger le fichier.");
         }
       } catch (e) {
-        _showErrorDialog(context, "Impossible de télécharger le document: $e");
+        _showErrorDialog(context, "Erreur lors du traitement du document: $e");
       }
     }
   }
@@ -42,8 +40,19 @@ class EventHandler {
   }
 
   Future<File?> _downloadFile(String url, String fileName) async {
-    // Ajoutez votre code de téléchargement ici
-    return null; // Placeholder
+    try {
+      final response = await http.get(Uri.parse(url)).timeout(Duration(seconds: 30));
+      if (response.statusCode == 200) {
+        final bytes = response.bodyBytes;
+        final tempDir = await getTemporaryDirectory();
+        final file = File('${tempDir.path}/${fileName.isNotEmpty ? fileName : "document"}.${_getFileExtension(url)}');
+        await file.writeAsBytes(bytes);
+        return file;
+      }
+    } catch (e) {
+      print("Erreur lors du téléchargement: $e");
+    }
+    return null;
   }
 
   void _showEnlargedImage(BuildContext context, File file, String title) {
@@ -116,50 +125,4 @@ class EventHandler {
   String _getFileExtension(String url) {
     return url.split('.').last.split('?').first.toLowerCase();
   }
-
-  // Vous pouvez rendre cette méthode publique pour l'utiliser dans d'autres fichiers
-  Widget buildThumbnail(Evenements evt) {
-    if (evt.fileUrl.isEmpty) {
-      return Container(
-        color: Colors.grey,
-        child: Center(child: Text("Aperçu non disponible")),
-      );
-    }
-
-    if (_isImageFile(evt.fileUrl)) {
-      return CachedNetworkImage(
-        imageUrl: evt.fileUrl,
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-      );
-    } else if (_isPdfFile(evt.fileUrl)) {
-      // Utilisation de pdf_thumbnail pour générer une miniature
-      return FutureBuilder<Image?>(
-        future: generatePdfThumbnail(evt.fileUrl),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container(
-              color: Colors.red,
-              child: Center(child: CircularProgressIndicator()),
-            );
-          } else if (snapshot.hasError) {
-            return Container(
-              color: Colors.red,
-              child: Center(child: Text("Erreur de miniature")),
-            );
-          } else {
-            return snapshot.data ?? Container();
-          }
-        },
-      );
-    }
-
-    return Container(
-      color: Colors.red,
-      child: Center(child: Text("Type de fichier non pris en charge")),
-    );
-  }
-
-
-
 }

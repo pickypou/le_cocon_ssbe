@@ -643,6 +643,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
   freelance:
     dependency: "direct main"
     description:
@@ -1139,6 +1147,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.12"
+  pdf_thumbnail:
+    dependency: "direct main"
+    description:
+      name: pdf_thumbnail
+      sha256: "7f56f3ea7c3c47736307989250dcabf82f48da985f68860189a5fbeb81239068"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6+1"
   pdfx:
     dependency: "direct main"
     description:
@@ -1288,6 +1304,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  spreadsheet_decoder:
+    dependency: transitive
+    description:
+      name: spreadsheet_decoder
+      sha256: "1370af9802bf14c7bdd9f24609294bbba0dbe715413922ce8e927d6d37aeefc6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   sprintf:
     dependency: transitive
     description:
@@ -1400,6 +1424,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
+  thumbnailer:
+    dependency: "direct main"
+    description:
+      name: thumbnailer
+      sha256: a6a28c1a049dc2d443f1e4a189169359e3ba17b110e3e29d65e5c49278d0c02b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   timing:
     dependency: transitive
     description:

@@ -19,7 +19,7 @@ class Evenements {
     required this.publishDate
   });
 
-
+  bool get isPdfFile => fileUrl.endsWith('.pdf');
 
   factory Evenements.fromMap(Map<String, dynamic>? data, String id) {
     return Evenements(
