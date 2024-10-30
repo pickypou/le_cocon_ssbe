@@ -97,7 +97,7 @@ TextStyle titleStyleSmall(BuildContext context) {
 // Style pour le texte avec la police Autography
 TextStyle textStyleText(BuildContext context) {
   Size size = MediaQuery.sizeOf(context);
-  double textFontSize = size.width / 50;
+  double textFontSize = size.width / 75;
   return
     GoogleFonts.montserrat().copyWith(
     fontSize: textFontSize,
@@ -118,7 +118,7 @@ TextStyle textStyleTextAccueil(BuildContext context) {
 
 TextStyle textStyleTextBulle(BuildContext context) {
   Size size = MediaQuery.sizeOf(context);
-  double textFontSize = size.width / 45;
+  double textFontSize = size.width / 88;
   return
     GoogleFonts.lora().copyWith(
     fontSize: textFontSize,

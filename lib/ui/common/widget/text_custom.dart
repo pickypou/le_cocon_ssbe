@@ -23,7 +23,7 @@ class CustomText extends StatelessWidget {
               TextSpan(
                 text: word.substring(0, 1), // Première lettre avec 'Autography'
                 style: TextStyle(
-                  color: theme.colorScheme.secondary,
+                  color: theme.colorScheme.onSurface,
                   fontFamily: 'Autography',
                   fontSize: fontSize, //Taille de la police responsive
                   fontWeight: FontWeight.bold,

@@ -5,6 +5,7 @@ class Activities extends StatelessWidget {
   final String logo;
   final String title;
   final String text;
+  final richText;
   final String value;
   final bool isImageBeforeTitle;
 
@@ -12,6 +13,7 @@ class Activities extends StatelessWidget {
     super.key,
     required this.title,
     required this.text,
+    required this.richText,
     required this.value,
     this.isImageBeforeTitle = true,
     required this.logo,
@@ -52,12 +54,22 @@ class Activities extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: titleStyleSmall(context).copyWith(fontSize: size.width / 50),
+                      style: titleStyleSmall(context).copyWith(fontSize: size.width / 35),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: richText,
+                            style: textStyleText(context), // Appliquer le style ici
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 05),
                     Text(
                       text,
-                      style: titleStyleSmall(context).copyWith(fontSize: size.width / 50),
+                      style: textStyleText(context).copyWith(fontSize: size.width / 50),
                     ),
                   ],
                 ),

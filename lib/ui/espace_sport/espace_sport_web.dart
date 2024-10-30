@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/bulle_dialogue.dart';
-import 'package:le_cocon_ssbe/ui/espace_sport/activity_sport.dart';
+import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport.dart';
 
 import '../common/widget/text_custom.dart';
 import '../theme.dart';
@@ -34,14 +34,14 @@ class EspaceSportWeb extends StatelessWidget {
               Image.asset(
                 'assets/images/gerard.png',
                 fit: BoxFit.contain,
-                width: size.width / 5.1,
+                width: size.width / 4,
               ),
               BulleDialogue(
                 text:
                     "Peu importe votre objectif, je vous propose des activités de la plus douce à la plus intense.",
                 color: theme.colorScheme.secondary,
-                width: size.width * 0.28,
-                height: size.height * 0.28,
+                width: size.width * 0.34,
+                height: size.height * 0.27,
                 textXOffset: 0,
                 textYOffset: -38,
               ),
@@ -156,7 +156,7 @@ class EspaceSportWeb extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          const ActivitySport()
+          const ActivitiesSport()
         ]));
   }
 }

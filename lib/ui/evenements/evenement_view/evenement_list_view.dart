@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/theme.dart';
 import '../../../domain/entities/evenements.dart';
 import '../event_handler.dart';
 import '../pdf_miniature.dart';
@@ -11,26 +12,37 @@ class EvenementListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
     if (evenement.isEmpty) {
       return Center(child: Text("Aucun événement disponible"));
     }
 
     return Center(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final cardWidth = constraints.maxWidth / 4.5;
-          final totalWidth = cardWidth * evenement.length;
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Nos événements",
+                style: titleStyleMedium(context).copyWith(fontSize: size.width / 10),
+              ),
+            ),
+          ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final cardWidth = constraints.maxWidth / 4.5;
 
-          return Container(
-            height: 300,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SizedBox(width: totalWidth > constraints.maxWidth
-                      ? 0
-                      : (constraints.maxWidth - totalWidth) / 2),
-                  ...evenement.map((evt) => Padding(
+              return Wrap(
+                spacing: 16.0,
+                runSpacing: 16.0,
+                children: evenement.map((evt) {
+                  // Ajoutez le print ici pour voir la valeur de pdfUrl
+                  print('Valeur de pdfUrl pour ${evt.title}: ${evt.fileUrl}');
+
+                  return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: SizedBox(
                       width: cardWidth,
@@ -43,11 +55,21 @@ class EvenementListView extends StatelessWidget {
                             children: [
                               Container(
                                 height: 150,
-                                child: evt.isPdfFile
-                                    ? PDFMiniature(pdfUrl: evt.fileUrl) // Utilisation de PDFMiniature pour les PDFs
-                                    : Image.network(evt.fileUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
-                                  return Icon(Icons.image_not_supported, color: Colors.red);
-                                }),
+                                width: double.infinity,
+                                child: evt.fileType == 'pdf'
+                                    ? PdfMiniature(pdfUrl: evt.fileUrl) // Utilisation de PDFMiniature
+                                    : Image.network(
+                                  evt.fileUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Center(
+                                      child: Text(
+                                        'Aperçu indisponible',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -56,14 +78,18 @@ class EvenementListView extends StatelessWidget {
                                   children: [
                                     Text(
                                       evt.title.isNotEmpty ? evt.title : "Sans titre",
-                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     SizedBox(height: 4),
                                     Text(
                                       evt.formattedPublishDate,
-                                      style: TextStyle(color: Colors.grey[600]),
+                                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
                                     ),
                                   ],
                                 ),
@@ -73,15 +99,12 @@ class EvenementListView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )),
-                  SizedBox(width: totalWidth > constraints.maxWidth
-                      ? 0
-                      : (constraints.maxWidth - totalWidth) / 2),
-                ],
-              ),
-            ),
-          );
-        },
+                  );
+                }).toList(),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

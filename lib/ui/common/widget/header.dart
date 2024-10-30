@@ -38,7 +38,7 @@ class Header extends StatelessWidget {
                   TextSpan(
                     text: 'S.S.B.E', // Partie avec la police Autography
                     style: titleStyleMedium(context).copyWith(
-                        fontFamily: 'Autography', fontSize: titleFontSize),
+                        fontFamily: 'Autography', fontSize: titleFontSize,),
                   ),
                 ],
               ),

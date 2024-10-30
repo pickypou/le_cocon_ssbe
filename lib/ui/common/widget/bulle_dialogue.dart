@@ -32,7 +32,7 @@ class BulleDialogue extends StatelessWidget {
             fillColor: Colors.transparent,
             text: text,
             textStyle:
-                textStyleTextBulle(context).copyWith(fontSize: size.width / 70),
+                textStyleTextBulle(context),
             width: width,
             height: height,
             textXOffset: textXOffset,

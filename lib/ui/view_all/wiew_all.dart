@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_appbar/custom_appbar.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/footer.dart';
@@ -11,10 +10,7 @@ import '../avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
 import '../common/widget/header.dart';
 import '../common/widget/img_header.dart';
 import '../common/widget/text_presentation.dart';
-import '../evenements/evenement_view/evenement_list_view.dart'; // Assurez-vous d'importer EvenementListView pour afficher la liste d'événements
-import '../evenements/evenement_view/evenement_page.dart';
 import '../theme.dart';
-import '../../domain/entities/evenements.dart';
 
 class ViewAll extends StatelessWidget {
   final GlobalKey espaceBienEtre = GlobalKey();

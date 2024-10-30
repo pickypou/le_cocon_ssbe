@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_mobile.dart';
 import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_web.dart';
 
+import 'activity_bien_etre.dart';
+
 class EspaceBienEtreView extends StatelessWidget {
 
   const EspaceBienEtreView({super.key});
@@ -12,11 +14,19 @@ class EspaceBienEtreView extends StatelessWidget {
     if (size.width < 750) {
       return const SizedBox(
         child: Padding(
-            padding: EdgeInsets.all(25), child: EspaceBienEtreMobile()),
+            padding: EdgeInsets.all(25),
+            child: EspaceBienEtreMobile()),
       );
     } else {
       return const SizedBox(
-        child: EspaceBienEtreWeb(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            EspaceBienEtreWeb(),
+            ActivityBienEtre()
+          ],
+        )
+
       );
     }
   }
