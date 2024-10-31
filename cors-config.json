@@ -1,7 +1,14 @@
 [
   {
-    "origin": ["https://lecoconssbe.fr/"],
-    "method": ["GET"],
+    "origin": ["https://le-cocon-ssbe-6a4d0.web.app"],
+    "responseHeader": [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Headers",
+      "X-Custom-Header"
+    ],
+    "method": ["GET", "OPTIONS"],
     "maxAgeSeconds": 3600
   }
 ]

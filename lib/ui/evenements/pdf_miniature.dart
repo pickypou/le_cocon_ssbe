@@ -2,19 +2,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pdf_render/pdf_render.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
+import '../../services/network_service.dart';
 
 class PdfMiniature extends StatefulWidget {
   final String pdfUrl;
   final double height;
   final double width;
+  final String fileName;
 
   const PdfMiniature({
-    Key? key,
+    super.key,
     required this.pdfUrl,
     this.height = 150,
-    this.width = double.infinity,
-  }) : super(key: key);
+    this.width = double.infinity, required this.fileName,
+  });
 
   @override
   _PdfMiniatureState createState() => _PdfMiniatureState();
@@ -22,42 +23,30 @@ class PdfMiniature extends StatefulWidget {
 
 class _PdfMiniatureState extends State<PdfMiniature> {
   PdfDocument? _document;
+  final NetworkService _networkService = NetworkService(); // Instanciez NetworkService
 
   @override
   void initState() {
     super.initState();
     _downloadAndLoadPdf();
   }
-  String _getFileNameFromUrl(String url) {
-    // Extraire le nom du fichier de l'URL
-    return url.split('/').last.split('?')[0];
-  }
-
 
   Future<void> _downloadAndLoadPdf() async {
     try {
-      // 1. Télécharger le fichier PDF depuis Firebase Storage
+      // Utilisez le NetworkService pour télécharger le fichier PDF
       debugPrint("Téléchargement du PDF depuis : ${widget.pdfUrl}");
-      final response = await http.get(Uri.parse(widget.pdfUrl));
+      final response = await _networkService.fetchPdf(widget.pdfUrl);
       if (response.statusCode == 200) {
-        // 2. Extraire le nom du fichier à partir de l'URL
-        final fileName = _getFileNameFromUrl(widget.pdfUrl);
-        debugPrint("Nom du fichier extrait : $fileName"); // Afficher le nom du fichier extrait
-
-        // 3. Sauvegarder le fichier PDF dans un répertoire temporaire
+        // Sauvegardez et chargez le fichier
         final tempDir = await getTemporaryDirectory();
-        final localPath = '${tempDir.path}/$fileName'; // Utiliser le nom d'origine
+        final localPath = '${tempDir.path}/${widget.pdfUrl.split('/').last}';
         final file = File(localPath);
         await file.writeAsBytes(response.bodyBytes);
 
-        debugPrint("PDF sauvegardé à : $localPath"); // Afficher le chemin de sauvegarde
-
-        // 4. Charger le document PDF depuis le fichier local
+        debugPrint("PDF sauvegardé à : $localPath");
         _document = await PdfDocument.openFile(localPath);
 
-        setState(() {
-          // Mise à jour pour indiquer que le fichier est prêt
-        });
+        setState(() {});
       } else {
         debugPrint("Erreur de téléchargement du PDF : ${response.statusCode}");
       }
@@ -81,9 +70,7 @@ class _PdfMiniatureState extends State<PdfMiniature> {
         } else if (snapshot.hasError || snapshot.data == null) {
           return Icon(Icons.error, color: Colors.red);
         } else {
-          return snapshot.data!.imageIfAvailable != null
-              ? RawImage(image: snapshot.data!.imageIfAvailable)
-              : Icon(Icons.error, color: Colors.red);
+          return RawImage(image: snapshot.data!.imageIfAvailable);
         }
       },
     );
@@ -95,3 +82,4 @@ class _PdfMiniatureState extends State<PdfMiniature> {
     super.dispose();
   }
 }
+
