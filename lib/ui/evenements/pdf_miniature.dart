@@ -1,66 +1,97 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:pdf_render/pdf_render.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:pdfx/pdfx.dart';
-import 'dart:typed_data'; // Assurez-vous d'avoir cette ligne seule pour Uint8List
 
 class PdfMiniature extends StatefulWidget {
   final String pdfUrl;
+  final double height;
+  final double width;
 
-  const PdfMiniature({super.key, required this.pdfUrl});
+  const PdfMiniature({
+    Key? key,
+    required this.pdfUrl,
+    this.height = 150,
+    this.width = double.infinity,
+  }) : super(key: key);
 
   @override
   _PdfMiniatureState createState() => _PdfMiniatureState();
 }
 
 class _PdfMiniatureState extends State<PdfMiniature> {
-  late PdfController _pdfController;
-  bool _loading = true;
+  PdfDocument? _document;
 
   @override
   void initState() {
     super.initState();
-    loadPDF();
+    _downloadAndLoadPdf();
+  }
+  String _getFileNameFromUrl(String url) {
+    // Extraire le nom du fichier de l'URL
+    return url.split('/').last.split('?')[0];
   }
 
-  Future<void> loadPDF() async {
+
+  Future<void> _downloadAndLoadPdf() async {
     try {
-      print('Début du téléchargement du PDF à partir de: ${widget.pdfUrl}');
+      // 1. Télécharger le fichier PDF depuis Firebase Storage
+      debugPrint("Téléchargement du PDF depuis : ${widget.pdfUrl}");
       final response = await http.get(Uri.parse(widget.pdfUrl));
       if (response.statusCode == 200) {
-        final Uint8List data = response.bodyBytes;
+        // 2. Extraire le nom du fichier à partir de l'URL
+        final fileName = _getFileNameFromUrl(widget.pdfUrl);
+        debugPrint("Nom du fichier extrait : $fileName"); // Afficher le nom du fichier extrait
 
-        _pdfController = PdfController(
-          document: PdfDocument.openData(data),
-        );
+        // 3. Sauvegarder le fichier PDF dans un répertoire temporaire
+        final tempDir = await getTemporaryDirectory();
+        final localPath = '${tempDir.path}/$fileName'; // Utiliser le nom d'origine
+        final file = File(localPath);
+        await file.writeAsBytes(response.bodyBytes);
+
+        debugPrint("PDF sauvegardé à : $localPath"); // Afficher le chemin de sauvegarde
+
+        // 4. Charger le document PDF depuis le fichier local
+        _document = await PdfDocument.openFile(localPath);
 
         setState(() {
-          _loading = false;
+          // Mise à jour pour indiquer que le fichier est prêt
         });
       } else {
-        print('Erreur lors du téléchargement du PDF: ${response.statusCode}');
+        debugPrint("Erreur de téléchargement du PDF : ${response.statusCode}");
       }
     } catch (e) {
-      print('Erreur lors du téléchargement du PDF: $e');
-      // Ajoutez des informations supplémentaires sur l'erreur
-      if (e is http.ClientException) {
-        print('Erreur Client: ${e.message}');
-      } else {
-        print('Erreur inconnue: ${e.toString()}');
-      }
+      debugPrint('Erreur lors du téléchargement ou du chargement du PDF : $e');
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return _loading
+    return _document == null
         ? Center(child: CircularProgressIndicator())
-        : PdfView(
-      controller: _pdfController,
-      scrollDirection: Axis.horizontal,
-      onPageChanged: (int page) {
-        print('Page $page affichée');
+        : FutureBuilder<PdfPageImage?>(
+      future: _document!.getPage(1).then((page) => page.render(
+        width: widget.width.toInt(),
+        height: widget.height.toInt(),
+      )),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError || snapshot.data == null) {
+          return Icon(Icons.error, color: Colors.red);
+        } else {
+          return snapshot.data!.imageIfAvailable != null
+              ? RawImage(image: snapshot.data!.imageIfAvailable)
+              : Icon(Icons.error, color: Colors.red);
+        }
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _document?.dispose();
+    super.dispose();
   }
 }

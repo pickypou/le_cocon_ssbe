@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Le cocon s.s.b.e',
-      theme: theme,
+      theme: theme.copyWith(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: ViewAll(),
     );
   }
