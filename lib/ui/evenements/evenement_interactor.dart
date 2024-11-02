@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/data/repository/enements_repository.dart';
-import 'package:le_cocon_ssbe/data/repository/evenementRepositoryImpl.dart';
+import 'package:le_cocon_ssbe/data/repository/evenements_repository.dart';
+import 'package:le_cocon_ssbe/data/repository/evenement_repository_impl.dart';
 import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
-import 'package:le_cocon_ssbe/domain/usecases/fetch_evenement-data-usecase.dart';
+import 'package:le_cocon_ssbe/domain/usecases/fetch_evenement_data_usecase.dart';
 
 import '../../core/di/di.dart';
 

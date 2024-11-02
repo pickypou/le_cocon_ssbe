@@ -13,12 +13,12 @@ import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../data/repository/avis_client_repositoryImpl.dart' as _i993;
+import '../../data/repository/avis_client_repository_impl.dart' as _i993;
 import '../../data/repository/avis_clients_repository.dart' as _i990;
-import '../../data/repository/enements_repository.dart' as _i554;
-import '../../data/repository/evenementRepositoryImpl.dart' as _i284;
+import '../../data/repository/evenements_repository.dart' as _i554;
+import '../../data/repository/evenement_repository_impl.dart' as _i284;
 import '../../domain/usecases/fetch_avis_clients_data_usecase.dart' as _i57;
-import '../../domain/usecases/fetch_evenement-data-usecase.dart' as _i545;
+import '../../domain/usecases/fetch_evenement_data_usecase.dart' as _i545;
 import 'api/firestore_service.dart' as _i746;
 import 'di_module.dart' as _i211;
 

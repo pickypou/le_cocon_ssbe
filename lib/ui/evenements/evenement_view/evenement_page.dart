@@ -22,13 +22,13 @@ class EvenementPage extends StatelessWidget {
 
         // Gestion des erreurs
         if (snapshot.hasError) {
-          print("Erreur lors de la récupération des données : ${snapshot.error}");
+          debugPrint("Erreur lors de la récupération des données : ${snapshot.error}");
           return Center(child: Text('Erreur : ${snapshot.error}'));
         }
 
         // Gestion des données vides
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          print("Aucune donnée disponible dans la collection 'evenement'");
+          debugPrint("Aucune donnée disponible dans la collection 'evenement'");
           return const Center(child: Text('Aucun événement disponible'));
         }
 
@@ -41,7 +41,7 @@ class EvenementPage extends StatelessWidget {
               doc.id,
             );
           } catch (e) {
-            print("Erreur lors de la transformation des données : $e");
+            debugPrint("Erreur lors de la transformation des données : $e");
             return null; // Gérer la transformation échouée
           }
         })
@@ -49,7 +49,7 @@ class EvenementPage extends StatelessWidget {
             .cast<Evenements>() // Cast pour le type correct
             .toList();
 
-        print("Données récupérées : $evenement");
+        debugPrint("Données récupérées : $evenement");
 
         // Utilisation de EvenementListView pour afficher les événements
         return EvenementListView(evenement: evenement); // Transmettre les données récupérées

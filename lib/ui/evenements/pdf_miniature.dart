@@ -18,10 +18,10 @@ class PdfMiniature extends StatefulWidget {
   });
 
   @override
-  _PdfMiniatureState createState() => _PdfMiniatureState();
+  PdfMiniatureState createState() => PdfMiniatureState();
 }
 
-class _PdfMiniatureState extends State<PdfMiniature> {
+class PdfMiniatureState extends State<PdfMiniature> {
   PdfDocument? _document;
   final NetworkService _networkService = NetworkService(); // Instanciez NetworkService
 

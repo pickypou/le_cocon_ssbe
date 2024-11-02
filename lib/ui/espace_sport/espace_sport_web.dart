@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/bulle_dialogue.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport.dart';
-
+import 'package:le_cocon_ssbe/ui/espace_sport/tarifs_horaires.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../common/widget/text_custom.dart';
 import '../theme.dart';
 
@@ -154,9 +155,36 @@ class EspaceSportWeb extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 5,
           ),
-          const ActivitiesSport()
+          const ActivitiesSport(),
+          const SizedBox(height: 5,),
+          TarifsHoraires(fraction: 2, size:size),
+          Text("Pour plus de renseignent visité mon site internet", style: textStyleText(context),),
+          ElevatedButton(
+            onPressed: () async {
+              final Uri url = Uri.parse('https://www.gerardducro.com/'); // Remplacez par l'URL de votre choix
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.primary, // Couleur de la bordure
+                width: 2, // Épaisseur de la bordure
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15), // Rayon des coins
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          ),
+              child: Text(
+            'Pour plus d\'infos',
+            style: textStyleText(context),
+          ),
+          )
         ]));
   }
 }

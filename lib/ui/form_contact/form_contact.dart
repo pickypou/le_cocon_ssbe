@@ -7,10 +7,10 @@ class FormContact extends StatefulWidget {
   const FormContact({super.key});
 
   @override
-  _FormContactState createState() => _FormContactState();
+  FormContactState createState() => FormContactState();
 }
 
-class _FormContactState extends State<FormContact> {
+class FormContactState extends State<FormContact> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
@@ -30,11 +30,13 @@ class _FormContactState extends State<FormContact> {
 
       if (await canLaunchUrl(emailUri)) {
         await launchUrl(emailUri);
-      } else {
+      } else if (mounted) {  // Vérifie si le widget est toujours monté
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(
+          const SnackBar(
+            content: Text(
                 'Impossible d\'ouvrir l\'application de messagerie.'
-            ))
+            ),
+          ),
         );
       }
     }
@@ -94,7 +96,6 @@ class _FormContactState extends State<FormContact> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _sendEmail,
-                      child: const  Text('Envoyer'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:  theme.colorScheme.secondary, // Couleur de fond gris
                         foregroundColor: theme.colorScheme.surface, // Couleur du texte
@@ -105,6 +106,7 @@ class _FormContactState extends State<FormContact> {
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Espacement interne
                         elevation: 0, // Pas d'ombre
                       ),
+                      child: const  Text('Envoyer'),
                     ),
 
                   ],

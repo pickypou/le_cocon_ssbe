@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:le_cocon_ssbe/data/repository/enements_repository.dart';
+import 'package:le_cocon_ssbe/data/repository/evenements_repository.dart';
 import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
 
 @injectable

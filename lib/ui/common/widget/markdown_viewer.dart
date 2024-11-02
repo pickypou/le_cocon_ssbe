@@ -9,7 +9,7 @@ class MarkdownViewer extends StatelessWidget {
   const MarkdownViewer({super.key, required this.filePath});
 
   Future<String> loadMarkdown() async {
-    // Charger le contenu du fichier Markdown
+    // Charger le contenu du fichier Markdown à partir des assets
     return await rootBundle.loadString(filePath);
   }
 

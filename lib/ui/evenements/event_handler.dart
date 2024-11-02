@@ -12,21 +12,34 @@ class EventHandler {
     if (kIsWeb) {
       await _launchURL(fileUrl);
     } else {
+      // Afficher un indicateur de chargement avant d'attendre le téléchargement du fichier
+      _showLoadingDialog(context);
+
       try {
         final file = await _downloadFile(fileUrl, title);
+
+        if (context.mounted) {
+          // Fermer le chargement après le téléchargement
+          Navigator.of(context, rootNavigator: true).pop();
+        }
+
         if (file != null) {
           if (_isImageFile(fileUrl)) {
-            _showEnlargedImage(context, file, title);
+            _navigateToEnlargedImage(context, file, title);
           } else if (_isPdfFile(fileUrl)) {
-            _openPdfFile(context, file, title);
-          } else {
+            _navigateToPdfView(context, file, title);
+          } else if (context.mounted) {
             _showErrorDialog(context, "Type de fichier non pris en charge.");
           }
-        } else {
+        } else if (context.mounted) {
           _showErrorDialog(context, "Impossible de télécharger le fichier.");
         }
       } catch (e) {
-        _showErrorDialog(context, "Erreur lors du traitement du document: $e");
+        if (context.mounted) {
+          // Fermer le chargement en cas d'erreur et afficher le dialogue d'erreur
+          Navigator.of(context, rootNavigator: true).pop();
+          _showErrorDialog(context, "Erreur lors du traitement du document: $e");
+        }
       }
     }
   }
@@ -35,13 +48,13 @@ class EventHandler {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
-      throw 'Could not launch $url';
+      throw 'Impossible d\'ouvrir $url';
     }
   }
 
   Future<File?> _downloadFile(String url, String fileName) async {
     try {
-      final response = await http.get(Uri.parse(url)).timeout(Duration(seconds: 30));
+      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
       if (response.statusCode == 200) {
         final bytes = response.bodyBytes;
         final tempDir = await getTemporaryDirectory();
@@ -50,12 +63,12 @@ class EventHandler {
         return file;
       }
     } catch (e) {
-      print("Erreur lors du téléchargement: $e");
+      debugPrint("Erreur lors du téléchargement: $e");
     }
     return null;
   }
 
-  void _showEnlargedImage(BuildContext context, File file, String title) {
+  void _navigateToEnlargedImage(BuildContext context, File file, String title) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scaffold(
@@ -70,7 +83,7 @@ class EventHandler {
     );
   }
 
-  void _openPdfFile(BuildContext context, File file, String title) {
+  void _navigateToPdfView(BuildContext context, File file, String title) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scaffold(
@@ -82,14 +95,24 @@ class EventHandler {
             autoSpacing: false,
             pageFling: false,
             onError: (error) {
-              print(error.toString());
+              debugPrint(error.toString());
             },
             onPageError: (page, error) {
-              print('$page: ${error.toString()}');
+              debugPrint('$page: ${error.toString()}');
             },
           ),
         ),
       ),
+    );
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 
@@ -98,11 +121,11 @@ class EventHandler {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Erreur"),
+          title: const Text("Erreur"),
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text("OK"),
+              child: const Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

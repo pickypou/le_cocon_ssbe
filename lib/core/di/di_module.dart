@@ -18,16 +18,16 @@ abstract class FirebaseModule {
 
 @lazySingleton
 class StorageService {
-  final FirebaseStorage _storage;
+  final FirebaseStorage storage;
 
-  StorageService(this._storage);
+  StorageService(this.storage);
 }
 
 @lazySingleton
 class FirestoreService {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore firestore;
 
-  FirestoreService(this._firestore);
+  FirestoreService(this.firestore);
 }
 
 @InjectableInit(

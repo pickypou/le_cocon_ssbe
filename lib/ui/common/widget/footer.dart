@@ -3,10 +3,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme.dart';
 
-class Footer extends StatelessWidget {
+class Footer extends StatefulWidget {
   const Footer({super.key});
 
-  Future<void> _openPdf(BuildContext context) async {
+  @override
+  FooterState createState() => FooterState();
+}
+
+class FooterState extends State<Footer> {
+  Future<void> _openPdf() async {
     try {
       // Afficher un indicateur de chargement
       showDialog(
@@ -23,7 +28,8 @@ class Footer extends StatelessWidget {
       final ref = FirebaseStorage.instance.ref().child('mention_legal.pdf');
       final url = await ref.getDownloadURL();
 
-      // Fermer l'indicateur de chargement
+      // Vérifier si le widget est toujours monté avant de fermer le dialog
+      if (!mounted) return;
       Navigator.of(context).pop();
 
       // Lancer le PDF
@@ -37,12 +43,13 @@ class Footer extends StatelessWidget {
     } catch (e, stackTrace) {
       debugPrint("Erreur inattendue : $e");
       debugPrint("Stack trace : $stackTrace");
-      Navigator.of(context).pop(); // Fermer l'indicateur de chargement
-      _showErrorDialog(context, 'Erreur inattendue: $e\n\nStack trace: $stackTrace');
+
+      if (mounted) Navigator.of(context).pop(); // Fermer l'indicateur de chargement
+      _showErrorDialog('Erreur inattendue: $e\n\nStack trace: $stackTrace');
     }
   }
 
-  void _showErrorDialog(BuildContext context, String message) {
+  void _showErrorDialog(String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -83,7 +90,7 @@ class Footer extends StatelessWidget {
                   style: textStyleText(context).copyWith(fontSize: size.width / 75)
               ),
               GestureDetector(
-                onTap: () => _openPdf(context),
+                onTap: _openPdf,
                 child: Text(
                     'Mentions légales',
                     style: textStyleText(context).copyWith(

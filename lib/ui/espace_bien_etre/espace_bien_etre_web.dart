@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/bulle_dialogue.dart';
-import 'package:le_cocon_ssbe/ui/espace_bien_etre/activity_bien_etre.dart';
-
 import '../common/widget/text_custom.dart';
 import '../theme.dart';
 

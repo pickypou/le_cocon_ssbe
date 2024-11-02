@@ -19,29 +19,29 @@ ThemeData theme = ThemeData(
   ),
 );
 
-MarkdownStyleSheet getMDTheme(BuildContext context) => MarkdownStyleSheet(
-      p: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-      h1: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-            fontFamily: "Autography",
-            height: 2,
-          ),
-      h2: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-            fontFamily: "Autography",
-            height: 2,
-          ),
-      h3: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-            height: 2,
-          ),
-      listBullet: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-      listBulletPadding: const EdgeInsets.only(top: 10, left: 20),
-    );
+MarkdownStyleSheet getMDTheme(BuildContext context) {
+  return MarkdownStyleSheet(
+    p: textStyleText(context), // Style du texte principal
+    h1: titleStyleLarge(context), // Style pour les grands titres
+    h2: titleStyleMedium(context), // Style pour les titres moyens
+    h3: titleStyleSmall(context), // Style pour les petits titres
+    listBullet: textStyleText(context).copyWith(
+      color: Theme.of(context).colorScheme.secondary,
+    ), // Style des puces de liste
+    blockquote: textStyleText(context).copyWith(
+      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+      fontStyle: FontStyle.italic,
+    ), // Style pour les citations
+    code: textStyleTextBulle(context).copyWith(
+      backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+      fontFamily: 'montserrat',
+    ), // Style pour le code en bloc
+    listBulletPadding: const EdgeInsets.only(top: 10, left: 20), // Espacement des puces
+    blockSpacing: 12, // Espacement entre blocs
+    textAlign: WrapAlignment.start, // Alignement du texte
+  );
+}
+
 
 // Style pour les titres avec la police Amable
 TextStyle titleStyle(BuildContext context) {
@@ -63,7 +63,7 @@ TextStyle titleStyleLarge(BuildContext context) {
     fontSize: titleFontSize,
     fontWeight: FontWeight.bold,
     color: Theme.of(context).colorScheme.secondary,
-    fontFamily: "Autography", // Police Amable pour les grands titres
+    fontFamily: "Autography",
     decoration: TextDecoration.none,
   );
 
@@ -109,7 +109,7 @@ TextStyle textStyleText(BuildContext context) {
 TextStyle textStyleTextAccueil(BuildContext context) {
   Size size = MediaQuery.sizeOf(context);
   double textFontSize = size.width / 55;
-  return  GoogleFonts.lora().copyWith(
+  return  GoogleFonts.montserrat().copyWith(
     fontSize: textFontSize,
     color: Theme.of(context).colorScheme.secondary,
     decoration: TextDecoration.none,
@@ -120,7 +120,7 @@ TextStyle textStyleTextBulle(BuildContext context) {
   Size size = MediaQuery.sizeOf(context);
   double textFontSize = size.width / 88;
   return
-    GoogleFonts.lora().copyWith(
+    GoogleFonts.montserrat().copyWith(
     fontSize: textFontSize,
     color: Theme.of(context).colorScheme.secondary,
     decoration: TextDecoration.none,
@@ -132,7 +132,7 @@ TextStyle? textStyleInput(BuildContext context, String inputText) {
   double textFontSize =
       inputText.length > 20 ? baseFontSize - 1.5 : baseFontSize.toDouble();
 
-  return  GoogleFonts.lora().copyWith(
+  return  GoogleFonts.montserrat().copyWith(
     fontSize: textFontSize,
     fontWeight: FontWeight.bold,
     color: Theme.of(context).secondaryHeaderColor,

@@ -3,7 +3,7 @@ import 'package:flutter_utils/flutter_utils.dart';
 import '../../theme.dart';
 
 class BulleDialogue extends StatelessWidget {
-  final color;
+  final Color color;
   final String text;
   final double width;
   final double height;
@@ -21,7 +21,6 @@ class BulleDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
     return SizedBox(
       width: width,
       height: height,

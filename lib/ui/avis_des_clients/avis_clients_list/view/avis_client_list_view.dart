@@ -19,7 +19,7 @@ class AvisClientsListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Les clients nous donnent leur avis',
+                'Les clients nous donnent leurs avis',
                 style: textStyleText(context),
               ),
               _buildAvisClientsBubble(context, avis.isNotEmpty ? avis[0] : null),

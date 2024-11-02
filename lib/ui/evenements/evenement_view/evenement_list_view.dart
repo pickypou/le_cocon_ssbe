@@ -8,7 +8,7 @@ class EvenementListView extends StatelessWidget {
   final List<Evenements> evenement;
   final EventHandler eventHandler = EventHandler();
 
-  EvenementListView({Key? key, required this.evenement}) : super(key: key);
+  EvenementListView({super.key, required this.evenement});
 
   @override
   Widget build(BuildContext context) {
