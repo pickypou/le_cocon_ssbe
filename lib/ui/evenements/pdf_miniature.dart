@@ -1,85 +1,101 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_render/pdf_render.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../services/network_service.dart';
+import 'package:pdf_thumbnail/pdf_thumbnail.dart';
+
 
 class PdfMiniature extends StatefulWidget {
   final String pdfUrl;
-  final double height;
-  final double width;
-  final String fileName;
 
-  const PdfMiniature({
-    super.key,
-    required this.pdfUrl,
-    this.height = 150,
-    this.width = double.infinity, required this.fileName,
-  });
+  const PdfMiniature({super.key, required this.pdfUrl});
 
   @override
   PdfMiniatureState createState() => PdfMiniatureState();
 }
 
 class PdfMiniatureState extends State<PdfMiniature> {
-  PdfDocument? _document;
-  final NetworkService _networkService = NetworkService(); // Instanciez NetworkService
+  late Future<File> pdfFile;
+  var currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-    _downloadAndLoadPdf();
-  }
-
-  Future<void> _downloadAndLoadPdf() async {
-    try {
-      // Utilisez le NetworkService pour télécharger le fichier PDF
-      debugPrint("Téléchargement du PDF depuis : ${widget.pdfUrl}");
-      final response = await _networkService.fetchPdf(widget.pdfUrl);
-      if (response.statusCode == 200) {
-        // Sauvegardez et chargez le fichier
-        final tempDir = await getTemporaryDirectory();
-        final localPath = '${tempDir.path}/${widget.pdfUrl.split('/').last}';
-        final file = File(localPath);
-        await file.writeAsBytes(response.bodyBytes);
-
-        debugPrint("PDF sauvegardé à : $localPath");
-        _document = await PdfDocument.openFile(localPath);
-
-        setState(() {});
-      } else {
-        debugPrint("Erreur de téléchargement du PDF : ${response.statusCode}");
-      }
-    } catch (e) {
-      debugPrint('Erreur lors du téléchargement ou du chargement du PDF : $e');
-    }
+    pdfFile = DownloadService.downloadFile(widget.pdfUrl, 'sample.pdf');
   }
 
   @override
   Widget build(BuildContext context) {
-    return _document == null
-        ? Center(child: CircularProgressIndicator())
-        : FutureBuilder<PdfPageImage?>(
-      future: _document!.getPage(1).then((page) => page.render(
-        width: widget.width.toInt(),
-        height: widget.height.toInt(),
-      )),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError || snapshot.data == null) {
-          return Icon(Icons.error, color: Colors.red);
-        } else {
-          return RawImage(image: snapshot.data!.imageIfAvailable);
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PDF Miniature'),
+      ),
+      body: FutureBuilder<File>(
+        future: pdfFile,
+        builder: (context, snapshot) {
+          return Center(
+            child: snapshot.hasData
+                ? PdfThumbnail.fromFile(
+              snapshot.data!.path,
+              currentPage: currentPage,
+              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.3),
+              height: 200,
+              currentPageWidget: (page, isCurrentPage) {
+                return Positioned(
+                  bottom: 50,
+                  right: 0,
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    color: isCurrentPage ? Colors.green : Colors.pink,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$page',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              currentPageDecoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.orange,
+                    width: 10,
+                  ),
+                ),
+              ),
+              onPageClicked: (page) {
+                setState(() {
+                  currentPage = page + 1;
+                });
+                if (kDebugMode) {
+                  print('Page $page clicked');
+                }
+              },
+            )
+                : const CircularProgressIndicator(),
+          );
+        },
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _document?.dispose();
-    super.dispose();
   }
 }
 
+class DownloadService {
+  static final _httpClient = HttpClient();
+
+  static Future<File> downloadFile(String url, String filename) async {
+    var request = await _httpClient.getUrl(Uri.parse(url));
+    var response = await request.close();
+    var bytes = await consolidateHttpClientResponseBytes(response);
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File file = File('$dir/$filename');
+    await file.writeAsBytes(bytes);
+    return file;
+  }
+}

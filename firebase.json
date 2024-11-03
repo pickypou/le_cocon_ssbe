@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/web",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -17,7 +17,6 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  // Supprimer la section functions
   "emulators": {
     "functions": {
       "port": 5001
@@ -35,5 +34,8 @@
       "enabled": true
     },
     "singleProjectMode": true
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

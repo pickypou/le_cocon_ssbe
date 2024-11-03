@@ -1,14 +1,7 @@
 [
   {
     "origin": ["*"],
-    "responseHeader": [
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin",
-      "Access-Control-Allow-Headers",
-      "X-Custom-Header"
-    ],
-    "method": ["GET", "OPTIONS", "POST"],
+    "method": ["GET"],
     "maxAgeSeconds": 3600
   }
 ]

@@ -53,7 +53,7 @@ class EvenementListView extends StatelessWidget {
                             AspectRatio(
                               aspectRatio: 16 / 9,
                               child: evt.fileType == 'pdf'
-                                  ? PdfMiniature(pdfUrl: evt.fileUrl, fileName: '',)
+                                  ? PdfMiniature(pdfUrl: evt.fileUrl)
                                   : Image.network(
                                 evt.fileUrl,
                                 fit: BoxFit.cover,
