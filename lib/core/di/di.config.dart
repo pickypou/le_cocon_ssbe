@@ -13,12 +13,12 @@ import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../data/repository/avis_client_repository_impl.dart' as _i993;
+import '../../data/repository/avis_client_repository_impl.dart' as _i891;
 import '../../data/repository/avis_clients_repository.dart' as _i990;
-import '../../data/repository/evenements_repository.dart' as _i554;
-import '../../data/repository/evenement_repository_impl.dart' as _i284;
+import '../../data/repository/evenement_repository_impl.dart' as _i1053;
+import '../../data/repository/evenements_repository.dart' as _i873;
 import '../../domain/usecases/fetch_avis_clients_data_usecase.dart' as _i57;
-import '../../domain/usecases/fetch_evenement_data_usecase.dart' as _i545;
+import '../../domain/usecases/fetch_evenement_data_usecase.dart' as _i914;
 import 'api/firestore_service.dart' as _i746;
 import 'di_module.dart' as _i211;
 
@@ -36,21 +36,21 @@ _i174.GetIt init(
   final firebaseModule = _$FirebaseModule();
   gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
   gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseModule.storage);
-  gh.lazySingleton<_i211.StorageService>(
-      () => _i211.StorageService(gh<_i457.FirebaseStorage>()));
-  gh.factory<_i993.AvisClientsRepositoryImpl>(() =>
-      _i993.AvisClientsRepositoryImpl(
+  gh.factory<_i1053.EvenementRepositoryImpl>(() =>
+      _i1053.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
+  gh.factory<_i891.AvisClientsRepositoryImpl>(() =>
+      _i891.AvisClientsRepositoryImpl(
           firestore: gh<_i974.FirebaseFirestore>()));
-  gh.factory<_i284.EvenementRepositoryImpl>(() =>
-      _i284.EvenementRepositoryImpl(firestore: gh<_i974.FirebaseFirestore>()));
-  gh.factory<_i545.FetchEvenementDataUseCase>(
-      () => _i545.FetchEvenementDataUseCase(gh<_i554.EvenementRepository>()));
-  gh.factory<_i57.FetchAvisClientDataUseCase>(
-      () => _i57.FetchAvisClientDataUseCase(gh<_i990.AvisClientsRepository>()));
   gh.lazySingleton<_i211.FirestoreService>(
       () => _i211.FirestoreService(gh<_i974.FirebaseFirestore>()));
+  gh.lazySingleton<_i211.StorageService>(
+      () => _i211.StorageService(gh<_i457.FirebaseStorage>()));
+  gh.factory<_i57.FetchAvisClientDataUseCase>(
+      () => _i57.FetchAvisClientDataUseCase(gh<_i990.AvisClientsRepository>()));
   gh.factory<_i746.FirestoreService>(
       () => _i746.FirestoreService(gh<_i974.FirebaseFirestore>()));
+  gh.factory<_i914.FetchEvenementDataUseCase>(
+      () => _i914.FetchEvenementDataUseCase(gh<_i873.EvenementRepository>()));
   return getIt;
 }
 

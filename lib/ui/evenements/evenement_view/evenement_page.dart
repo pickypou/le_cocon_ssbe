@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenement_list_view.dart';
+
 import '../../../domain/entities/evenements.dart';
+import 'evenement_list_view.dart';
 
 class EvenementPage extends StatelessWidget {
   const EvenementPage({super.key});
@@ -15,24 +16,20 @@ class EvenementPage extends StatelessWidget {
           .limit(5)
           .snapshots(),
       builder: (context, snapshot) {
-        // Gestion de l'état de connexion
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        // Gestion des erreurs
         if (snapshot.hasError) {
           debugPrint("Erreur lors de la récupération des données : ${snapshot.error}");
           return Center(child: Text('Erreur : ${snapshot.error}'));
         }
 
-        // Gestion des données vides
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           debugPrint("Aucune donnée disponible dans la collection 'evenement'");
           return const Center(child: Text('Aucun événement disponible'));
         }
 
-        // Transformation des données
         List<Evenements> evenement = snapshot.data!.docs
             .map((doc) {
           try {
@@ -42,17 +39,16 @@ class EvenementPage extends StatelessWidget {
             );
           } catch (e) {
             debugPrint("Erreur lors de la transformation des données : $e");
-            return null; // Gérer la transformation échouée
+            return null;
           }
         })
-            .where((event) => event != null) // Éliminer les éléments nuls
-            .cast<Evenements>() // Cast pour le type correct
+            .where((event) => event != null)
+            .cast<Evenements>()
             .toList();
 
         debugPrint("Données récupérées : $evenement");
 
-        // Utilisation de EvenementListView pour afficher les événements
-        return EvenementListView(evenement: evenement); // Transmettre les données récupérées
+        return EvenementListView(evenement: evenement);
       },
     );
   }
