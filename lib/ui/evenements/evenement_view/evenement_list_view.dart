@@ -8,6 +8,7 @@ class EvenementListView extends StatelessWidget {
   final EventHandler eventHandler = EventHandler();
 
   EvenementListView({super.key, required this.evenement});
+
   @override
   Widget build(BuildContext context) {
     if (evenement.isEmpty) {
@@ -46,7 +47,14 @@ class EvenementListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-
+                            // Affichage de la vignette
+                            if (evt.thumbnailUrl != null && evt.thumbnailUrl!.isNotEmpty)
+                              Image.network(
+                                evt.thumbnailUrl!,  // URL de la vignette
+                                width: double.infinity,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(

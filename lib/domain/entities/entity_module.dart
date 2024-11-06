@@ -21,6 +21,7 @@ void setupEntityModule() {
         title: '',
         fileType: '',
         fileUrl: '',
+        thumbnailUrl: '',
         publishDate: DateTime.now(),
       ));
 }

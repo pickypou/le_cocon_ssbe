@@ -1,4 +1,5 @@
 
+
 import 'package:intl/intl.dart';
 
 import '../../core/utils/date_converter.dart';
@@ -8,6 +9,7 @@ class Evenements {
   final String id;
   final String fileUrl;
   final String fileType;
+  final String? thumbnailUrl;
   final DateTime publishDate;
 
 
@@ -16,7 +18,9 @@ class Evenements {
     required this.id,
     required this.fileType,
     required this.fileUrl,
-    required this.publishDate
+    required this.publishDate,
+     this.thumbnailUrl
+
   });
 
   bool get isPdfFile => fileUrl.endsWith('.pdf');
@@ -27,7 +31,8 @@ class Evenements {
       title: data?['title'] ?? 'Titre inconnu',
       fileType: data?['fileType'] ?? 'Type inconnu',
       fileUrl: data?['fileUrl'] ?? 'URL inconnue',
-        publishDate:DateConverter.converToDateTime( data? ['publishDATE']),
+      thumbnailUrl: data?['thumbnailUrl'] ?? '',
+      publishDate:DateConverter.converToDateTime( data? ['publishDATE']),
 
     );
   }
@@ -39,6 +44,6 @@ class Evenements {
 
   @override
   String toString() {
-    return 'Evenements(id: $id, title: $title, fileType: $fileType, fileUrl: $fileUrl, publishDate: $formattedPublishDate)';
+    return 'Evenements(id: $id, title: $title, fileType: $fileType, fileUrl: $fileUrl, thumbnailUrl: $thumbnailUrl, publishDate: $formattedPublishDate)';
   }
 }
