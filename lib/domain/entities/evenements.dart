@@ -1,5 +1,3 @@
-
-
 import 'package:intl/intl.dart';
 
 import '../../core/utils/date_converter.dart';
@@ -7,33 +5,29 @@ import '../../core/utils/date_converter.dart';
 class Evenements {
   final String title;
   final String id;
-  final String fileUrl;
+  String fileUrl;
   final String fileType;
-  final String? thumbnailUrl;
+  String? thumbnailUrl;
   final DateTime publishDate;
 
-
-  Evenements({
-    required this.title,
-    required this.id,
-    required this.fileType,
-    required this.fileUrl,
-    required this.publishDate,
-     this.thumbnailUrl
-
-  });
+  Evenements(
+      {required this.title,
+      required this.id,
+      required this.fileType,
+      required this.fileUrl,
+      required this.publishDate,
+      this.thumbnailUrl});
 
   bool get isPdfFile => fileUrl.endsWith('.pdf');
 
   factory Evenements.fromMap(Map<String, dynamic>? data, String id) {
     return Evenements(
-        id: id,
+      id: id,
       title: data?['title'] ?? 'Titre inconnu',
       fileType: data?['fileType'] ?? 'Type inconnu',
       fileUrl: data?['fileUrl'] ?? 'URL inconnue',
       thumbnailUrl: data?['thumbnailUrl'] ?? '',
-      publishDate:DateConverter.converToDateTime( data? ['publishDATE']),
-
+      publishDate: DateConverter.converToDateTime(data?['publishDATE']),
     );
   }
 
