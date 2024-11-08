@@ -7,14 +7,29 @@ class EvenementBloc extends Bloc<EvenementEvent, EvenementState> {
   final EvenementInteractor evenementInteractor;
 
   EvenementBloc(this.evenementInteractor) : super(EvenementLoadingState()) {
+    // Événement pour charger tous les événements
     on<LoadAEvenementEvent>((event, emit) async {
       emit(EvenementLoadingState());
       try {
-        // Appel de la méthode pour récupérer les événements
         final evenement = await evenementInteractor.fetchEvenementData();
-
-        // Émettre l'état avec les données chargées
         emit(EvenementLoadedState(evenementData: evenement.toList()));
+      } catch (e) {
+        emit(EvenementErrorState(message: 'Une erreur s\'est produite : $e'));
+      }
+    });
+
+    // Événement pour récupérer un événement spécifique par ID
+    on<FetchEvenementDetailEvent>((event, emit) async {
+      emit(EvenementLoadingState());
+      try {
+        final evenementDetail =
+        await evenementInteractor.fetchEvenementById(event.evenementId);
+        if (evenementDetail != null) {
+          emit(EvenementDetailLoadedState(evenementDetail: evenementDetail));
+        } else {
+          emit(EvenementErrorState(
+              message: 'L\'événement avec cet ID n\'existe pas.'));
+        }
       } catch (e) {
         emit(EvenementErrorState(message: 'Une erreur s\'est produite : $e'));
       }

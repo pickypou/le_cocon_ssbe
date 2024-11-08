@@ -12,7 +12,7 @@ import 'avis_clients_repository.dart';
 
 final GetIt getIt = GetIt.instance;
 
-void setupDataModule() {
+void setupRepositoryModule() {
   getIt.registerLazySingleton<FirebaseFirestore>(() =>
   FirebaseFirestore.instance);
 
@@ -25,5 +25,10 @@ void setupDataModule() {
           () => AvisClientsRepositoryImpl()
   );
 
-  getIt.registerLazySingleton<EvenementRepository>(() => EvenementRepositoryImpl());
+  getIt.registerLazySingleton<EvenementRepository>(
+          () => EvenementRepositoryImpl()
+  );
+  getIt.registerLazySingleton<EvenementRepositoryImpl>(
+      () => EvenementRepositoryImpl()
+  );
 }

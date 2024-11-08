@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:le_cocon_ssbe/data/repository/evenements_repository.dart';
 import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
 
+import '../dto/evenements_dto.dart';
+
 @injectable
 
 class EvenementRepositoryImpl extends EvenementRepository {
@@ -26,11 +28,16 @@ class EvenementRepositoryImpl extends EvenementRepository {
 
     @override
 
-    Future<Map<String, dynamic>> getById(String evenementId) async {
-    final docSnapshot =
-        await _firestore.collection('evenement').doc(evenementId).get();
-    return docSnapshot.data() ?? {};
+    @override
+    Future<EvenementDto?> getById(String evenementId) async {
+      final docSnapshot = await _firestore.collection('evenement').doc(evenementId).get();
+      if (docSnapshot.exists) {
+        return EvenementDto.fromJson(docSnapshot.data() ?? {});
+      } else {
+        return null; // Si le document n'existe pas
+      }
     }
+
 
 
 

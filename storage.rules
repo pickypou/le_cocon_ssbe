@@ -1,12 +1,15 @@
 rules_version = '2';
-
-// Craft rules based on data in your Firestore database
-// allow write: if firestore.get(
-//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
 service firebase.storage {
   match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if false;
+    // Autoriser la lecture publique pour tous les fichiers dans le dossier 'evenement'
+    match /evenement/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    // Autoriser la lecture publique pour les fichiers spécifiques sous 'evenement/unique_event'
+    match /evenement/unique_event/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
     }
   }
 }

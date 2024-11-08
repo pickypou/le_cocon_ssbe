@@ -1,55 +1,61 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import '../../../domain/entities/evenements.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/evenements.dart';
-import 'evenement_list_view.dart';
+class EvenementPage {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-class EvenementPage extends StatelessWidget {
-  const EvenementPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
+  // Récupération des événements depuis Firestore
+  Future<List<Evenements>> fetchEvenements() async {
+    List<Evenements> evenements = [];
+    Set<String> seenEventIds = {};
+
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('evenement')
           .orderBy('publishDate', descending: true)
-          .limit(5)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          .get();
+
+      for (var doc in snapshot.docs) {
+        Evenements evt = Evenements.fromMap(
+            doc.data() as Map<String, dynamic>, doc.id);
+
+        if (seenEventIds.contains(evt.id)) {
+          continue;
         }
 
-        if (snapshot.hasError) {
-          debugPrint("Erreur lors de la récupération des données : ${snapshot.error}");
-          return Center(child: Text('Erreur : ${snapshot.error}'));
+        seenEventIds.add(evt.id);
+
+        try {
+          final fileRef = FirebaseStorage.instance.ref().child(
+              'evenement/${evt.id}/file.pdf');
+          final thumbnailRef = FirebaseStorage.instance.ref().child(
+              'evenement/${evt.id}/thumbnail.jpg');
+
+          String fileUrl = await fileRef.getDownloadURL();
+          String thumbnailUrl = await thumbnailRef.getDownloadURL();
+
+          evt.fileUrl = fileUrl;
+          evt.thumbnailUrl = thumbnailUrl;
+
+          debugPrint(
+              'Fichier PDF récupéré pour l\'événement ${evt.id}: $fileUrl');
+          debugPrint(
+              'Vignette récupérée pour l\'événement ${evt.id}: $thumbnailUrl');
+
+          evenements.add(evt);
+        } catch (e) {
+          debugPrint(
+              'Erreur lors de la récupération des fichiers pour l\'événement ${evt
+                  .id}: $e');
         }
+      }
+    } catch (e) {
+      debugPrint("Erreur lors de la récupération des événements : $e");
+    }
 
-        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          debugPrint("Aucune donnée disponible dans la collection 'evenement'");
-          return const Center(child: Text('Aucun événement disponible'));
-        }
-
-        List<Evenements> evenement = snapshot.data!.docs
-            .map((doc) {
-          try {
-            return Evenements.fromMap(
-              doc.data() as Map<String, dynamic>,
-              doc.id,
-            );
-          } catch (e) {
-            debugPrint("Erreur lors de la transformation des données : $e");
-            return null;
-          }
-        })
-            .where((event) => event != null)
-            .cast<Evenements>()
-            .toList();
-
-        debugPrint("Données récupérées : $evenement");
-
-        return EvenementListView(evenement: evenement);
-      },
-    );
-  }
-}
+    return evenements;
+  }}

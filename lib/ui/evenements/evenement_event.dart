@@ -5,10 +5,10 @@ abstract class EvenementEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// Événement pour charger la liste d'avis clients
+// Événement pour charger tous les événements
 class LoadAEvenementEvent extends EvenementEvent {}
 
-// Événement pour récupérer les détails d'un avis spécifique
+// Événement pour récupérer les détails d'un événement spécifique
 class FetchEvenementDetailEvent extends EvenementEvent {
   final String evenementId;
 

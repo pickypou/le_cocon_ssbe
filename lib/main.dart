@@ -5,6 +5,8 @@ import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:le_cocon_ssbe/ui/view_all/wiew_all.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'data/repository/repository_module.dart';
+import 'domain/usecases/usecase_module.dart';
 import 'firebase_options.dart';
 
 Future<String> getDirectoryPath() async {
@@ -23,9 +25,12 @@ void main() async {
         DefaultFirebaseOptions.currentPlatform, // Utilisez les options générées
   );
 
-
+  setupUseCaseModule(); // Appel pour enregistrer les cas d'utilisation
+  setupRepositoryModule();
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

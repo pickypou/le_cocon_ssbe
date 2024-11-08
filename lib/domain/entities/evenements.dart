@@ -1,5 +1,5 @@
 
-
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/utils/date_converter.dart';
@@ -7,9 +7,9 @@ import '../../core/utils/date_converter.dart';
 class Evenements {
   final String title;
   final String id;
-  final String fileUrl;
+  String? fileUrl;
   final String fileType;
-  final String? thumbnailUrl;
+  String? thumbnailUrl;
   final DateTime publishDate;
 
 
@@ -23,7 +23,16 @@ class Evenements {
 
   });
 
-  bool get isPdfFile => fileUrl.endsWith('.pdf');
+
+  ImageProvider<Object> getThumbnailImage() {
+    if (thumbnailUrl != null && thumbnailUrl!.isNotEmpty) {
+      return NetworkImage(thumbnailUrl!);
+    } else {
+      // Utiliser une image par défaut si la vignette n'existe pas
+      return AssetImage('assets/images/logo_cocon.pbg');
+    }
+  }
+
 
   factory Evenements.fromMap(Map<String, dynamic>? data, String id) {
     return Evenements(
