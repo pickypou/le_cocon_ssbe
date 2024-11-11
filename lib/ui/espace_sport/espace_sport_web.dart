@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/bulle_dialogue.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/tarifs_horaires.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -51,7 +52,7 @@ class EspaceSportWeb extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          Text('Qui suis je?',
+          Text('Qui suis-je?',
               style: titleStyleSmall(
                   context) //.copyWith(fontSize: size.width / 47),
               ),
@@ -96,7 +97,7 @@ class EspaceSportWeb extends StatelessWidget {
                     ),
                     TextSpan(
                       text:
-                          'degré, BPJEPS, professeur de yoga D.U, coach sportif à domicile & diplômé éducateur Sport Santé, je m\'occupe de vous préparer un programme (en présentiel ou à distance) pour entretenir votre forme physique et votre mobilité. Tout cela par le biais d\'activité ',
+                          'degré, BPJEPS, professeur de yoga D.U, coach sportif à domicile & diplômé éducateur Sport Santé, je m\'occupe de vous préparer un programme (en présentiel ou à distance) pour entretenir votre forme physique et votre mobilité, tout cela par le biais d\'activité ',
                       style: textStyleText(context)
                           .copyWith(fontSize: size.width / 75),
                     ),
@@ -129,7 +130,7 @@ class EspaceSportWeb extends StatelessWidget {
                           color: Colors.red), // Rouge pour "S"
                     ),
                     TextSpan(
-                      text: 'écurisé, ',
+                      text: 'écurisée, ',
                       style: textStyleText(context)
                           .copyWith(fontSize: size.width / 75),
                     ),
@@ -161,7 +162,7 @@ class EspaceSportWeb extends StatelessWidget {
           const SizedBox(height: 5,),
           TarifsHoraires(fraction: 2, size:size),
           Text("Pour plus de renseignent visité mon site internet", style: textStyleText(context),),
-          ElevatedButton(
+          CustomButton(
             onPressed: () async {
               final Uri url = Uri.parse('https://www.gerardducro.com/'); // Remplacez par l'URL de votre choix
               if (await canLaunchUrl(url)) {
@@ -170,20 +171,9 @@ class EspaceSportWeb extends StatelessWidget {
                 throw 'Could not launch $url';
               }
             },
-            style: ElevatedButton.styleFrom(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary, // Couleur de la bordure
-                width: 2, // Épaisseur de la bordure
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15), // Rayon des coins
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          ),
-              child: Text(
+              label:
             'Pour plus d\'infos',
-            style: textStyleText(context),
-          ),
+
           )
         ]));
   }

@@ -42,28 +42,29 @@ class ContactCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  ClipOval(
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0), // Rayon pour arrondir les coins
                     child: Image.asset(
                       assetImage,
-                      fit: BoxFit.cover, // L'image couvre tout le cercle
-                      width: 60, // Largeur du cercle
-                      height: 60, // Hauteur du cercle
+                      fit: BoxFit.cover, // L'image couvre tout le cadre
+                      width: 150, // Largeur de l'image
+                      height: 100, // Hauteur de l'image
                     ),
                   ),
                   const SizedBox(width: 16),
                   Text(
                     name,
-                    style: textStyleText(context)
-                        .copyWith(fontSize: calculatedFontSize),
+                    style: textStyleText(context).copyWith(fontSize: calculatedFontSize),
                   ),
                 ],
               ),
+
               const SizedBox(height: 16),
               _buildContactRow(context, Icons.phone, phone),
               const SizedBox(height: 8),

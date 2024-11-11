@@ -3,6 +3,7 @@ import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../common/widget/activities.dart';
+import '../common/widget/custom_button.dart';
 
 
 class ActivityBienEtre extends StatelessWidget {
@@ -15,7 +16,7 @@ class ActivityBienEtre extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Activities(
-            title: 'Des soin énergétiques',
+            title: 'Des soins énergétiques',
             text: '',
             value: 'tete.png',
             isImageBeforeTitle: false, logo: 'petit_logo_loren.png',
@@ -47,7 +48,7 @@ class ActivityBienEtre extends StatelessWidget {
             text: '',
             isImageBeforeTitle: true, logo: 'petit_logo_loren.png',),
            const SizedBox(height: 25,),
-      ElevatedButton(
+      CustomButton(
         onPressed: () async {
           final Uri url = Uri.parse('https://www.aucoeurdelesensciel.com/');
           if (await canLaunchUrl(url)) {
@@ -56,20 +57,10 @@ class ActivityBienEtre extends StatelessWidget {
             throw 'Could not launch $url';
           }
         },
-        style: ElevatedButton.styleFrom(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-            width: 2,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15), // Rayon des coins
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        ),
-        child: Text(
+        label:
           'Pour plus d\'infos',
-          style: textStyleText(context),
-        ),
+
+
       )
 
 

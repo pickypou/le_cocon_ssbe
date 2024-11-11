@@ -4,10 +4,6 @@ import '../../../domain/entities/evenements.dart';
 import 'package:flutter/material.dart';
 
 class EvenementPage {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
-
-
   // Récupération des événements depuis Firestore
   Future<List<Evenements>> fetchEvenements() async {
     List<Evenements> evenements = [];
@@ -15,7 +11,7 @@ class EvenementPage {
 
     try {
       QuerySnapshot snapshot = await FirebaseFirestore.instance
-          .collection('evenement')
+          .collection('evenements')
           .orderBy('publishDate', descending: true)
           .get();
 

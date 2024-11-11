@@ -70,7 +70,7 @@ class Presentation extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                          'L\'alliance entre ces deux univers qui unit Corps & Esprit au sein ',
+                          'L\'alliance entre ces deux univers unit Corps & Esprit au sein ',
                           // Texte en dessous des groupes
                           style: textStyleText(context).copyWith(
                               fontSize: size.width / 75) // Texte en gras

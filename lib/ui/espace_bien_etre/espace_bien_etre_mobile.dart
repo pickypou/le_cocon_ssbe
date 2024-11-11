@@ -53,17 +53,31 @@ class EspaceBienEtreMobile extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          Text(
-            'En tant que masso-thérapeute, énergéticienne\n'
-            ' je vous propose divers soins tel que',
-            style: textStyleText(context).copyWith(fontSize: size.width / 27),
-          ),
-          const SizedBox(
-            height: 15,
+          Text('Qui suis-je?', style: titleStyleMedium(context).copyWith(fontSize: size.width / 12,)),
+
+          SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(35),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Je suis Loren, praticienne masso-thérapeute & énergéticienne, installée depuis 2019',
+                        style: textStyleText(context).copyWith(fontSize: size.width / 27)),
+                    Text('Après de nombreuses formations en soins holistiques, je me suis constituée ma propre boîte à outils avec divers téchniques qui me permet d\'accompagner chaque personne dans sa globalité pour réaligner corps/âme et esprit.',
+                      style: textStyleText(context).copyWith(fontSize: size.width / 27,)),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Dans cette boîte il y a :',style: textStyleText(context).copyWith(fontSize: size.width / 27),
+                        )
+
+                    ),
+                  ],
+                ),
+              )
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
-              'Des soins énergétique',
+              'Des soins énergétiques',
               style: textStyleText(context).copyWith(fontSize: size.width / 27),
             ),
             const SizedBox(
@@ -94,7 +108,7 @@ class EspaceBienEtreMobile extends StatelessWidget {
             height: 15,
           ),
           const LinkText(
-              text: 'Pour plus de renseignement www.aucoeurdelesensciel.com',
+              text: 'Et bien plus n\'hésitez pas à consulter mon site internet  www.aucoeurdelesensciel.com',
               url: 'https://www.aucoeurdelesensciel.com')
         ],
       ),

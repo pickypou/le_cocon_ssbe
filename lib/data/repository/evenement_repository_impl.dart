@@ -18,7 +18,7 @@ class EvenementRepositoryImpl extends EvenementRepository {
   
   @override
   Stream<Iterable<Evenements>> getEvenementStream() {
-    return _firestore.collection('evenement').snapshots().map(
+    return _firestore.collection('evenements').snapshots().map(
           (querySnapshot) =>
           querySnapshot.docs
               .map((doc) => Evenements.fromMap(doc.data(), doc.id))
@@ -30,7 +30,7 @@ class EvenementRepositoryImpl extends EvenementRepository {
 
     @override
     Future<EvenementDto?> getById(String evenementId) async {
-      final docSnapshot = await _firestore.collection('evenement').doc(evenementId).get();
+      final docSnapshot = await _firestore.collection('evenements').doc(evenementId).get();
       if (docSnapshot.exists) {
         return EvenementDto.fromJson(docSnapshot.data() ?? {});
       } else {

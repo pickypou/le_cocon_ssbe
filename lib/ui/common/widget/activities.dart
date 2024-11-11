@@ -6,6 +6,8 @@ class Activities extends StatelessWidget {
   final String title;
   final String text;
   final String value;
+  final double? fontSize;
+  final double? titleSize;
   final bool isImageBeforeTitle;
 
   const Activities({
@@ -15,11 +17,17 @@ class Activities extends StatelessWidget {
     required this.value,
     this.isImageBeforeTitle = true,
     required this.logo,
+    this.fontSize,
+    this.titleSize
   });
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    double calculatedFontSize =
+        fontSize ??  (size.width > 749 ? size.width / 73 : 12);
+    double calculatedTitleSize =
+    titleSize ?? (size.width > 749 ? size.width / 30 : 24);
     double imageWidth = size.width * 0.18;
     double decalage = size.width * 0.1; // Augmentation du décalage
 
@@ -52,12 +60,12 @@ class Activities extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: titleStyleSmall(context).copyWith(fontSize: size.width / 35),
+                      style: titleStyleSmall(context).copyWith(fontSize: calculatedTitleSize),
                     ),
                     const SizedBox(height: 05),
                     Text(
                       text,
-                      style: textStyleText(context)
+                      style: textStyleText(context).copyWith(fontSize: calculatedFontSize)
                     ),
                   ],
                 ),

@@ -11,7 +11,7 @@ class TextPresentation extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     double calculatedFontSize =
-        fontSize ?? (size.width > 749 ? size.width / 75 : 18);
+        fontSize ?? (size.width > 749 ? size.width / 77 : 18);
     return SizedBox(
       width: size.width, // Utilisez la largeur de l'écran si nécessaire
       child: Column(
@@ -32,7 +32,7 @@ class TextPresentation extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    phrase: 'Pourquoi le, Cocon ?',
+                    phrase: 'Pourquoi,  le,  Cocon ?',
                     // Supprimer le \n pour réduire l'espace
                   ),
                   SizedBox(
@@ -52,7 +52,7 @@ class TextPresentation extends StatelessWidget {
                   Align(
                     alignment: Alignment.center, // Aligner le texte au centre
                     child: Text(
-                      'Dans une société qui va de plus en plus vite, où l’on nous demande encore de plus de choses urgentes que ce soit dans le cadre professionnel ou familial, l’homme moderne du XXIe siècle oublie souvent de prendre soin de lui et de sa santé. Il en découle des douleurs physiques ou même émotionnelles.  Parce qu’être en bonne santé ne signifie pas seulement absence de maladie. C’est pour cela que Loren et Gerard ont décidé de créer en 2022 ce centre de sport Santé Bien-être appelé le Cocon S-S-B-E, lieu de proximité, convivial  & rempli de bienveillance. Cet espace alliant le physique et lepsychique est l’endroit idéal pour vous aider dans votre transformation, et vous permettre de vous sentir bien dans votre corps comme dans votre esprit.',
+                      'Dans une société qui va de plus en plus vite, où l’on nous demande encore de plus de choses urgentes, que ce soit dans le cadre professionnel ou familial, l’homme moderne du XXIe siècle oublie souvent de prendre soin de lui et de sa santé. Il en découle des douleurs physiques ou même émotionnelles.  Parce qu’être en bonne santé ne signifie pas seulement absence de maladie. C’est pour cela que Loren et Gérard ont décidé de créer en 2022 ce centre de sport Santé Bien-être appelé le Cocon S-S-B-E, lieu de proximité, convivial  & rempli de bienveillance. Cet espace alliant le physique et lepsychique est l’endroit idéal pour vous aider dans votre transformation, et vous permettre de vous sentir bien dans votre corps comme dans votre esprit.',
                       style: textStyleText(context).copyWith(
                           height: 1.5, // Ajustez la hauteur de ligne ici
                           fontSize: calculatedFontSize),

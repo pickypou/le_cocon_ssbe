@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
 import '../../../../domain/entities/avis_clients.dart';
 import '../../../common/widget/bulle_avis_clients.dart';
 import '../../../theme.dart';
@@ -18,19 +19,20 @@ class AvisClientsListView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Les clients nous donnent leurs avis',
-                style: textStyleText(context),
+              CustomText(
+                phrase: 'Les, Clients, Nous, Donnent, Leurs, Avis',
               ),
-              _buildAvisClientsBubble(context, avis.isNotEmpty ? avis[0] : null),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildAvisClientsBubble(context, avis.length > 1 ? avis[1] : null),
-                  const SizedBox(width: 20),
-                  _buildAvisClientsBubble(context, avis.length > 2 ? avis[2] : null),
-                ],
+              const SizedBox(height: 16), // Espacement entre le texte et les avis
+              Wrap(
+                spacing: 20, // Espace horizontal entre les éléments
+                runSpacing: 20, // Espace vertical entre les lignes
+                alignment: WrapAlignment.start, // Aligner les éléments à gauche
+                children: avis.map((avisClient) {
+                  return SizedBox(
+                    width: (constraints.maxWidth - 60) / 3, // 3 bulles par ligne
+                    child: _buildAvisClientsBubble(context, avisClient),
+                  );
+                }).toList(),
               ),
             ],
           ),
@@ -52,4 +54,3 @@ class AvisClientsListView extends StatelessWidget {
     );
   }
 }
-

@@ -9,7 +9,7 @@ class ContactBientEtre extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SizedBox(
       child: Padding(
-        padding: EdgeInsets.all(25),
+        padding: EdgeInsets.all(5),
         child: ContactCard(
           assetImage: 'assets/images/logo_loren.png',
           name: 'au coeur de l\'e-sens-ciel',

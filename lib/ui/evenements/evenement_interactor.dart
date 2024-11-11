@@ -8,6 +8,7 @@ import '../../core/di/di.dart';
 class EvenementInteractor {
   final FetchEvenementDataUseCase fetchEvenementDataUseCase =
   getIt<FetchEvenementDataUseCase>();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
   // L'Interactor n'a pas besoin d'injecter un repository ici, on utilise directement le UseCase
@@ -32,13 +33,12 @@ class EvenementInteractor {
       rethrow;
     }
   }
-// Récupération des événements depuis Firestore et les fichiers associés
-  Future<List<Evenements>> fetchEvenement() async {
+  Future<List<Evenements>> fetchEvenements() async {
     List<Evenements> evenements = [];
     Set<String> seenEventIds = {};
 
     try {
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
+      QuerySnapshot snapshot = await _firestore
           .collection('evenements')
           .orderBy('publishDate', descending: true)
           .get();
@@ -50,13 +50,12 @@ class EvenementInteractor {
         if (seenEventIds.contains(evt.id)) {
           continue;
         }
+
         seenEventIds.add(evt.id);
 
         try {
-          final fileRef = _firebaseStorage.ref().child(
-              'evenement/${evt.id}/file.pdf');
-          final thumbnailRef = _firebaseStorage.ref().child(
-              'evenement/${evt.id}/thumbnail.jpg');
+          final fileRef = _firebaseStorage.ref().child('evenement/${evt.id}/file.pdf');
+          final thumbnailRef = _firebaseStorage.ref().child('evenement/${evt.id}/thumbnail.jpg');
 
           String fileUrl = await fileRef.getDownloadURL();
           String thumbnailUrl = await thumbnailRef.getDownloadURL();
@@ -64,19 +63,14 @@ class EvenementInteractor {
           evt.fileUrl = fileUrl;
           evt.thumbnailUrl = thumbnailUrl;
 
-          debugPrint(
-              'Fichier PDF récupéré pour l\'événement ${evt.id}: $fileUrl');
-          debugPrint(
-              'Vignette récupérée pour l\'événement ${evt.id}: $thumbnailUrl');
-
           evenements.add(evt);
         } catch (e) {
-          debugPrint(
-              'Erreur lors de la récupération des fichiers pour l\'événement ${evt.id}: $e');
+          debugPrint('Erreur lors de la récupération des fichiers pour l\'événement ${evt.id}: $e');
         }
       }
     } catch (e) {
       debugPrint("Erreur lors de la récupération des événements : $e");
+      rethrow;
     }
 
     return evenements;

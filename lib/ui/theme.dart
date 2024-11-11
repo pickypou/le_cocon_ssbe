@@ -26,13 +26,14 @@ MarkdownStyleSheet getMDTheme(BuildContext context) {
     h2: titleStyleMedium(context), // Style pour les titres moyens
     h3: titleStyleSmall(context), // Style pour les petits titres
     listBullet: textStyleText(context).copyWith(
+      fontSize: 25,
       color: Theme.of(context).colorScheme.secondary,
     ), // Style des puces de liste
     blockquote: textStyleText(context).copyWith(
       color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
       fontStyle: FontStyle.italic,
     ), // Style pour les citations
-    code: textStyleTextBulle(context).copyWith(
+    code: textStyleText(context).copyWith(
       backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
       fontFamily: 'montserrat',
     ), // Style pour le code en bloc

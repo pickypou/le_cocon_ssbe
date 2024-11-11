@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/link_text.dart';
+import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport_mobile.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
 import '../common/widget/text_custom.dart';
@@ -49,6 +51,19 @@ class EspaceSportMobile extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 25),
+          Text('Qui suis-je?',
+              style: titleStyleMedium(context).copyWith(
+                fontSize: size.width / 12,
+              )),
+          Text('Je suis Gérard DUCROCQ ',
+              style: textStyleText(context).copyWith(
+                fontSize: size.width / 27,
+              )),
+          Text(
+              'Professeur de judo, 6éme dan, BE 1er degré, BPJEPS, professeur de yoga D.U, coach sportif à domicile et diplômé éducateur Sport Santé. Je m\'occupe de vous préparer un programe (en présentiel ou à distance) pour entretenir votre forme physique et votre mobilité, tout cela par le biais d\'activité,',
+              style: textStyleText(context).copyWith(
+                fontSize: size.width / 27,
+              )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: RichText(
@@ -59,10 +74,6 @@ class EspaceSportMobile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     height: 1.5),
                 children: [
-                  const TextSpan(
-                    text:
-                        'Gérard, Professeur de judo, 6éme dan, BE 1er degré, BPJEPS, professeur de yoga D.U, coach sportif à domicile et diplômé éducateur Sport Santé, je m\'occupe de vous préparer un programe (en presentiel ou à distance) pour entretenir votre forme physique et votre mobilité. tout cela par le biais d\'activité, ',
-                  ),
                   TextSpan(
                     text: 'R',
                     style: TextStyle(
@@ -80,7 +91,7 @@ class EspaceSportMobile extends StatelessWidget {
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondary),
                   ),
-                  const TextSpan(text: 'ecurisé, '),
+                  const TextSpan(text: 'ecurisée, '),
                   TextSpan(
                     text: 'P',
                     style: TextStyle(
@@ -94,8 +105,53 @@ class EspaceSportMobile extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
+          Text('je vous propose plusieurs activités comme :',
+              style: textStyleText(context).copyWith(
+                fontSize: size.width / 27,
+              )),
+          Row(children: [
+            Text('De la gym douce',
+                style: textStyleText(context).copyWith(
+                  fontSize: size.width / 27,
+                )),
+            const SizedBox(width: 15,),
+            Text('Du yoga',
+                style: textStyleText(context).copyWith(
+                  fontSize: size.width / 27,
+                )),
+            const SizedBox(width: 15,),
+            Text('Du stretching ...',
+                style: textStyleText(context).copyWith(
+                  fontSize: size.width / 27,
+                )),
+          ]),
+          const SizedBox(height: 20,),
+
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ActivitiesSportMobile()),
+                  );
+                },
+                label:'Voir toute ce que je propose',
+              ),
+              SizedBox(height: 25,),
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ActivitiesSportMobile()),
+                  );
+                },
+                label:'Mon site internet',
+              ),
+
+
           const LinkText(
-              text: 'Pour plus de renseignement www.gerard.fr',
+              text: 'Pour plus de renseignements www.gerard.fr',
               url: 'https://www.gerad.fr')
         ],
       ),

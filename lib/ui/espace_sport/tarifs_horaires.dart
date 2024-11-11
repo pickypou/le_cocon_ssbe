@@ -26,22 +26,17 @@ class TarifsHoraires extends StatelessWidget {
   }
 
   Widget buildMarkdownCard(String filePath, BuildContext context) {
-    return Wrap(
-    children: [
-    Card(
-    margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
-    elevation: 4,
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10)
-    ),
-    child: SizedBox(
-    width: size.width * 0.4,// Ajuste la largeur des cartes
-    height: size.height * 0.75,
-    child: MarkdownViewer(filePath: filePath),
-    ),
-    )
-    ]
-    );
-
+    return Wrap(children: [
+      Card(
+        margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: SizedBox(
+          width: size.width * 0.6, // Ajuste la largeur des cartes
+          height: size.height * 0.60,
+          child: MarkdownViewer(filePath: filePath),
+        ),
+      )
+    ]);
   }
 }

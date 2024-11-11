@@ -48,20 +48,20 @@ class EspaceBienEtreWeb extends StatelessWidget {
             ],
           ),
         const SizedBox(height: 25,),
-        Text('Qui suis je?', style: titleStyleSmall(context),),
+        Text('Qui suis-je?', style: titleStyleSmall(context),),
     SizedBox(
     child: Padding(
         padding: const EdgeInsets.all(65),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Je suis Loren, praticienne masso-thérapeute & énergéticienne et installée depuis 2019',
+          Text('Je suis Loren, praticienne masso-thérapeute & énergéticienne installée depuis 2019.',
               style: textStyleText(context)),
-          Text('Après de nombreuses formation en soins holistique, je me suis constitué ma propre boite à outils avec divers téchniques qui me permet d\'accompagner chaque personne dans sa globalité pour réaligner Corps/ Ame et esprit.',
+          Text('Après de nombreuses formations en soins holistiques, je me suis constituée ma propre boîte à outils avec divers techniques qui me permet d\'accompagner chaque personne dans sa globalité pour réaligner corps/âme et esprit.',
             style: textStyleText(context),),
           Align(
             alignment: Alignment.centerLeft,
-            child: Text('Dans cette boite il y a :',style: textStyleText(context),
+            child: Text('Dans cette boîte il y a :',style: textStyleText(context),
           )
 
           ),

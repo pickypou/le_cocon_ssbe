@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
 import 'package:le_cocon_ssbe/ui/contact/contact_bient_etre.dart';
 import 'package:le_cocon_ssbe/ui/contact/contact_sport_sante.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
@@ -18,13 +19,12 @@ class ContactView extends StatelessWidget {
           padding: const EdgeInsets.all(25),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
-              Text(
-                'Nous contacter',
-                style: titleStyleMedium(context)
-                    .copyWith(fontSize: size.width / 10),
-                textAlign: TextAlign.center,
+              CustomText(
+                phrase:'Nous, Contacter',
+
               ),
               const SizedBox(height: 20),
               Flexible(

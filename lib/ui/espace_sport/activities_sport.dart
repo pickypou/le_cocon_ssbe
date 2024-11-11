@@ -22,7 +22,7 @@ class ActivitiesSport extends StatelessWidget {
           ),
           Activities(
             title: 'Yoga : lundi 14h00 / vendredi 19h00',
-            text: "Que ce soit hatha yoga, vinyasa yoga, yoga nidra, ou un yoga traditionnel thérapeutique en direct d'inde (Kaivalyadhama), un travail de mobilité associé à la respiration et de la spiritualité va vous aider sur le chemin de la connaissance de soi. Dans une société qui vous en demande toujours plus, dans la séance de yoga, je vous propose de faire une pose.",
+            text: "Que ce soit hatha yoga, vinyasa yoga, yoga nidra, ou un yoga traditionnel thérapeutique en direct d'inde (Kaivalyadhama), un travail de mobilité associé à la respiration et de la spiritualité va vous aider sur le chemin de la connaissance de soi. Dans une société qui vous en demande toujours plus. Dans la séance de yoga, je vous propose de faire une pause.",
             value: 'yoga.png',
             isImageBeforeTitle: true,
             logo: 'cardio.png',
@@ -38,21 +38,21 @@ class ActivitiesSport extends StatelessWidget {
           Activities(
             value: 'yoga.png',
             title: 'Yoga parents/enfants : mercredi 09h30',
-            text: 'Venez partager un moment de complicité avec votre enfant(+ 4ans) avec des posture ludique et agréable et créer un lien filial.',
+            text: 'Venez partager un moment de complicité avec votre enfant (+ 4ans) avec des postures ludiques et agréables et créer un lien filial.',
             isImageBeforeTitle: true,
             logo: 'cardio.png',
           ),
           Activities(
             value: 'taiso.png',
             title: 'Taiso : Mardi 19h00 & samedi 10h00 \n (Préparation du corps en japonais)',
-            text: "Méthode japonaise de renforcement musculaire de l'ensemble de votre corp de la tête jusqu'au petit orteil. 15' d'échauffement, 30' de renforcement musculaire sur les grand groupes , les jambes, abdo, fessier, dos etc... qui est suivi par un temps calme association d'étirement et de relaxation",
+            text: "Méthode japonaise de renforcement musculaire de l'ensemble de votre corps de la tête jusqu'au petit orteil. 15' d'échauffement, 30' de renforcement musculaire sur les grands groupes , les jambes, abdos, fessiers, dos etc...  suivi par un temps calme : association d'étirement et de relaxation",
             isImageBeforeTitle: false,
             logo: 'cardio.png',
           ),
           Activities(
             value: 'yoga.png',
             title: 'Coaching individuel : Uniquement sur rendez-vous ',
-            text: "Vous préférez decider de votre activité et / ou de vos horaires, je peux intervenir chez vous ou vous recevoir au Cocon ou encore en visio.\n Besoin de vous remuscler?\n a la d'une mobilité après une opération. Envie de perdre du poids?\n Vous souffrez de trouble musculaire-squelettiques, Obésité, diabète(type 2), trouble respiratoire ou de stress exesif chronique etc... Exposez moi votre problématique et j'adapte votre programme sur mesure",
+            text: "Vous préférez décider de votre activité et / ou de vos horaires, je peux intervenir chez vous ou vous recevoir au Cocon ou encore en visio.\n Besoin de vous remuscler ?\n A la recherche d'une mobilité après une opération ?\n Envie de perdre du poids?\n Vous souffrez de troubles musculo-squelettiques, Obésité, diabète (type 2), troubles respiratoires ou de stress excessif chronique etc... Exposez-moi votre problématique et j'adapte votre programme sur mesure.",
             isImageBeforeTitle: true,
             logo: 'cardio.png',
           ),

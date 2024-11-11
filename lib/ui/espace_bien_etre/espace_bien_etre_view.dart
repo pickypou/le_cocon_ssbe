@@ -24,6 +24,7 @@ class EspaceBienEtreView extends StatelessWidget {
           children: [
             EspaceBienEtreWeb(),
             ActivityBienEtre()
+
           ],
         )
 

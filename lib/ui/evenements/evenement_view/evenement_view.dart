@@ -6,7 +6,7 @@ class EvenementView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return EvenementListView(evenement: [],);
+        return EvenementListView();
 
   }
 }
