@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/common/widget/contact_card.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
 class ContactLeCocon extends StatelessWidget {

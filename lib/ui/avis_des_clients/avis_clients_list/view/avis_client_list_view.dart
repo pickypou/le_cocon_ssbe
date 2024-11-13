@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
+
 import '../../../../domain/entities/avis_clients.dart';
 import '../../../common/widget/bulle_avis_clients.dart';
-import '../../../theme.dart';
 
 class AvisClientsListView extends StatelessWidget {
   final List<AvisClients> avis;
@@ -22,14 +22,16 @@ class AvisClientsListView extends StatelessWidget {
               CustomText(
                 phrase: 'Les, Clients, Nous, Donnent, Leurs, Avis',
               ),
-              const SizedBox(height: 16), // Espacement entre le texte et les avis
+              const SizedBox(
+                  height: 16), // Espacement entre le texte et les avis
               Wrap(
                 spacing: 20, // Espace horizontal entre les éléments
                 runSpacing: 20, // Espace vertical entre les lignes
                 alignment: WrapAlignment.start, // Aligner les éléments à gauche
                 children: avis.map((avisClient) {
                   return SizedBox(
-                    width: (constraints.maxWidth - 60) / 3, // 3 bulles par ligne
+                    width:
+                        (constraints.maxWidth - 60) / 3, // 3 bulles par ligne
                     child: _buildAvisClientsBubble(context, avisClient),
                   );
                 }).toList(),
@@ -50,7 +52,9 @@ class AvisClientsListView extends StatelessWidget {
       date: avis.formattedPublishDate,
       categories: avis.categories,
       text: avis.text,
-      color: Theme.of(context).colorScheme.onSurface, // Utilisation du thème pour la couleur
+      color: Theme.of(context)
+          .colorScheme
+          .onSurface, // Utilisation du thème pour la couleur
     );
   }
 }

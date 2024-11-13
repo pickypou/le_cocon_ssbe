@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
 import 'package:le_cocon_ssbe/ui/evenements/event_handler.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
+
 import '../../../domain/entities/evenements.dart';
 import '../evenement_interactor.dart';
 
@@ -27,7 +28,8 @@ class EvenementListViewState extends State<EvenementListView> {
 
   Future<void> _loadEvenements() async {
     try {
-      List<Evenements> evenements = await _evenementInteractor.fetchEvenements();
+      List<Evenements> evenements =
+          await _evenementInteractor.fetchEvenements();
       setState(() {
         _evenements = evenements;
         _isLoading = false;
@@ -75,8 +77,7 @@ class EvenementListViewState extends State<EvenementListView> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: CustomText(
-                  phrase:"Nos, Evénements",
-
+                  phrase: "Nos, Evénements",
                 ),
               ),
               Wrap(
@@ -89,32 +90,39 @@ class EvenementListViewState extends State<EvenementListView> {
                     child: Card(
                       elevation: 4,
                       child: InkWell(
-                        onTap: ()
-                          => eventHandler.handleDocumentTap(
-                            context,
-                            evt.fileUrl!,
-                            evt.title,
-                          ),
+                        onTap: () => eventHandler.handleDocumentTap(
+                          context,
+                          evt.fileUrl!,
+                          evt.title,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             evt.thumbnailUrl != null
-                                ? Image.network(evt.thumbnailUrl!)
+                                ? Image.network(
+                                    evt.thumbnailUrl!,
+                                    height: 150,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
                                 : Container(
-                              height: 100,
-                              color: Colors.grey[300],
-                              child: Icon(Icons.picture_as_pdf, color: Colors.white),
-                            ),
+                                    height: 150,
+                                    color: Colors.grey[300],
+                                    child:
+                                        Icon(Icons.image, color: Colors.white),
+                                  ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    evt.title.isNotEmpty ? evt.title : "Sans titre",
+                                    evt.title.isNotEmpty
+                                        ? evt.title
+                                        : "Sans titre",
                                     style: textStyleText(context),
-                                    ),
+                                  ),
                                   const SizedBox(height: 4),
                                   Text(
                                     evt.formattedPublishDate,
