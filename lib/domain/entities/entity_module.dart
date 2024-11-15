@@ -15,8 +15,8 @@ void setupEntityModule() {
       ));
 
   //Register evenements
-  getIt.registerFactory<Evenements>(() =>
-      Evenements(
+  getIt.registerFactory<Evenement>(() =>
+      Evenement(
         id: '',
         title: '',
         fileType: '',

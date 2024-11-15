@@ -11,7 +11,7 @@ class ContactView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
+    
     return LayoutBuilder(
       builder: (context, constraints) {
         return Padding(

@@ -5,6 +5,6 @@ import '../../domain/entities/evenements.dart';
 abstract class EvenementRepository {
   FirebaseFirestore get firestore;
 
-  Stream<Iterable<Evenements>> getEvenementStream();
+  Stream<Iterable<Evenement>> getEvenementStream();
   Future<EvenementDto?>getById(String evenementId);
 }

@@ -11,14 +11,14 @@ class FetchEvenementDataUseCase {
 
   FetchEvenementDataUseCase(this.evenementRepository);
 
-  Future<List<Evenements>> getEvenement() async {
+  Future<List<Evenement>> getEvenement() async {
     try {
       debugPrint("Fetching événement data from Firestore...");
-      Stream<Iterable<Evenements>> evenementStream =
+      Stream<Iterable<Evenement>> evenementStream =
       evenementRepository.getEvenementStream();
 
       // Utilisez 'await for' pour consommer le stream
-      List<Evenements> evenementList = [];
+      List<Evenement> evenementList = [];
       await for (var evenementIterable in evenementStream) {
         evenementList.addAll(evenementIterable);
       }
@@ -29,13 +29,13 @@ class FetchEvenementDataUseCase {
     }
   }
 
-  Future<Evenements?> getEvenementById(String evenementId) async {
+  Future<Evenement?> getEvenementById(String evenementId) async {
     try {
       debugPrint("Fetching événement data from Firestore...");
       EvenementDto? evenementDto = await evenementRepository.getById(evenementId);
       if (evenementDto != null) {
         // Conversion de EvenementDto à Evenements
-        return Evenements(
+        return Evenement(
           id: evenementId,
           title: evenementDto.title,
           fileUrl: evenementDto.fileUrl,

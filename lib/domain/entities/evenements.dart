@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../../core/utils/date_converter.dart';
 
-class Evenements {
+class Evenement {
   final String title;
   final String id;
   String? fileUrl;
@@ -11,7 +11,7 @@ class Evenements {
   String? thumbnailUrl;
   final DateTime publishDate;
 
-  Evenements(
+  Evenement(
       {required this.title,
       required this.id,
       required this.fileType,
@@ -28,8 +28,8 @@ class Evenements {
     }
   }
 
-  factory Evenements.fromMap(Map<String, dynamic>? data, String id) {
-    return Evenements(
+  factory Evenement.fromMap(Map<String, dynamic>? data, String id) {
+    return Evenement(
       id: id,
       title: data?['title'] ?? 'Titre inconnu',
       fileType: data?['fileType'] ?? 'Type inconnu',

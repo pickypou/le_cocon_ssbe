@@ -7,14 +7,14 @@ class EvenementLoadingState extends EvenementState {}
 
 // État lorsque la liste des événements est chargée avec succès
 class EvenementLoadedState extends EvenementState {
-  final List<Evenements> evenementData;
+  final List<Evenement> evenementData;
 
   EvenementLoadedState({required this.evenementData});
 }
 
 // État lorsque les détails d'un événement spécifique sont chargés avec succès
 class EvenementDetailLoadedState extends EvenementState {
-  final Evenements evenementDetail;
+  final Evenement evenementDetail;
 
   EvenementDetailLoadedState({required this.evenementDetail});
 }

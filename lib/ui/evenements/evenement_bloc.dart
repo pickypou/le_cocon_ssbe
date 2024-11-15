@@ -11,7 +11,7 @@ class EvenementBloc extends Bloc<EvenementEvent, EvenementState> {
     on<LoadAEvenementEvent>((event, emit) async {
       emit(EvenementLoadingState());
       try {
-        final evenement = await evenementInteractor.fetchEvenementData();
+        final evenement = await evenementInteractor.fetchEvenements();
         emit(EvenementLoadedState(evenementData: evenement.toList()));
       } catch (e) {
         emit(EvenementErrorState(message: 'Une erreur s\'est produite : $e'));

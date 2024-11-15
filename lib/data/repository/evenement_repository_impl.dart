@@ -17,11 +17,11 @@ class EvenementRepositoryImpl extends EvenementRepository {
   FirebaseFirestore get firestore => _firestore;
   
   @override
-  Stream<Iterable<Evenements>> getEvenementStream() {
-    return _firestore.collection('evenements').snapshots().map(
+  Stream<Iterable<Evenement>> getEvenementStream() {
+    return _firestore.collection('evenement').snapshots().map(
           (querySnapshot) =>
           querySnapshot.docs
-              .map((doc) => Evenements.fromMap(doc.data(), doc.id))
+              .map((doc) => Evenement.fromMap(doc.data(), doc.id))
               .toList(),
     );
   }
