@@ -17,14 +17,15 @@ class ContactLeCocon extends StatelessWidget {
               ),
               Text(
                 'Le Cocon SSBE se trouve à moins de 30 min de Lille, Lens, Henin Beaumont & Arras',
-                style: textStyleText(context),
+                style: textStyleText(context).copyWith(fontSize: 16),
               ),
               Text(
-                  'En voiture : prendre la sortie Carvin sur l\'A1 et suivre la direction d\'Annoeullin',
-                  style: textStyleText(context)),
+                'En voiture : prendre la sortie Carvin sur l\'A1 et suivre la direction d\'Annoeullin',
+                style: textStyleText(context).copyWith(fontSize: 16),
+              ),
               Text(
                   'Gare la plus proche : Bauvin ( environ 900 M à pieds, 5/10 min de marche )',
-                  style: textStyleText(context))
+                  style: textStyleText(context).copyWith(fontSize: 16)),
             ],
           )),
     );

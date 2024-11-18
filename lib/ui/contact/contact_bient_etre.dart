@@ -17,6 +17,8 @@ class ContactBientEtre extends StatelessWidget {
           email: 'aucoeordelesensciel@gmail.com',
           address: '59 rue Nationale 59185 Provin',
           website: 'https://www.aucoeurdelesensciel.com',
+          imageHeight: 100,
+          imageWidth: 100,
         ),
       ),
     );

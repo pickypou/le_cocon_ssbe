@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import '../../domain/entities/avis_clients.dart';
 import 'avis_clients_list/view/avis_client_list_view.dart';
 
@@ -30,15 +31,17 @@ class AvisClientsPage extends StatelessWidget {
         // Transformation des données
         List<AvisClients> avis = snapshot.data!.docs
             .map((doc) => AvisClients.fromMap(
-          doc.data() as Map<String, dynamic>,
-          doc.id,
-        ))
+                  doc.data() as Map<String, dynamic>,
+                  doc.id,
+                ))
             .toList();
 
         // Utilisation de AvisClientsListView pour afficher les avis
-        return AvisClientsListView(avis: avis);
+        return AvisClientsListView(
+          avis: avis,
+          backgroundImage: 'assets/images/facade_cocon.jpeg',
+        );
       },
     );
   }
 }
-

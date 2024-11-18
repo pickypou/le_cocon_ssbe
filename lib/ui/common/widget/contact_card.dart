@@ -12,6 +12,8 @@ class ContactCard extends StatelessWidget {
   final String address;
   final LatLng? location; // Coordonnées optionnelles pour Google Maps
   final String? website; // URL optionnelle pour le site web
+  final double imageWidth; // Largeur personnalisable de l'image
+  final double imageHeight; // Hauteur personnalisable de l'image
 
   const ContactCard({
     super.key,
@@ -23,6 +25,8 @@ class ContactCard extends StatelessWidget {
     this.location, // Peut être null pour désactiver la carte
     this.website,
     this.fontSize, // Peut être null pour désactiver le lien du site web
+    this.imageWidth = 150, // Valeur par défaut pour la largeur de l'image
+    this.imageHeight = 100, // Valeur par défaut pour la hauteur de l'image
   });
 
   @override
@@ -30,6 +34,7 @@ class ContactCard extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
     double calculatedFontSize =
         fontSize ?? (size.width > 749 ? size.width / 75 : 16);
+
     return SizedBox(
       width: size.width * 0.3,
       child: Card(
@@ -46,25 +51,23 @@ class ContactCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0), // Rayon pour arrondir les coins
-                    child: Image.asset(
-                      assetImage,
-                      fit: BoxFit.cover, // L'image couvre tout le cadre
-                      width: 150, // Largeur de l'image
-                      height: 100, // Hauteur de l'image
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    name,
-                    style: textStyleText(context).copyWith(fontSize: calculatedFontSize),
-                  ),
-                ],
+              // Image avec dimensions personnalisées
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(8.0), // Rayon pour arrondir les coins
+                child: Image.asset(
+                  assetImage,
+                  fit: BoxFit.cover, // L'image couvre tout le cadre
+                  width: imageWidth,
+                  height: imageHeight,
+                ),
               ),
-
+              const SizedBox(width: 25),
+              Text(
+                name,
+                style: textStyleText(context)
+                    .copyWith(fontSize: calculatedFontSize),
+              ),
               const SizedBox(height: 16),
               _buildContactRow(context, Icons.phone, phone),
               const SizedBox(height: 8),

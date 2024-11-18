@@ -64,6 +64,7 @@ dependencies:
   pdfx: ^2.8.0
   pdf_thumbnail: ^0.1.6+1
   thumbnailer: ^2.2.0
+  carousel_slider: ^5.0.0
 
 
 

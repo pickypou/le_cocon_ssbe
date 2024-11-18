@@ -17,6 +17,7 @@ class ContactSportSante extends StatelessWidget {
           email: 'gerardjudo59@gmail.com',
           address: '59 rue Nationale 59185 Provin',
           website: 'gerard.fr',
+          imageWidth: 220,
         ),
       ),
     );

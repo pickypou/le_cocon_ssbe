@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
-import 'package:le_cocon_ssbe/ui/common/widget/link_text.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport_mobile.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
@@ -114,45 +113,47 @@ class EspaceSportMobile extends StatelessWidget {
                 style: textStyleText(context).copyWith(
                   fontSize: size.width / 27,
                 )),
-            const SizedBox(width: 15,),
+            const SizedBox(
+              width: 15,
+            ),
             Text('Du yoga',
                 style: textStyleText(context).copyWith(
                   fontSize: size.width / 27,
                 )),
-            const SizedBox(width: 15,),
+            const SizedBox(
+              width: 15,
+            ),
             Text('Du stretching ...',
                 style: textStyleText(context).copyWith(
                   fontSize: size.width / 27,
                 )),
           ]),
-          const SizedBox(height: 20,),
-
-              CustomButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ActivitiesSportMobile()),
-                  );
-                },
-                label:'Voir toute ce que je propose',
-              ),
-              SizedBox(height: 25,),
-              CustomButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ActivitiesSportMobile()),
-                  );
-                },
-                label:'Mon site internet',
-              ),
-
-
-          const LinkText(
-              text: 'Pour plus de renseignements www.gerard.fr',
-              url: 'https://www.gerad.fr')
+          const SizedBox(
+            height: 20,
+          ),
+          CustomButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ActivitiesSportMobile()),
+              );
+            },
+            label: 'Voir toute ce que je propose',
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          CustomButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ActivitiesSportMobile()),
+              );
+            },
+            label: 'Mon site internet',
+          ),
         ],
       ),
     );
