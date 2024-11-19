@@ -125,10 +125,24 @@ class ContactCard extends StatelessWidget {
       children: [
         Icon(icon, color: Theme.of(context).colorScheme.secondary),
         const SizedBox(width: 8),
-        Text(
-          text,
-          style: textStyleText(context).copyWith(fontSize: calculatedFontSize),
-        ),
+        if (icon == Icons.email) // Vérifiez si c'est l'email
+          GestureDetector(
+            onTap: () => _launchMail(text),
+            child: Text(
+              text,
+              style: textStyleText(context).copyWith(
+                fontSize: calculatedFontSize,
+                color: Theme.of(context).colorScheme.secondary,
+                decoration: TextDecoration.underline, // Indique un lien
+              ),
+            ),
+          )
+        else
+          Text(
+            text,
+            style:
+                textStyleText(context).copyWith(fontSize: calculatedFontSize),
+          ),
       ],
     );
   }
@@ -174,6 +188,18 @@ class ContactCard extends StatelessWidget {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       throw 'Impossible d\'ouvrir Google Maps';
+    }
+  }
+
+  Future<void> _launchMail(String email) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Impossible d\'ouvrir le client de messagerie pour $email';
     }
   }
 }

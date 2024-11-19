@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/link_button.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport_mobile.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
@@ -144,16 +145,8 @@ class EspaceSportMobile extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
-          CustomButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ActivitiesSportMobile()),
-              );
-            },
-            label: 'Mon site internet',
-          ),
+         LinkButton(label: 'Consultez mon site internet',
+             url: 'gerard.fr')
         ],
       ),
     );

@@ -27,7 +27,7 @@ class ActivityBienEtreMobile extends StatelessWidget {
                 logo: 'petit_logo_loren.png',
               ),
               const Activities(
-                value: 'palmaire.jpg',
+                value: 'massage.png',
                 title: 'Divers massages',
                 text: '',
                 isImageBeforeTitle: true,

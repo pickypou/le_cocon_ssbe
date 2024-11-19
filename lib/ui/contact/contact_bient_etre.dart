@@ -12,9 +12,9 @@ class ContactBientEtre extends StatelessWidget {
         padding: EdgeInsets.all(5),
         child: ContactCard(
           assetImage: 'assets/images/logo_loren.png',
-          name: 'au coeur de l\'e-sens-ciel',
+          name: 'Au Coeur de l\'E-Sens-Ciel',
           phone: '06 78 44 30 57',
-          email: 'aucoeordelesensciel@gmail.com',
+          email: 'aucoeurdelesensciel@gmail.com',
           address: '59 rue Nationale 59185 Provin',
           website: 'https://www.aucoeurdelesensciel.com',
           imageHeight: 100,

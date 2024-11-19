@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+import 'package:le_cocon_ssbe/ui/common/widget/link_button.dart';
 import '../common/widget/activities.dart';
-import '../common/widget/custom_button.dart';
 
 class ActivityBienEtre extends StatelessWidget {
   const ActivityBienEtre({super.key});
@@ -21,14 +19,14 @@ class ActivityBienEtre extends StatelessWidget {
             logo: 'petit_logo_loren.png',
           ),
           const Activities(
-            value: 'palmaire.jpg',
+            value: 'massage.png',
             title: 'Divers massages',
             text: '',
             isImageBeforeTitle: true,
             logo: 'petit_logo_loren.png',
           ),
           const Activities(
-              value: 'img_header_1.jpeg',
+              value: 'magnetisme.jpg',
               title: 'Du magnétisme',
               text: '',
               isImageBeforeTitle: false,
@@ -41,14 +39,14 @@ class ActivityBienEtre extends StatelessWidget {
             logo: 'petit_logo_loren.png',
           ),
           const Activities(
-            value: 'img_header_1.jpeg',
+            value: 'guidance.jpg',
             title: 'De la guidance par oracles',
             text: '',
             isImageBeforeTitle: false,
             logo: 'petit_logo_loren.png',
           ),
           const Activities(
-            value: 'pied.png',
+            value: 'hypnose.jpg',
             title: 'De l\'hypnose',
             text: '',
             isImageBeforeTitle: true,
@@ -57,17 +55,8 @@ class ActivityBienEtre extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          CustomButton(
-            onPressed: () async {
-              final Uri url = Uri.parse('https://www.aucoeurdelesensciel.com/');
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url);
-              } else {
-                throw 'Could not launch $url';
-              }
-            },
-            label: 'Pour plus d\'infos',
-          )
+          LinkButton(label: 'Consultez mon site internet',
+              url: 'https://www.aucoeurdelesensciel.com')
         ],
       ),
     );

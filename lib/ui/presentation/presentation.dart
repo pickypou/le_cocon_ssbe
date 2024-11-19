@@ -80,7 +80,7 @@ class Presentation extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                          'du Cocon : lieu de transformation',
+                          'du Cocon : lieu de transformation personnelle',
                           // Texte en dessous des groupes
                           style: textStyleText(context).copyWith(
                               fontSize: size.width / 75) // Texte en gras

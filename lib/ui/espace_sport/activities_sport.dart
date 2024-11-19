@@ -36,14 +36,14 @@ class ActivitiesSport extends StatelessWidget {
             logo: 'cardio.png',
           ),
           Activities(
-            value: 'yoga.png',
+            value: 'yoga_parent_enfant.jpeg',
             title: 'Yoga parents/enfants : mercredi 09h30',
             text: 'Venez partager un moment de complicité avec votre enfant (+ 4ans) avec des postures ludiques et agréables et créer un lien filial.',
             isImageBeforeTitle: true,
             logo: 'cardio.png',
           ),
           Activities(
-            value: 'taiso.png',
+            value: 'taiso.jpg',
             title: 'Taiso : Mardi 19h00 & samedi 10h00 \n (Préparation du corps en japonais)',
             text: "Méthode japonaise de renforcement musculaire de l'ensemble de votre corps de la tête jusqu'au petit orteil. 15' d'échauffement, 30' de renforcement musculaire sur les grands groupes , les jambes, abdos, fessiers, dos etc...  suivi par un temps calme : association d'étirement et de relaxation",
             isImageBeforeTitle: false,

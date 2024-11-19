@@ -58,7 +58,7 @@ class ActivitiesSportMobile extends StatelessWidget {
                 height: 20,
               ),
               Activities(
-                value: 'yoga.png',
+                value: 'yoga_parent_enfant.jpeg',
                 title: 'Yoga parents/enfants : mercredi 09h30',
                 text:
                     'Venez partager un moment de complicité avec votre enfant (+ 4ans) avec des postures ludiques et agréables et créer un lien filial.',
@@ -69,7 +69,7 @@ class ActivitiesSportMobile extends StatelessWidget {
                 height: 20,
               ),
               Activities(
-                value: 'taiso.png',
+                value: 'taiso.jpeg',
                 title:
                     'Taiso : Mardi 19h00 & samedi 10h00 \n (Préparation du corps en japonais)',
                 text:

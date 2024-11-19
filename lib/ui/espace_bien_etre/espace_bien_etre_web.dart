@@ -38,7 +38,7 @@ class EspaceBienEtreWeb extends StatelessWidget {
               const SizedBox(width: 35,),
 
               BulleDialogue(
-                text: '"Je suis là pour vous aider à retrouver un équilibre, relaxation & bien-être. Que vous souffriez de maux physiques ou émotionnels"',
+                text: '"Je suis là pour vous aider à retrouver un équilibre Corps / Ame / Esprit que vous souffriez de douleurs physiques ou émotionnelles ."',
                 color: theme.colorScheme.secondary,
                 width: size.width * 0.4,
                 height: size.height *0.3,
