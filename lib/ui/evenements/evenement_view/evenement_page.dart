@@ -4,11 +4,13 @@ import 'package:le_cocon_ssbe/domain/entities/evenements.dart';
 import '../evenement_interactor.dart';
 
 class EvenementPage extends StatefulWidget {
+  const EvenementPage({super.key});
+
   @override
-  _EvenementPageState createState() => _EvenementPageState();
+  EvenementPageState createState() => EvenementPageState();
 }
 
-class _EvenementPageState extends State<EvenementPage> {
+class EvenementPageState extends State<EvenementPage> {
   late Future<List<Evenement>> evenementsFuture;
 
   @override

@@ -65,6 +65,8 @@ dependencies:
   pdf_thumbnail: ^0.1.6+1
   thumbnailer: ^2.2.0
   carousel_slider: ^5.0.0
+  video_player: ^2.9.2
+  chewie: ^1.8.5
 
 
 

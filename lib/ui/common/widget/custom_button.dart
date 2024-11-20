@@ -1,41 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/theme.dart';
+import '../../theme.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final String label;
-  final VoidCallback onPressed;
   final double? fontSize;
-  const CustomButton({super.key, required this.label, required this.onPressed, this.fontSize});
+  final VoidCallback? onPressed;
+
+  const CustomButton({
+    required this.label,
+    this.onPressed,
+    this.fontSize,
+    super.key,
+  });
+
+  @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
     double screenWidth = MediaQuery.of(context).size.width;
-    double buttonWidth = screenWidth > 749 ?  450.0 : 300.0 ;
+    Size size = MediaQuery.of(context).size;
     double calculatedFontSize =
-        fontSize ?? (size.width > 749 ? size.width / 75 : 18);
+        widget.fontSize ?? (size.width > 749 ? size.width / 60 : 20);
 
-
+    double buttonWidth = screenWidth * 0.8;
+    if (screenWidth > 500) {
+      buttonWidth = 400.0;
+    }
 
     return Center(
       child: SizedBox(
         width: buttonWidth,
-        child: ElevatedButton(
-          style: ButtonStyle(
-            padding: WidgetStateProperty.all<EdgeInsets>(
-                const EdgeInsets.symmetric(vertical: 2)),
-            backgroundColor: WidgetStateProperty.all(theme.colorScheme.surface),
-            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(color: theme.colorScheme.onSurface)
-                ))
+        child: GestureDetector(
+          onTapDown: (_) => setState(() => _isPressed = true),
+          onTapUp: (_) => setState(() => _isPressed = false),
+          onTapCancel: () => setState(() => _isPressed = false),
+          child: ElevatedButton(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.symmetric(vertical: 15),
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return theme.colorScheme.secondary;
+                  }
+                  return theme.colorScheme.primary;
+                },
+              ),
+              shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
+                    (states) {
+                  return RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    side: BorderSide(
+                      color: theme.colorScheme.onPrimary,
+                      width: states.contains(MaterialState.pressed) ? 3.0 : 3.0,
+                    ),
+                  );
+                },
+              ),
+            ),
+            onPressed: widget.onPressed ?? () {},
+            child: Text(
+              widget.label,
+              style: TextStyle(
+                fontSize: calculatedFontSize,
+                color: _isPressed
+                    ? theme.colorScheme.surface
+                    : theme.colorScheme.secondary,
+              ),
+            ),
           ),
-            onPressed: onPressed,
-            child: Text(label, style: textStyleText(context).copyWith(fontSize:calculatedFontSize ),)),
+        ),
       ),
     );
-
   }
 }
-

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
 class PDFViewerPage extends StatefulWidget {
+  const PDFViewerPage({super.key});
+
   @override
   // ignore: library_private_types_in_public_api
   _PDFViewerPageState createState() => _PDFViewerPageState();
