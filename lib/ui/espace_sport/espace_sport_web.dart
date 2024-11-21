@@ -4,6 +4,7 @@ import 'package:le_cocon_ssbe/ui/common/widget/link_button.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/tarifs_horaires.dart';
 import 'package:le_cocon_ssbe/ui/video_mp4/video_mp4_view.dart';
+
 import '../common/widget/text_custom.dart';
 import '../theme.dart';
 
@@ -159,14 +160,12 @@ class EspaceSportWeb extends StatelessWidget {
             height: 5,
           ),
           const ActivitiesSport(),
-          const SizedBox(height: 5,),
-           SizedBox(
-            height: 300,
-             child:  VideoMp4View(),
+          SizedBox(
+            height: 550,
+            child: VideoMp4View(),
           ),
-
-          TarifsHoraires(fraction: 2, size:size),
-
+          const SizedBox(height: 50),
+          TarifsHoraires(fraction: 2, size: size),
           LinkButton(
               label: 'Consultez mon site internet',
               url: 'https://www.gerardducro.com/')

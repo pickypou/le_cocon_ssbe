@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
 import 'package:le_cocon_ssbe/ui/evenements/event_handler.dart';
@@ -30,8 +29,7 @@ class EvenementListViewState extends State<EvenementListView> {
 
   Future<void> _loadEvenements() async {
     try {
-      List<Evenement> evenements =
-          await _evenementInteractor.fetchEvenements();
+      List<Evenement> evenements = await _evenementInteractor.fetchEvenements();
       setState(() {
         _evenements = evenements;
         _isLoading = false;
@@ -104,28 +102,31 @@ class EvenementListViewState extends State<EvenementListView> {
                             // Si une vignette est présente (thumbnailUrl), on l'affiche
                             evt.thumbnailUrl != null
                                 ? Image.network(
-                              evt.thumbnailUrl!,
-                              height: 150,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                            // Sinon, si c'est une image principale (fileUrl), on l'affiche
-                            // Si la vignette est nulle, vérifier si l'événement est une image
-                                : (evt.fileType == 'image' && evt.fileUrl != null)
-                                ? Image.network(
-                              evt.fileUrl!,  // Affiche l'image téléchargée si c'est une image
-                              height: 150,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                                : Container(),
+                                    evt.thumbnailUrl!,
+                                    height: 150,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
+                                // Sinon, si c'est une image principale (fileUrl), on l'affiche
+                                // Si la vignette est nulle, vérifier si l'événement est une image
+                                : (evt.fileType == 'image' &&
+                                        evt.fileUrl != null)
+                                    ? Image.network(
+                                        evt.fileUrl!, // Affiche l'image téléchargée si c'est une image
+                                        height: 150,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Container(),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    evt.title.isNotEmpty ? evt.title : "Sans titre",
+                                    evt.title.isNotEmpty
+                                        ? evt.title
+                                        : "Sans titre",
                                     style: textStyleText(context),
                                   ),
                                   const SizedBox(height: 4),
@@ -141,7 +142,6 @@ class EvenementListViewState extends State<EvenementListView> {
                             ),
                           ],
                         ),
-
                       ),
                     ),
                   );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../theme.dart';
 
 class CustomButton extends StatefulWidget {
@@ -41,24 +42,24 @@ class _CustomButtonState extends State<CustomButton> {
           onTapCancel: () => setState(() => _isPressed = false),
           child: ElevatedButton(
             style: ButtonStyle(
-              padding: MaterialStateProperty.all<EdgeInsets>(
+              padding: WidgetStateProperty.all<EdgeInsets>(
                 const EdgeInsets.symmetric(vertical: 15),
               ),
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (states) {
-                  if (states.contains(MaterialState.pressed)) {
+              backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                (states) {
+                  if (states.contains(WidgetState.pressed)) {
                     return theme.colorScheme.secondary;
                   }
                   return theme.colorScheme.primary;
                 },
               ),
-              shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
-                    (states) {
+              shape: WidgetStateProperty.resolveWith<RoundedRectangleBorder>(
+                (states) {
                   return RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                     side: BorderSide(
                       color: theme.colorScheme.onPrimary,
-                      width: states.contains(MaterialState.pressed) ? 3.0 : 3.0,
+                      width: states.contains(WidgetState.pressed) ? 3.0 : 3.0,
                     ),
                   );
                 },

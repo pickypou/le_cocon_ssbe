@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "le-cocon-ssbe-6a4d0"
-  }
+    "default": "le-cocon-ssbe-6a4d0",
+    "le cocon": "le-cocon-ssbe-6a4d0"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -47,7 +47,7 @@ class ActivitiesSportMobile extends StatelessWidget {
                 height: 20,
               ),
               Activities(
-                value: 'stretching.png',
+                value: 'stretching.jpg',
                 title: 'Stretching : mercredi 19h00',
                 text:
                     'Avec un travail sur le muscle profond, par étirement et contractions isométriques retrouvez votre souplesse.',
@@ -69,7 +69,7 @@ class ActivitiesSportMobile extends StatelessWidget {
                 height: 20,
               ),
               Activities(
-                value: 'taiso.jpeg',
+                value: 'taiso.png',
                 title:
                     'Taiso : Mardi 19h00 & samedi 10h00 \n (Préparation du corps en japonais)',
                 text:
