@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 class VideoMp4View extends StatefulWidget {
   @override
@@ -7,8 +9,8 @@ class VideoMp4View extends StatefulWidget {
 }
 
 class _VideoMp4ViewState extends State<VideoMp4View> {
-  late VideoPlayerController _controller;
-  bool _isFullScreen = false; // Flag pour gérer le plein écran
+  late VideoPlayerController _videoPlayerController;
+  ChewieController? _chewieController;
 
   final String videoUrl =
       "https://firebasestorage.googleapis.com/v0/b/le-cocon-ssbe-6a4d0.appspot.com/o/video%2Fvideo.mp4?alt=media&token=154c579d-52cb-48d2-a133-a0fdde7bbe68";
@@ -16,93 +18,67 @@ class _VideoMp4ViewState extends State<VideoMp4View> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(videoUrl))
-      ..initialize().then((_) {
-        setState(() {});
-      });
+    _initializePlayer();
+  }
+
+  Future<void> _initializePlayer() async {
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
+    await _videoPlayerController.initialize();
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      aspectRatio: _videoPlayerController.value.aspectRatio,
+      autoPlay: false,
+      looping: false,
+      allowFullScreen: true,
+      allowMuting: true,
+      showControls: true,
+      placeholder: Center(child: CircularProgressIndicator()),
+      errorBuilder: (context, errorMessage) {
+        return Center(
+          child: Text(
+            errorMessage,
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+    setState(() {});
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _videoPlayerController.dispose();
+    _chewieController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+
+        title: Text('Une petite vidéo avec la participation de non adhérant', style: textStyleText(context),),
+      ),
       body: Center(
-        child: Column(
+        child: _chewieController != null &&
+            _chewieController!.videoPlayerController.value.isInitialized
+            ? Theme(
+          data: Theme.of(context).copyWith(
+            platform: TargetPlatform.iOS, // Utilise le style iOS qui n'a pas d'effet de focus visible
+          ),
+          child: Chewie(
+            controller: _chewieController!,
+          ),
+        )
+            : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Vidéo
-            if (_controller.value.isInitialized)
-              SizedBox(
-                height: 400, // Hauteur maximale de la vidéo
-                width: 450, // Largeur maximale (ajustable si nécessaire)
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                ),
-              )
-            else
-              CircularProgressIndicator(),
-
-            SizedBox(height: 5),
-
-            // Boutons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_controller.value.isPlaying) {
-                        _controller.pause();
-                      } else {
-                        _controller.play();
-                      }
-                    });
-                  },
-                  child: Icon(
-                    _controller.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                    size: 30,
-                  ),
-                ),
-                SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      // Passer en plein écran ou revenir à la taille normale
-                      _isFullScreen = !_isFullScreen;
-                    });
-                  },
-                  child: Icon(
-                    _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
+            CircularProgressIndicator(),
+            SizedBox(height: 20),
+            Text('Chargement de la vidéo...'),
           ],
         ),
       ),
-      bottomNavigationBar: _isFullScreen
-          ? null
-          : BottomAppBar(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Vidéo en cours",
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                ),
-              ),
-            ),
     );
   }
 }

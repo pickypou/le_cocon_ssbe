@@ -5,6 +5,7 @@ import 'package:le_cocon_ssbe/ui/espace_sport/activities_sport_mobile.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
 import '../common/widget/text_custom.dart';
+import '../video_mp4/video_mp4_view.dart';
 
 class EspaceSportMobile extends StatelessWidget {
   const EspaceSportMobile({super.key});
@@ -144,6 +145,10 @@ class EspaceSportMobile extends StatelessWidget {
           ),
           SizedBox(
             height: 25,
+          ),
+          SizedBox(
+            height: 550,
+            child: VideoMp4View(),
           ),
          LinkButton(label: 'Consultez mon site internet',
              url: 'gerard.fr')
