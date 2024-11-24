@@ -13,7 +13,7 @@ class AvisClientsPage extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection('avis_clients')
           .orderBy('publishDate', descending: true)
-          .limit(3)
+          .limit(15)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

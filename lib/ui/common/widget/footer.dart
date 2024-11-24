@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/pdf_viewver.dart';
 import '../../theme.dart';
+import 'image_cliquable.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -19,6 +20,7 @@ class Footer extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              ClickableImage(),
               Text('© 2024 Le CoconSSBE - Tous droits réservés',
                   style: textStyleText(context)
                       .copyWith(fontSize: size.width / 75)),

@@ -4,7 +4,7 @@ import 'package:le_cocon_ssbe/ui/theme.dart';
 class CustomText extends StatelessWidget {
   final String phrase;
 
-  const CustomText({super.key, required this.phrase});
+  const CustomText({super.key, required this.phrase, });
 
   @override
   Widget build(BuildContext context) {
