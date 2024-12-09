@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
+import '../theme.dart';
+
 class VideoMp4View extends StatefulWidget {
   @override
-  _VideoMp4ViewState createState() => _VideoMp4ViewState();
+  VideoMp4ViewState createState() => VideoMp4ViewState();
 }
 
-class _VideoMp4ViewState extends State<VideoMp4View> {
+class VideoMp4ViewState extends State<VideoMp4View> {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
 
@@ -31,7 +32,7 @@ class _VideoMp4ViewState extends State<VideoMp4View> {
       looping: false,
       allowFullScreen: true,
       allowMuting: true,
-      showControls: true,
+      showControls: false, // On masque les contrôles par défaut pour ajouter les nôtres
       placeholder: Center(child: CircularProgressIndicator()),
       errorBuilder: (context, errorMessage) {
         return Center(
@@ -56,19 +57,59 @@ class _VideoMp4ViewState extends State<VideoMp4View> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        title: Text('Une petite vidéo avec la participation de non adhérant', style: textStyleText(context),),
+        title: Text(
+          'Vidéo Personnalisée',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Center(
         child: _chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized
-            ? Theme(
-          data: Theme.of(context).copyWith(
-            platform: TargetPlatform.iOS, // Utilise le style iOS qui n'a pas d'effet de focus visible
-          ),
-          child: Chewie(
-            controller: _chewieController!,
-          ),
+            ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Conteneur vidéo avec dimensions ajustées
+            Container(
+              height: 300,
+              color: Colors.transparent, // Suppression du fond noir
+              padding: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width * 0.9, // Ajuste la largeur
+              child: AspectRatio(
+                aspectRatio: _videoPlayerController.value.aspectRatio,
+                child: Chewie(
+                  controller: _chewieController!,
+                ),
+              ),
+            ),
+            // Boutons de contrôle personnalisés
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.play_arrow, color:  theme.colorScheme.onSurface, size: 30),
+                    onPressed: () {
+                      _videoPlayerController.play();
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.pause, color: theme.colorScheme.onPrimary, size: 30),
+                    onPressed: () {
+                      _videoPlayerController.pause();
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.stop, color: theme.colorScheme.secondary, size: 30),
+                    onPressed: () {
+                      _videoPlayerController.seekTo(Duration.zero);
+                      _videoPlayerController.pause();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
         )
             : Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_cocon_ssbe/ui/espace_bien_etre/widget/text_activity.dart';
 
 import '../common/widget/activities.dart';
 import '../theme.dart';
@@ -39,7 +40,7 @@ class ActivityBienEtreMobile extends StatelessWidget {
                   text: '',
                   isImageBeforeTitle: false,
                   logo: 'petit_logo_loren.png'),
-              const Activities(
+              const TextActivities(
                 value: 'bol_tibetains.jpg',
                 title: 'Des relaxations',
                 text: 'Aux bols tibétains',

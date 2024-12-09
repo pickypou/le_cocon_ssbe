@@ -130,13 +130,7 @@ class EvenementListViewState extends State<EvenementListView> {
                                     style: textStyleText(context),
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    evt.formattedPublishDate,
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 14,
-                                    ),
-                                  ),
+
                                 ],
                               ),
                             ),

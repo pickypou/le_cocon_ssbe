@@ -14,7 +14,7 @@ class HorairesTarifs extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Les horaires', style: titleStyleSmall(context).copyWith(fontSize: size.width / 20),),
-          Text('Yoga : lundi de 14h à 15h30 et le vendredi de 19h30 à 20h30.' ,style: textStyleText(context).copyWith(fontSize: size.width / 42),),
+          Text('Yoga : lundi de 14h à 15h30 et le vendredi de 19h00 à 20h30.' ,style: textStyleText(context).copyWith(fontSize: size.width / 42),),
           Text('Yoga  parent/enfant:  mercredi de 9h30 à 10h30.' ,style: textStyleText(context).copyWith(fontSize: size.width / 42),),
           Text('Gym douce :  mercredi de 14h à 15h.' ,style: textStyleText(context).copyWith(fontSize: size.width / 42),),
           Text('Stretching : mercredi de 19h à 20h.' ,style: textStyleText(context).copyWith(fontSize: size.width / 42),),

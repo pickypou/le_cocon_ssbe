@@ -141,7 +141,7 @@ class EspaceSportMobile extends StatelessWidget {
                     builder: (context) => const ActivitiesSportMobile()),
               );
             },
-            label: 'Voir toute ce que je propose',
+            label: 'Voir tout ce que je propose',
           ),
           SizedBox(
             height: 25,
@@ -150,7 +150,7 @@ class EspaceSportMobile extends StatelessWidget {
             height: 550,
             child: VideoMp4View(),
           ),
-         LinkButton(label: 'Consultez mon site internet',
+         LinkButton(label: 'Consulter mon site internet',
              url: 'gerard.fr')
         ],
       ),

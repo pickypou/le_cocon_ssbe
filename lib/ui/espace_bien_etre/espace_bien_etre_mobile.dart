@@ -83,7 +83,7 @@ class EspaceBienEtreMobile extends StatelessWidget {
         ),
       )),
       Text(
-        'Il y à divers Des soins comme : ',
+        'Il y à divers  soins comme : ',
         style: textStyleText(context).copyWith(fontSize: size.width / 27),
       ),
       const SizedBox(
@@ -108,13 +108,13 @@ class EspaceBienEtreMobile extends StatelessWidget {
                 builder: (context) => const ActivityBienEtreMobile()),
           );
         },
-        label: 'Voir toute ce que je propose',
+        label: 'Voir tout ce que je propose',
       ),
       const SizedBox(
         height: 25,
       ),
       LinkButton(
-        label: 'Consultez mon site internet',
+        label: 'Consulter mon site internet',
         url: 'https://www.aucoeurdelesensciel.com',
       ),
     ]));

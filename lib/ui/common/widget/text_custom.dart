@@ -13,7 +13,7 @@ class CustomText extends StatelessWidget {
 
     // Calculer une taille de police responsive en fonction de la largeur de l'écran
     double fontSize =
-        screenWidth * 0.05; // Ajustez ce facteur selon vos besoins
+        screenWidth * 0.04; // Ajustez ce facteur selon vos besoins
 
     return RichText(
       text: TextSpan(

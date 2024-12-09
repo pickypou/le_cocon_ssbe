@@ -1,6 +1,6 @@
 ## Les horaires
 
- **Yoga** : lundi de 14h à 15h30 et vendredi de 19h30 à 20h30. 
+ **Yoga** : lundi de 14h à 15h30 et vendredi de 19h00 à 20h30. 
 
  **Yoga parent/enfant** : mercredi de 9h30 à 10h30.  
 

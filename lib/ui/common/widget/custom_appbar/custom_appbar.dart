@@ -123,7 +123,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Commenters', style: TextStyle(color: theme.colorScheme.onPrimary)),
+            title: Text('Commentaires', style: TextStyle(color: theme.colorScheme.onPrimary)),
             onTap: () {
               _scrollToSection(commenters);
               Navigator.pop(context);

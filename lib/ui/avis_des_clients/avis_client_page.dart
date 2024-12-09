@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/avis_clients.dart';
+import '../common/widget/text_custom.dart';
 import 'avis_clients_list/view/avis_client_list_view.dart';
 
 class AvisClientsPage extends StatelessWidget {
@@ -37,9 +38,17 @@ class AvisClientsPage extends StatelessWidget {
             .toList();
 
         // Utilisation de AvisClientsListView pour afficher les avis
-        return AvisClientsListView(
-          avis: avis,
-          backgroundImage: 'assets/images/facade_cocon.jpeg',
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomText(
+              phrase: 'Les, Clients, Nous, Donnent, Leurs, Avis',
+            ),
+            AvisClientsListView(
+              avis: avis,
+              backgroundImage: 'assets/images/facade_cocon.jpeg',
+            )
+          ],
         );
       },
     );

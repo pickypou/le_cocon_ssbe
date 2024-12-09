@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/link_button.dart';
+import 'package:le_cocon_ssbe/ui/espace_bien_etre/widget/text_activity.dart';
 import '../common/widget/activities.dart';
 
 class ActivityBienEtre extends StatelessWidget {
@@ -31,7 +32,7 @@ class ActivityBienEtre extends StatelessWidget {
               text: '',
               isImageBeforeTitle: false,
               logo: 'petit_logo_loren.png'),
-          const Activities(
+          const TextActivities(
             value: 'bol_tibetains.jpg',
             title: 'Des relaxations',
             text: 'Aux bols tibétains',
@@ -55,7 +56,7 @@ class ActivityBienEtre extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          LinkButton(label: 'Consultez mon site internet',
+          LinkButton(label: 'Consulter mon site internet',
               url: 'https://www.aucoeurdelesensciel.com')
         ],
       ),

@@ -15,7 +15,7 @@ class ActivitiesSportMobile extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
             title: Text(
-          'Mes activitées',
+          'Mes activités',
           style: textStyleText(context).copyWith(fontSize: size.width / 20),
         )),
         body: SingleChildScrollView(
