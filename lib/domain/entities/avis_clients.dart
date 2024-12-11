@@ -6,12 +6,14 @@ class AvisClients {
   final String id;
   final String categories;
   final String text;
+  final String firstname;
   final DateTime publishDate;
 
   AvisClients({
     required this.id,
     required this.categories,
     required this.text,
+    required this.firstname,
     required this.publishDate
   });
 
@@ -20,6 +22,7 @@ class AvisClients {
       id: id,
       categories: data?['categories'] ?? '',
       text: data? ['text'] ?? '',
+      firstname: data? ['firstname'] ?? '',
       publishDate: DateConverter.converToDateTime(data? ['publishDate']), // Utilise le convertisseur ici
     );
   }

@@ -35,7 +35,7 @@ class ActivityBienEtreMobile extends StatelessWidget {
                 logo: 'petit_logo_loren.png',
               ),
               const Activities(
-                  value: 'img_header_1.jpeg',
+                  value: 'magnetisme.jpg',
                   title: 'Du magnétisme',
                   text: '',
                   isImageBeforeTitle: false,
@@ -48,14 +48,14 @@ class ActivityBienEtreMobile extends StatelessWidget {
                 logo: 'petit_logo_loren.png',
               ),
               const Activities(
-                value: 'img_header_1.jpeg',
+                value: 'guidance.jpg',
                 title: 'De la guidance par oracles',
                 text: '',
                 isImageBeforeTitle: false,
                 logo: 'petit_logo_loren.png',
               ),
               const Activities(
-                value: 'pied.png',
+                value: 'hypnose.jpg',
                 title: 'De l\'hypnose',
                 text: '',
                 isImageBeforeTitle: true,

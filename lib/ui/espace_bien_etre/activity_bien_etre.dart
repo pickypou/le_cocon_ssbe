@@ -32,6 +32,7 @@ class ActivityBienEtre extends StatelessWidget {
               text: '',
               isImageBeforeTitle: false,
               logo: 'petit_logo_loren.png'),
+              
           const TextActivities(
             value: 'bol_tibetains.jpg',
             title: 'Des relaxations',

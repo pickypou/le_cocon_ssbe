@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/avis_clients.dart';
-import '../../../common/widget/text_custom.dart';
 
 class AvisClientsListView extends StatefulWidget {
   final List<AvisClients> avis;

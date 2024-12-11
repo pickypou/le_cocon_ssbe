@@ -5,6 +5,8 @@ import 'package:chewie/chewie.dart';
 import '../theme.dart';
 
 class VideoMp4View extends StatefulWidget {
+  const VideoMp4View({super.key});
+
   @override
   VideoMp4ViewState createState() => VideoMp4ViewState();
 }

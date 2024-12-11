@@ -16,6 +16,11 @@ class AvisClientsRepositoryImpl extends AvisClientsRepository {
   FirebaseFirestore get fireStore => _firestore;
 
   @override
+  Future<void> add(Map<String, dynamic> data) async {
+    await _firestore.collection('avis_clients').add(data);
+  }
+
+  @override
   Stream<Iterable<AvisClients>> getAvisClientsStream() {
     return _firestore.collection('avis_clients').snapshots().map(
           (querySnapshot) => querySnapshot.docs

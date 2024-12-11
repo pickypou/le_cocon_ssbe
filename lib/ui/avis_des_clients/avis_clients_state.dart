@@ -19,6 +19,11 @@ class AvisClientDetailLoadedState extends AvisClientsState {
   AvisClientDetailLoadedState({required this.avisClientDetail});
 }
 
+class AddAvisClientsSignUpSuccessState extends AvisClientsState {
+  final String addAvisClientsId;
+  AddAvisClientsSignUpSuccessState({required this.addAvisClientsId});
+}
+
 // État lorsqu'une erreur survient
 class AvisClientsErrorState extends AvisClientsState {
   final String message;

@@ -3,7 +3,6 @@ import 'package:le_cocon_ssbe/ui/espace_sport/horaires_tarifs.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 
 import '../common/widget/activities.dart';
-import '../video_mp4/video_mp4_view.dart';
 
 class ActivitiesSportMobile extends StatelessWidget {
   const ActivitiesSportMobile({super.key});

@@ -21,5 +21,18 @@ class AvisClientsInteractor {
       rethrow;
     }
   }
+  Future<void> addAvisClients(AvisClients avisClients) async {
+    try {
+      await avisClientsRepository.add({
+        'categories': avisClients.categories,
+        'text': avisClients.text,
+        'firstname': avisClients.firstname,
+        'publishDate': avisClients.publishDate
+      });
+    } catch (error) {
+      debugPrint('Erreur lors de l\'ajout de l\'avis du client: $error');
+      rethrow;
+    }
+  }
 
 }

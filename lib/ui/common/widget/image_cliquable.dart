@@ -12,8 +12,8 @@ class ClickableImage extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () async {
-          if (await canLaunch(url)) {
-            await launch(url);
+          if (await canLaunchUrl(url as Uri)) {
+            await launchUrl(url as Uri);
           } else {
             throw 'Impossible d\'ouvrir l\'URL $url';
           }
