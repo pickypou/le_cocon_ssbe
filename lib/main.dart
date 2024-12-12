@@ -1,10 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:le_cocon_ssbe/ui/avis_des_clients/avis_clients_bloc.dart';
+import 'package:le_cocon_ssbe/ui/avis_des_clients/avis_clients_interactor.dart';
 import 'package:le_cocon_ssbe/ui/theme.dart';
 import 'package:le_cocon_ssbe/ui/view_all/wiew_all.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'core/di/di.dart';
 import 'data/repository/repository_module.dart';
 import 'domain/usecases/usecase_module.dart';
 import 'firebase_options.dart';
@@ -27,7 +32,12 @@ void main() async {
 
   setupUseCaseModule(); // Appel pour enregistrer les cas d'utilisation
   setupRepositoryModule();
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => AvisClientsBloc(getIt<AvisClientsInteractor>()),
+      child: MyApp(),
+    ),
+  );
 }
 
 

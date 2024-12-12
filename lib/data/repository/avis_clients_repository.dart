@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/avis_clients.dart';
 
+
 abstract class AvisClientsRepository {
   FirebaseFirestore get fireStore;
   Stream<Iterable<AvisClients>> getAvisClientsStream();

@@ -19,6 +19,7 @@ import '../../data/repository/evenement_repository_impl.dart' as _i1053;
 import '../../data/repository/evenements_repository.dart' as _i873;
 import '../../domain/usecases/fetch_avis_clients_data_usecase.dart' as _i57;
 import '../../domain/usecases/fetch_evenement_data_usecase.dart' as _i914;
+import '../../ui/avis_des_clients/avis_clients_interactor.dart' as _i3;
 import 'api/firestore_service.dart' as _i746;
 import 'di_module.dart' as _i211;
 
@@ -34,6 +35,7 @@ _i174.GetIt initGetIt(
     environmentFilter,
   );
   final firebaseModule = _$FirebaseModule();
+  gh.singleton<_i3.AvisClientsInteractor>(() => _i3.AvisClientsInteractor());
   gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
   gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseModule.storage);
   gh.factory<_i1053.EvenementRepositoryImpl>(() =>

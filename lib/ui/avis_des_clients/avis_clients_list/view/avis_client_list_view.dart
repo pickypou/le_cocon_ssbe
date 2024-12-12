@@ -220,6 +220,7 @@ class _AvisClientsListViewState extends State<AvisClientsListView> {
                     }).toList(),
                   ),
                 ],
+
               ),
             ],
           ));

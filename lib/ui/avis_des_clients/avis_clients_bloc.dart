@@ -9,34 +9,46 @@ class AvisClientsBloc extends Bloc<AvisClientsEvent, AvisClientsState> {
 
   AvisClientsBloc(this.avisClientsInteractor)
       : super(AvisClientsLoadingState()) {
-    on<AvisClientsEvent>((event, emit) async {
+    // Gestion de l'événement pour charger les avis
+    on<LoadAvisClientsEvent>((event, emit) async {
+      emit(AvisClientsLoadingState());
       try {
-        // Optionnel : Vous pouvez émettre un état de chargement ici
+        final avisClients = await avisClientsInteractor.fetchAvisClientsData();
+        emit(AvisClientsLoadedState(avisClientsData: avisClients.toList()));
+      } catch (e) {
+        emit(AvisClientsErrorState(message: 'Erreur lors du chargement : $e'));
+      }
+    });
+
+    // Gestion de l'événement pour ajouter un avis
+    on<AddAvisClientEvent>((event, emit) async {
+      try {
         emit(AvisClientsLoadingState());
 
-        // Créez un nouvel avis avec les données de l'événement
+        // Crée l'avis client
         final avisClient = AvisClients(
-          id: DateTime.now().millisecondsSinceEpoch.toString(), // Génère un ID unique
+          id: event.id,
           firstname: event.firstname,
           text: event.text,
           publishDate: event.publishDate,
           categories: event.categories,
         );
 
-        // Ajoutez l'avis via l'interactor
-        await avisClientsInteractor.addAvisClients(AvisClients as AvisClients);
+        // Appelle l'interactor pour ajouter l'avis
+        await avisClientsInteractor.addAvisClients(avisClient);
 
-        // Rechargez la liste après l'ajout
+        // Recharge les avis clients
         final updatedAvisClients = await avisClientsInteractor.fetchAvisClientsData();
 
-        // Émettre l'état avec les données mises à jour
-        emit(AvisClientsLoadedState(avisClientsData: []));
+        // Émet un état de succès
+        emit(AvisClientsLoadedState(avisClientsData: updatedAvisClients.toList()));
+
+        // Navigation après succès
+        event.navigateToAccount();
       } catch (e) {
         emit(AvisClientsErrorState(message: 'Erreur lors de l\'ajout : $e'));
       }
     });
-
-
 
   }
 }

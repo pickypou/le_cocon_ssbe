@@ -2,15 +2,14 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get_it/get_it.dart';
 import 'package:le_cocon_ssbe/data/repository/evenements_repository.dart';
 import 'package:le_cocon_ssbe/data/repository/evenement_repository_impl.dart';
 
 import '../../core/di/api/firestore_service.dart';
+import '../../core/di/di.dart';
 import 'avis_client_repository_impl.dart';
 import 'avis_clients_repository.dart';
 
-final GetIt getIt = GetIt.instance;
 
 void setupRepositoryModule() {
   getIt.registerLazySingleton<FirebaseFirestore>(() =>
