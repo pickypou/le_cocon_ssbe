@@ -1,5 +1,3 @@
-import 'package:get_it/get_it.dart';
-
 import '../../core/di/di.dart';
 import '../../data/repository/avis_client_repository_impl.dart';
 import '../../data/repository/evenement_repository_impl.dart';

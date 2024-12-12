@@ -2,6 +2,9 @@ import '../../../../domain/entities/avis_clients.dart';
 
 abstract class AvisClientsState {}
 
+
+class AvisClientsInitial extends AvisClientsState {}
+
 // État initial, indique que le chargement est en cours
 class AvisClientsLoadingState extends AvisClientsState {}
 

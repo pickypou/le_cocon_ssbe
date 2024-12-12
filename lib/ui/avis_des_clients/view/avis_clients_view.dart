@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../avis_client_page.dart';
+import '../avis_client_page.dart';
 
 class AvisClientsView extends StatelessWidget {
   const AvisClientsView({super.key});

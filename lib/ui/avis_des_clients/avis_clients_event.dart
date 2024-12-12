@@ -28,7 +28,6 @@ class AddAvisClientEvent extends AvisClientsEvent {
   final String text;
   final DateTime publishDate;
   final String categories;
-  final Function navigateToAccount;
 
 
   const AddAvisClientEvent({
@@ -37,7 +36,6 @@ class AddAvisClientEvent extends AvisClientsEvent {
     required this.text,
     required this.publishDate,
     required this.categories,
-    required this.navigateToAccount
   });
 
   @override

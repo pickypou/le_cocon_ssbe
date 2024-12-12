@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:le_cocon_ssbe/ui/avis_des_clients/avis_clients_list/view/add_avis_clients.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:le_cocon_ssbe/ui/avis_des_clients/view/add_avis_clients.dart';
+import 'package:le_cocon_ssbe/ui/avis_des_clients/view/avis_client_list_view.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
 
 import '../../domain/entities/avis_clients.dart';
 import '../common/widget/text_custom.dart';
-import 'avis_clients_list/view/avis_client_list_view.dart';
+import 'avis_clients_bloc.dart';
 
 class AvisClientsPage extends StatelessWidget {
   const AvisClientsPage({super.key});
@@ -52,14 +54,17 @@ class AvisClientsPage extends StatelessWidget {
             ),
 
             CustomButton(
-                label: 'Je laisse un avis',
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  AddAvisClientsView()),
-              );
-
-            },
+              label: 'Je laisse un avis',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider.value(
+                      value: BlocProvider.of<AvisClientsBloc>(context),
+                      child: AddAvisClientsView(),
+                    ),
+                  ),
+                );
+              },
             )
           ],
         );

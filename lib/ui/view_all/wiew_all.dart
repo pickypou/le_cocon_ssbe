@@ -6,7 +6,7 @@ import 'package:le_cocon_ssbe/ui/espace_bien_etre/espace_bien_etre_view.dart';
 import 'package:le_cocon_ssbe/ui/espace_sport/espace_sport_view.dart';
 import 'package:le_cocon_ssbe/ui/evenements/evenement_view/evenement_view.dart';
 import 'package:le_cocon_ssbe/ui/presentation/presentation.dart';
-import '../avis_des_clients/avis_clients_list/view/avis_clients_view.dart';
+import '../avis_des_clients/view/avis_clients_view.dart';
 import '../common/widget/header.dart';
 import '../common/widget/img_header.dart';
 import '../common/widget/text_presentation.dart';

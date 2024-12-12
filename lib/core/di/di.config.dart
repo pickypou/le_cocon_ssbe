@@ -20,6 +20,9 @@ import '../../data/repository/evenements_repository.dart' as _i873;
 import '../../domain/usecases/fetch_avis_clients_data_usecase.dart' as _i57;
 import '../../domain/usecases/fetch_evenement_data_usecase.dart' as _i914;
 import '../../ui/avis_des_clients/avis_clients_interactor.dart' as _i3;
+import '../../ui/avis_des_clients/avis_clients_module.dart' as _i1016;
+import '../../ui/ui_module.dart' as _i573;
+import '../router/router_config.dart' as _i718;
 import 'api/firestore_service.dart' as _i746;
 import 'di_module.dart' as _i211;
 
@@ -36,6 +39,8 @@ _i174.GetIt init(
   );
   final firebaseModule = _$FirebaseModule();
   gh.singleton<_i3.AvisClientsInteractor>(() => _i3.AvisClientsInteractor());
+  gh.singleton<_i573.AppRouter>(() => _i573.AppRouter());
+  gh.singleton<_i718.AppRouterConfig>(() => _i718.AppRouterConfig());
   gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
   gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseModule.storage);
   gh.factory<_i1053.EvenementRepositoryImpl>(() =>
@@ -51,6 +56,8 @@ _i174.GetIt init(
       () => _i57.FetchAvisClientDataUseCase(gh<_i990.AvisClientsRepository>()));
   gh.factory<_i746.FirestoreService>(
       () => _i746.FirestoreService(gh<_i974.FirebaseFirestore>()));
+  gh.singleton<_i1016.AddAvisClientsModule>(
+      () => _i1016.AddAvisClientsModule(gh<_i573.AppRouter>()));
   gh.factory<_i914.FetchEvenementDataUseCase>(
       () => _i914.FetchEvenementDataUseCase(gh<_i873.EvenementRepository>()));
   return getIt;

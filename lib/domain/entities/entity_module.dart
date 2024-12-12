@@ -1,9 +1,7 @@
-import 'package:get_it/get_it.dart';
-
+import '../../core/di/di.dart';
 import 'avis_clients.dart';
 import 'evenements.dart';
 
-final GetIt getIt = GetIt.instance;
 
 void setupEntityModule() {
   getIt.registerFactory<AvisClients>(() =>
