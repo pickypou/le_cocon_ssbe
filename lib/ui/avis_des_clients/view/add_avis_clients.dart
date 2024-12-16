@@ -7,6 +7,7 @@ import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_text_field.dart';
 
+import '../../theme.dart';
 import '../avis_clients_bloc.dart';
 import '../avis_clients_event.dart';
 import '../avis_clients_state.dart';
@@ -50,7 +51,19 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
 
       builder: (context, state) {
         return Scaffold(
-          appBar: CustomAppBar(title: 'Je poste un avis'),
+          appBar: AppBar(
+            title: GestureDetector(
+              onTap: () {
+                context.go('/'); // Navigue vers la route '/'
+              },
+              child: Text(
+                'Accueil',
+                style:  TextStyle(color: theme.colorScheme.onPrimary // Assurez-vous que le texte est visible
+                ),
+              ),
+            ),
+          ),
+
           body: _buildBody(context, state),
         );
       },
