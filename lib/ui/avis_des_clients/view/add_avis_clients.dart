@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/custom_appbar/custom_appbar.dart';
 import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
@@ -38,13 +39,15 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Avis ajouté avec succès')),
           );
-          Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+          // Utilisation de GoRouter pour rediriger vers la HomePage
+          context.go('/');
         } else if (state is AvisClientsErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message)),
           );
         }
       },
+
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar(title: 'Je poste un avis'),
@@ -64,7 +67,10 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CustomText(phrase: 'Je, Poste, Mon, Avis'),
+              Center(
+                child:
+              CustomText(phrase: 'Je, Poste, Mon, Avis',   ) ,
+              ),
               const SizedBox(height: 40),
               CustomTextField(
                 labelText: 'Titre',
@@ -108,5 +114,12 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
         publishDate: now,
       ),
     );
+    // Redirection après l'ajout de l'avis
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Avis ajouté avec succès')),
+    );
+
+    // Redirection vers la HomePage avec GoRouter
+    context.go('/');
   }
 }

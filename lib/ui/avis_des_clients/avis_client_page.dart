@@ -34,30 +34,36 @@ class AvisClientsPage extends StatelessWidget {
         // Transformation des données
         List<AvisClients> avis = snapshot.data!.docs
             .map((doc) => AvisClients.fromMap(
-                  doc.data() as Map<String, dynamic>,
-                  doc.id,
-                ))
+          doc.data() as Map<String, dynamic>,
+          doc.id,
+        ))
             .toList();
 
-        // Utilisation de AvisClientsListView pour afficher les avis
+        // Log pour vérifier les données
+        debugPrint('Nombre d\'avis : ${avis.length}');
+        for (var avisItem in avis) {
+          debugPrint('Avis : ${avisItem.text}');
+        }
+
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomText(
+            const CustomText(
               phrase: 'Les, Clients, Nous, Donnent, Leurs, Avis',
             ),
             AvisClientsListView(
               avis: avis,
               backgroundImage: 'assets/images/facade_cocon.jpeg',
             ),
-            const SizedBox(height: 35,),
+            const SizedBox(height: 35),
             CustomButton(
-                label: 'Je donne mon avis ',
-            onPressed: () => GoRouter.of(context).go('/addAvisClients'),
-            )
+              label: 'Je donne mon avis',
+              onPressed: () => GoRouter.of(context).go('/addAvisClients'),
+            ),
           ],
         );
       },
     );
   }
 }
+
