@@ -18,14 +18,14 @@ void setupRepositoryModule() {
   );
 
   getIt.registerLazySingleton<AvisClientsRepository>(
-          () => AvisClientsRepositoryImpl()
+          () => AvisClientsRepositoryImpl(getIt<FirestoreService>())
   );
 
   getIt.registerLazySingleton<EvenementRepository>(
           () => EvenementRepositoryImpl()
   );
   getIt.registerLazySingleton<EvenementRepositoryImpl>(
-      () => EvenementRepositoryImpl()
+          () => EvenementRepositoryImpl()
   );
 
 }

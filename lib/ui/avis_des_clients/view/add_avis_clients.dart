@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/custom_appbar/custom_appbar.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/text_custom.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/custom_button.dart';
+import 'package:le_cocon_ssbe/ui/common/widget/custom_text_field.dart';
 
-import '../../common/widget/custom_button.dart';
-import '../../common/widget/custom_text_field.dart';
-import '../../theme.dart';
 import '../avis_clients_bloc.dart';
 import '../avis_clients_event.dart';
 import '../avis_clients_state.dart';
 
 class AddAvisClientsView extends StatefulWidget {
-   const AddAvisClientsView({super.key});
+  const AddAvisClientsView({super.key});
 
   @override
   AddAvisClientsViewState createState() => AddAvisClientsViewState();
@@ -20,14 +21,12 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
   final TextEditingController categoriesController = TextEditingController();
   final TextEditingController textController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController publishDateController = TextEditingController();
 
   @override
   void dispose() {
     categoriesController.dispose();
     textController.dispose();
     firstnameController.dispose();
-    publishDateController.dispose();
     super.dispose();
   }
 
@@ -39,7 +38,7 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Avis ajouté avec succès')),
           );
-          Navigator.pop(context);
+          Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
         } else if (state is AvisClientsErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message)),
@@ -48,13 +47,7 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('J\'ajoute un avis'),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
+          appBar: CustomAppBar(title: 'Je poste un avis'),
           body: _buildBody(context, state),
         );
       },
@@ -71,11 +64,7 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                'Ajouter un commentaire',
-                style: titleStyleLarge(context),
-                textAlign: TextAlign.center,
-              ),
+              CustomText(phrase: 'Je, Poste, Mon, Avis'),
               const SizedBox(height: 40),
               CustomTextField(
                 labelText: 'Titre',
@@ -84,9 +73,9 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                labelText: 'Date du jour (dd/MM/yyyy)',
-                controller: publishDateController,
-                maxLines: 1,
+                  labelText: 'Nom et Prénom',
+                  controller: firstnameController,
+                  maxLines: 1
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -107,25 +96,17 @@ class AddAvisClientsViewState extends State<AddAvisClientsView> {
   }
 
   void _submitAvis() {
-    try {
-      final DateFormat format = DateFormat('dd/MM/yyyy');
-      final DateTime publishDate = format.parse(publishDateController.text);
+    final DateTime now = DateTime.now();
+    final String formattedDate = DateFormat('dd/MM/yyyy').format(now);
 
-      context.read<AvisClientsBloc>().add(
-        AddAvisClientEvent(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          categories: categoriesController.text,
-          text: textController.text,
-          publishDate: publishDate,
-          firstname: firstnameController.text,
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erreur de format de date : $e')),
-      );
-      debugPrint('Erreur de format de date : $e');
-    }
+    context.read<AvisClientsBloc>().add(
+      AddAvisClientEvent(
+        id: now.millisecondsSinceEpoch.toString(),
+        categories: categoriesController.text,
+        text: textController.text,
+        firstname: firstnameController.text,
+        publishDate: now,
+      ),
+    );
   }
 }
-

@@ -129,14 +129,14 @@ TextStyle textStyleTextBulle(BuildContext context) {
 }
 
 TextStyle? textStyleInput(BuildContext context, String inputText) {
-  int baseFontSize = 20;
+  int baseFontSize = 15;
   double textFontSize =
-      inputText.length > 20 ? baseFontSize - 1.5 : baseFontSize.toDouble();
+      inputText.length > 20 ? baseFontSize - 1.2 : baseFontSize.toDouble();
 
   return  GoogleFonts.montserrat().copyWith(
     fontSize: textFontSize,
     fontWeight: FontWeight.bold,
-    color: Theme.of(context).secondaryHeaderColor,
+    color: Theme.of(context).colorScheme.onSurface,
     decoration: TextDecoration.none,
   );
 }

@@ -1,19 +1,31 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../core/di/api/firestore_service.dart';
 import '../../domain/entities/avis_clients.dart';
 import 'avis_clients_repository.dart';
 
 
-@injectable
+@Injectable(as: AvisClientsRepository)
 class AvisClientsRepositoryImpl extends AvisClientsRepository {
-  final FirebaseFirestore _firestore;
+  final FirestoreService _firestore;
 
-  AvisClientsRepositoryImpl({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  AvisClientsRepositoryImpl(this._firestore);
 
   @override
-  FirebaseFirestore get fireStore => _firestore;
+  Stream<Iterable<AvisClients>> getAvisClientsStream() {
+    return _firestore.collection('avis_clients').snapshots().map(
+          (querySnapshot) => querySnapshot.docs
+          .map((doc) => AvisClients.fromMap(doc.data() as Map<String, dynamic>?, doc.id))
+          .toList(),
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> getById(String avisClientsId) async {
+    final docSnapshot =
+    await _firestore.collection('avis_client').doc(avisClientsId).get();
+    return docSnapshot.data() as Map<String, dynamic>? ?? {};
+  }
 
   @override
   Future<void> add(Map<String, dynamic> data) async {
@@ -21,35 +33,11 @@ class AvisClientsRepositoryImpl extends AvisClientsRepository {
   }
 
   @override
-  Stream<Iterable<AvisClients>> getAvisClientsStream() {
-    return _firestore.collection('avis_clients').snapshots().map(
-          (querySnapshot) => querySnapshot.docs
-          .map((doc)=>AvisClients.fromMap(doc.data(), doc.id))
-          .toList(),
-    );
-  }
-
-
-  @override
-  Future<Map<String, dynamic>> getById(String avisClientsId) async {
-    final docSnapshot =
-    await _firestore.collection('avis_client').doc(avisClientsId).get();
-    return docSnapshot.data() ?? {};
-  }
-
-
-  @override
   Future<void> updateField(
-      String avisClientsId,
-      String fieldName,
-      String newValue) async {
+      String avisClientsId, String fieldName, String newValue) async {
     await _firestore
         .collection('avis_client')
         .doc(avisClientsId)
         .update({fieldName: newValue});
-
   }
-
-
-
 }

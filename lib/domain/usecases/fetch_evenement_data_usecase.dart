@@ -1,13 +1,13 @@
 import 'package:injectable/injectable.dart';
+import 'package:le_cocon_ssbe/data/repository/evenement_repository_impl.dart';
 
 import '../../data/dto/evenements_dto.dart';
-import '../../data/repository/evenements_repository.dart';
 import '../entities/evenements.dart';
 import 'package:flutter/material.dart';
 
 @injectable
 class FetchEvenementDataUseCase {
-  final EvenementRepository evenementRepository;
+  final EvenementRepositoryImpl evenementRepository;
 
   FetchEvenementDataUseCase(this.evenementRepository);
 
