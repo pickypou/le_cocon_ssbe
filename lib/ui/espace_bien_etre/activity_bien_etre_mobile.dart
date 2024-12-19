@@ -13,7 +13,7 @@ class ActivityBienEtreMobile extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
             title: Text(
-          'Mes activitées',
+          'Mes activité',
           style: textStyleText(context).copyWith(fontSize: size.width / 20),
         )),
         body: SizedBox(
