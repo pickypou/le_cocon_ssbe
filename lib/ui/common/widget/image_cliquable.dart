@@ -12,13 +12,14 @@ class ClickableImage extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () async {
-          if (await canLaunchUrl(url as Uri)) {
-            await launchUrl(url as Uri);
+          if (await canLaunch(url)) {
+            await launch(url);
           } else {
             throw 'Impossible d\'ouvrir l\'URL $url';
           }
         },
-        child: Image.asset(imagePath, width: 75, height: 75), // Ajustez la taille selon vos besoins
+        child: Image.asset(imagePath,
+            width: 75, height: 75), // Ajustez la taille selon vos besoins
       ),
     );
   }
