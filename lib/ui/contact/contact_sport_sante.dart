@@ -16,7 +16,7 @@ class ContactSportSante extends StatelessWidget {
           phone: '06 27 49 07 41',
           email: 'gerard.judo.59@gmail.com',
           address: '59 rue Nationale 59185 Provin',
-          website: 'gerard.fr',
+          website: 'https://gerarddcoachsportif.fr/',
           imageWidth: 220,
         ),
       ),

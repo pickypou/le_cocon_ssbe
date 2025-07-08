@@ -25,17 +25,7 @@ class Footer extends StatelessWidget {
               Text('© 2024 Le CoconSSBE - Tous droits réservés',
                   style: textStyleText(context)
                       .copyWith(fontSize: size.width / 75)),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => PDFViewerPage(),
-                      ),
-                    );
-                  },
-                  child: Text('Mentions_légales',
-                      style: textStyleText(context)
-                          .copyWith(fontSize: size.width / 75))),
+
               TextButton(
                 onPressed: () async {
                   final Uri url = Uri.parse('https://ludovicspysschaert.fr/');
@@ -47,8 +37,48 @@ class Footer extends StatelessWidget {
                   }
                 },
                 child:
-                Text('Céation Ludovic SPYSSCHAERT', style:textStyleText(context).copyWith(fontSize: 10, color: theme.colorScheme.error), textAlign: TextAlign.end,),
+                Text('Création Ludovic SPYSSCHAERT', style:textStyleText(context).copyWith(fontSize: 10, color: theme.colorScheme.error), textAlign: TextAlign.end,),
               ),
+              PopupMenuButton<String>(
+                icon: Icon(Icons.info_outline, color: Colors.black), // Icône noire visible
+                color: Colors.white, // Fond du menu
+                onSelected: (value) {
+                  if (value == 'mentions') {
+                    launchUrl(Uri.parse('/mentions-legales.html'));
+                  } else if (value == 'confidentialite') {
+                    launchUrl(Uri.parse('/confidentialite.html'));
+                  } else if (value == 'cookies') {
+                    launchUrl(Uri.parse('/cookies.html'));
+                  }
+                },
+                itemBuilder: (BuildContext context) => [
+                  PopupMenuItem<String>(
+                    value: 'mentions',
+                    child: Text(
+                      'Mentions légales',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  PopupMenuItem<String>(
+                    value: 'confidentialite',
+                    child: Text(
+                      'Politique de confidentialité',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  PopupMenuItem<String>(
+                    value: 'cookies',
+                    child: Text(
+                      'Politique des cookies',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              )
+
+
+
+
             ],
           ),
         ),
